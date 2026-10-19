@@ -171,6 +171,10 @@ h3{font-weight:700;letter-spacing:-.01em}
 .out{align-self:start;border:1.5px dashed var(--accent);border-radius:16px;padding:22px;background:var(--accent-soft);display:flex;flex-direction:column;gap:12px;min-width:0}
 .out h3{margin:0;font-size:17px}
 .out pre{margin:0;white-space:pre-wrap;word-break:break-word;font-family:var(--f);font-size:15px;line-height:1.55}
+.acts{display:flex;flex-wrap:wrap;gap:10px}
+.pick{font-weight:600;font-size:15px;text-decoration:none}
+.svc .pick{margin-top:6px}
+.svc .pick::after{content:"";display:inline-block;width:7px;height:7px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg);margin-left:8px;vertical-align:2px}
 .out .hint{color:var(--ink-2);font-size:14.5px;margin:0}
 .contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
 .ct{padding:22px 24px 4px 0;display:flex;flex-direction:column;gap:4px;min-width:0}
@@ -300,17 +304,18 @@ T = {
            ("Громада", ["Дані про споживання енергії бюджетними будівлями за 3 роки", "Чинні програми енергоефективності, SECAP чи МЕП, якщо є", "Контакт відповідальної особи: енергоменеджер, відділ ЖКГ чи економіки", "Перелік проєктів, які громада вже розглядає"]),
            ("Ініціативна група", ["Склад групи і хто має намір стати учасником", "Можливий об’єкт: дах, ділянка, котельня", "Орієнтовне річне споживання електроенергії чи тепла учасниками", "Позиція органу місцевого самоврядування"])],
   "form_title": "Опишіть ваше питання",
-  "form_sub": "Заповніть кілька полів — сторінка складе текст звернення. Повідомлення не надсилається автоматично: скопіюйте його і надішліть мені на пошту чи в месенджер. Дані з форми нікуди не передаються і не зберігаються.",
+  "form_sub": "Заповніть кілька полів — сторінка складе текст звернення. Повідомлення не надсилається автоматично: натисніть «Надіслати листом» — відкриється ваша пошта з готовим текстом, — або скопіюйте текст у месенджер. Дані з форми нікуди не передаються і не зберігаються.",
   "f_role": "Хто звертається", "roles": ["ОСББ або управитель", "Громада (ОМС)", "Ініціативна група / енергоспільнота", "Міжнародна організація / донор", "Інше"],
   "f_need": "Що потрібно", "needs": ["Консультація", "Участь у загальних зборах ОСББ", "Огляд будинку і розрахунок", "Муніципальний енергетичний план", "Запуск енергетичної спільноти", "Експертна участь у проєкті"],
   "f_place": "Населений пункт", "f_name": "Ваше ім’я", "f_contact": "Телефон або email", "f_msg": "Коротко про питання",
   "f_btn": "Скласти звернення", "f_err": "Оберіть, хто звертається, і вкажіть ім’я та контакт, щоб я міг відповісти.", "f_send": "Надіслати листом", "f_call": "Зателефонувати",
-  "f_out_title": "Ваше звернення — скопіюйте і надішліть",
+  "f_out_title": "Звернення готове",
   "f_hdr": "Звернення з сайту", "f_lab": ["Хто", "Населений пункт", "Що потрібно", "Питання", "Контакт"],
   "c_title": "Контакти",
   "c_sub": "Пишіть щодо МЕП для вашої громади, консультації для ОСББ чи енергетичної спільноти.",
   "contacts": [("Email", "dmytropalamarchuk@gmail.com", True), ("Телефон", "+380 97 889 13 85", True), ("ORCID", "0000-0002-6023-9780", False)],
   "copy": "Копіювати", "copied": "Скопійовано",
+  "svc_cta": ["Обговорити МЕП для громади", "Записатися на консультацію ОСББ", "Обговорити енергоспільноту"], "partners_cta": "Запросити до проєкту",
   "footer_l": "© 2026 Дмитро Паламарчук",
   "footer_r": "Організація: ГО «Е-ТЕАМ»",
   "jobTitle": "Експерт з енергоефективності та муніципального енергетичного планування",
@@ -394,17 +399,18 @@ T = {
            ("Municipality", ["Energy consumption of public buildings for 3 years", "Current energy efficiency programmes, SECAP or energy plan, if any", "Contact of the responsible person: energy manager, housing or economic department", "List of projects the municipality is already considering"]),
            ("Community group", ["Members of the group and who intends to join", "Possible site: roof, land plot, boiler house", "Approximate annual electricity or heat use of members", "Position of the local authority"])],
   "form_title": "Describe your question",
-  "form_sub": "Fill in a few fields and the page will compose a message. It is not sent automatically: copy it and send it to me by email or messenger. Form data is not transmitted or stored anywhere.",
+  "form_sub": "Fill in a few fields and the page will compose a message. It is not sent automatically: press “Send by email” to open your mail app with the text filled in, or copy it into a messenger. Form data is not transmitted or stored anywhere.",
   "f_role": "Who you are", "roles": ["Homeowner association or manager", "Municipality", "Community group / energy community", "International organisation / donor", "Other"],
   "f_need": "What you need", "needs": ["Consultation", "Attendance at an HOA general meeting", "Building inspection and calculation", "Municipal energy plan", "Setting up an energy community", "Expert input to a project"],
   "f_place": "Town or village", "f_name": "Your name", "f_contact": "Phone or email", "f_msg": "Your question in brief",
   "f_btn": "Compose message", "f_err": "Please choose who you are and enter your name and a contact so I can reply.", "f_send": "Send by email", "f_call": "Call",
-  "f_out_title": "Your message — copy and send it",
+  "f_out_title": "Your message is ready",
   "f_hdr": "Request from the website", "f_lab": ["Who", "Location", "Needs", "Question", "Contact"],
   "c_title": "Contact",
   "c_sub": "Write about an energy plan for your municipality, HOA advisory or an energy community.",
   "contacts": [("Email", "dmytropalamarchuk@gmail.com", True), ("Phone", "+380 97 889 13 85", True), ("ORCID", "0000-0002-6023-9780", False)],
   "copy": "Copy", "copied": "Copied",
+  "svc_cta": ["Discuss a municipal energy plan", "Book an HOA consultation", "Discuss an energy community"], "partners_cta": "Invite to a project",
   "footer_l": "© 2026 Dmytro Palamarchuk",
   "footer_r": "Organisation: NGO E-TEAM",
   "jobTitle": "Energy efficiency and municipal energy planning expert",
@@ -497,6 +503,9 @@ ICONS = [
 ]
 
 
+SVC_PICK = [(1, 3), (0, 0), (2, 4)]  # (role index, need index) per service card
+
+
 def esc(s):
     return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;"))
 
@@ -505,7 +514,7 @@ def page(t, skeleton, seo=False):
     nav = "".join(f'<a href="{h}">{esc(l)}</a>' for h, l in t["nav"])
     nav += f'<a class="lang" href="{t["other"]}" hreflang="{"en" if t["lang"]=="uk" else "uk"}">{t["other_label"]}</a>'
     svcs = "".join(
-        f'<article class="svc" id="svc-{i}">{ICONS[i]}<p class="who">{esc(a)}</p><h3>{esc(h)}</h3><p>{esc(p)}</p><p class="proof">{esc(pr)}</p></article>'
+        f'<article class="svc" id="svc-{i}">{ICONS[i]}<p class="who">{esc(a)}</p><h3>{esc(h)}</h3><p>{esc(p)}</p><p class="proof">{esc(pr)}</p><a class="pick" href="#contact" data-role="{SVC_PICK[i][0]}" data-need="{SVC_PICK[i][1]}">{esc(t['svc_cta'][i])}</a></article>'
         for i, (a, h, p, pr) in enumerate(t["services"]))
     quick = "".join(f'<a href="{h}">{esc(l)}</a>' for h, l in t["quick"])
     partners = "".join(f'<li>{esc(x)}</li>' for x in t["partners"])
@@ -525,7 +534,7 @@ def page(t, skeleton, seo=False):
 <p class="err" id="f-err" hidden>{esc(t['f_err'])}</p>
 <div><button class="btn primary" type="submit" style="cursor:pointer">{esc(t['f_btn'])}</button></div>
 </form>
-<div class="out" id="f-out" hidden><h3>{esc(t['f_out_title'])}</h3><pre class="v" id="f-text"></pre><button class="copy" type="button" id="copy-msg">{t['copy']}</button><p class="hint"><a id="f-mail" href="mailto:{t['contacts'][0][1]}">{esc(t['f_send'])}: {esc(t['contacts'][0][1])}</a> · <a href="tel:{t['contacts'][1][1].replace(' ','')}">{esc(t['f_call'])}: {esc(t['contacts'][1][1])}</a></p></div>
+<div class="out" id="f-out" hidden><h3>{esc(t['f_out_title'])}</h3><pre class="v" id="f-text"></pre><button class="copy" type="button" id="copy-msg">{t['copy']}</button><div class="acts"><a class="btn primary" id="f-mail" href="mailto:{t['contacts'][0][1]}">{esc(t['f_send'])}</a><a class="btn ghost" href="tel:{t['contacts'][1][1].replace(' ','')}">{esc(t['f_call'])}</a></div><p class="hint">{esc(t['contacts'][0][1])}, {esc(t['contacts'][1][1])}</p></div>
 </div>"""
     figs = "".join(f'<li><span class="num">{esc(n)}</span><span class="lbl">{esc(l)}</span></li>' for n, l in t["figures"])
     tl = ""
@@ -584,7 +593,7 @@ def page(t, skeleton, seo=False):
 <main>
 <section id="how"><div class="wrap"><h2>{esc(t['path_title'])}</h2><p class="sub">{esc(t['path_sub'])}</p><ol class="path">{path}</ol></div></section>
 <section id="services" class="band"><div class="wrap"><h2>{esc(t['s_title'])}</h2><p class="sub">{esc(t['s_sub'])}</p><div class="services">{svcs}</div></div></section>
-<section id="partners"><div class="wrap split"><div><h2>{esc(t['partners_title'])}</h2><p class="sub">{esc(t['partners_sub'])}</p><ul class="plist">{partners}</ul></div><div>{trust}</div></div></section>
+<section id="partners"><div class="wrap split"><div><h2>{esc(t['partners_title'])}</h2><p class="sub">{esc(t['partners_sub'])}</p><ul class="plist">{partners}</ul><p style="margin:28px 0 0"><a class="btn primary pick" href="#contact" data-role="3" data-need="5">{esc(t['partners_cta'])}</a></p></div><div>{trust}</div></div></section>
 <section id="figures" class="night figs"><div class="wrap"><h2>{esc(t['f_title'])}</h2><ul class="figures">{figs}</ul><p class="src">{esc(t['f_src'])}</p></div></section>
 <section id="prepare" class="band"><div class="wrap"><h2>{esc(t['prep_title'])}</h2><p class="sub">{esc(t['prep_sub'])}</p><div class="prep">{prep}</div></div></section>
 <section id="experience"><div class="wrap"><h2>{esc(t['e_title'])}</h2><ul class="tl" style="margin-top:40px">{tl}</ul>
@@ -633,6 +642,10 @@ document.querySelectorAll('.copy').forEach(function(b){{b.addEventListener('clic
     setTimeout(function(){{requestAnimationFrame(step);}},500);
   }}
 }})();
+document.querySelectorAll('.pick').forEach(function(a){{a.addEventListener('click',function(){{
+  var r=document.getElementById('role-'+a.getAttribute('data-role')); if(r){{r.checked=true;r.dispatchEvent(new Event('change'));}}
+  var n=document.getElementById('need-'+a.getAttribute('data-need')); if(n) n.checked=true;
+}});}});
 function sel(b){{var s=b.parentNode.querySelector('.v');var r=document.createRange();r.selectNodeContents(s);var w=window.getSelection();w.removeAllRanges();w.addRange(r);}}
 </script>"""
     if skeleton:
