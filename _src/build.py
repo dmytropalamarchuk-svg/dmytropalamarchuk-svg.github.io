@@ -104,7 +104,19 @@ h2{font-family:var(--f-display);font-weight:600;font-size:clamp(26px,3.4vw,34px)
 footer{border-top:1px solid var(--rule);padding-block:28px 40px;font-size:14px;color:var(--ink-2);display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .trust{display:flex;flex-wrap:wrap;gap:10px 28px;align-items:center;padding-block:22px;border-top:1px solid var(--rule);margin:0}
 .trust .tt{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-2);width:100%}
+.trust{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px 28px}
+.trust .tt{grid-column:1/-1}
+.trust .ti{display:flex;flex-direction:column;gap:2px;min-width:0}
 .trust .tn{font-weight:600;font-size:15.5px;color:var(--ink)}
+.trust .tr{font-size:13.5px;color:var(--ink-2);line-height:1.4}
+.lead2{font-size:16px;color:var(--ink-2);max-width:38em;margin:-6px 0 16px}
+.quick{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 24px}
+.quick a{font-size:14px;text-decoration:none;color:var(--accent);border:1px solid var(--rule);border-radius:999px;padding:5px 12px;background:var(--surface)}
+.quick a:hover{border-color:var(--accent)}
+.plist{margin:0;padding-left:20px;display:grid;gap:8px;max-width:48em}
+.ct a.v{color:var(--ink);text-decoration:none}
+.ct a.v:hover{color:var(--accent)}
+.out .hint a{color:var(--accent)}
 .prep{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
 .prep .card{border-top:3px solid var(--accent);padding-top:14px}
 .prep h3{font-family:var(--f-display);font-weight:600;font-size:19px;margin:0 0 10px}
@@ -138,7 +150,12 @@ footer{border-top:1px solid var(--rule);padding-block:28px 40px;font-size:14px;c
   body{font-size:16px}
   .tl li,.edu{grid-template-columns:minmax(0,1fr);gap:4px}
   .path{grid-template-columns:minmax(0,1fr)}
-  .nav{gap:14px}
+  .nav{gap:16px;flex-wrap:nowrap;overflow-x:auto;width:100%;padding-bottom:4px;-webkit-overflow-scrolling:touch}
+  .nav a{white-space:nowrap}
+  .top{padding-block:14px}
+  .path li{border-top:0;border-left:3px solid var(--accent);padding:0 0 4px 44px}
+  .path{margin-left:16px}
+  .path li::before{top:0;left:-17px}
   .lead{font-size:18px}
 }
 @media (prefers-reduced-motion:no-preference){
@@ -154,6 +171,10 @@ T = {
  "ua": {
   "lang": "uk", "file": "index.html", "other": "en.html", "other_label": "EN",
   "title": "Дмитро Паламарчук",
+  "seo_title": "Дмитро Паламарчук — енергоефективність, МЕП, енергоспільноти",
+  "lead2": "Громадам — муніципальні енергетичні плани, ОСББ — підготовка до енергомодернізації, ініціативним групам — моделі енергетичних спільнот.",
+  "quick": [("#svc-0", "Громаді"), ("#svc-1", "ОСББ"), ("#svc-2", "Енергоспільноті"), ("#partners", "Міжнародним програмам")],
+  "pub_more": "Повний перелік публікацій — у профілі ORCID",
   "description": "Дмитро Паламарчук — консультант з енергоефективності: муніципальні енергетичні плани для громад, консультації ОСББ щодо програм Фонду енергоефективності, підтримка енергетичних спільнот. Черкаси.",
   "nav": [("#how", "Як працюю"), ("#services", "Послуги"), ("#experience", "Досвід"), ("#publications", "Публікації"), ("#contact", "Контакти")],
   "eyebrow": "Енергоефективність · Енергетичне планування громад · Енергетичні спільноти",
@@ -162,10 +183,10 @@ T = {
   "path_title": "Як я працюю",
   "path_sub": "З чим би ви не прийшли, шлях однаковий. Ви маєте одного співрозмовника, а інженерів, юристів і фінансистів, з якими я працюю роками, я залучаю сам, коли це потрібно.",
   "path": [("Розбираємося з питанням", "Що є зараз, що турбує, які дані вже зібрано і яких бракує."), ("Рахуємо", "Базова лінія, варіанти заходів, вартість, економія й окупність."), ("Знаходимо фінансування", "Програми Фонду енергоефективності, донорські гранти, кредити, бюджет громади."), ("Доводимо до результату", "Загальні збори, заявки, підрядники, верифікація, звіти.")],
-  "meta": "Черкаси · кандидат економічних наук · член правління ГО «Е-ТЕАМ»",
-  "cta1": "Зв’язатися", "cta2": "Профіль ORCID",
+  "meta": "Базуюся в Черкасах, працюю з громадами різних областей · кандидат економічних наук · член правління ГО «Е-ТЕАМ»",
+  "cta1": "Зв’язатися", "cta2": "З чим звертаються",
   "scale_title": "Клас енергоефективності будівлі",
-  "scale_note": "Шкала з енергетичного сертифіката будівлі. Перевести будинок чи громаду ближче до класу A — це й є робота, описана нижче.",
+  "scale_note": "Умовна ілюстрація за шкалою енергетичного сертифіката будівлі. Мета роботи — наблизити будинок чи громаду до класу A.",
   "s_title": "З чим до мене звертаються",
   "s_sub": "Звертаються три групи клієнтів. Для кожної — свій інструмент, підтверджений реальними проєктами.",
   "services": [
@@ -176,8 +197,8 @@ T = {
      "Огляд будинку, розрахунок фінансового результату, підготовка загальних зборів і заявки до програм «Енергодім» та «ВідновиДІМ» Фонду енергоефективності, супровід до верифікації.",
      "Регіональний радник у Черкаській області: 2019–2025 — у програмі IFC, з 2026 — у мережі радників ГО «Е-ТЕАМ» (проєкт GIZ)."),
     ("Енергетичним спільнотам", "Запуск енергетичної спільноти",
-     "Консультації ініціативним групам і громадам: вибір моделі спільноти, правові рамки, бізнес-модель і джерела фінансування.",
-     "Національний координатор європейського проєкту LIFE-ECOss — центр підтримки енергетичних спільнот у Луцьку."),
+     "Що можна замовити зараз: консультацію для ініціативної групи чи громади, попередню оцінку моделі спільноти, план запуску з правовими рамками, бізнес-моделлю і джерелами фінансування.",
+     "Національний координатор проєкту ЄС LIFE-ECOss (старт — вересень 2026): створюємо центр підтримки енергетичних спільнот у Луцьку."),
   ],
   "f_title": "Цифри з роботи з ОСББ",
   "figures": [("41", "успішна заявка ОСББ до Фонду енергоефективності"),
@@ -201,22 +222,32 @@ T = {
   "p_title": "Публікації",
   "pubs": [
     ("2024", "Інформаційні кампанії як інструмент зміни поведінки споживачів щодо використання енергії: досвід ЄС", "Матеріали III Міжнародної науково-практичної конференції, Тернопіль, ЗУНУ", "http://dspace.wunu.edu.ua/handle/316497/50505"),
-    ("2023", "Енергоефективність у житловому секторі України", "Стратегії глобальної конкурентоспроможності: соціально-економічний вимір. Матеріали X Міжнародної науково-практичної конференції, ЧДТУ", "https://bit.ly/3OaJAVb"),
+    ("2023", "Енергоефективність у житловому секторі України", "Стратегії глобальної конкурентоспроможності: соціально-економічний вимір. Матеріали X Міжнародної науково-практичної конференції, ЧДТУ", "https://dntb.gov.ua/wp-content/uploads/2023/05/X-%D0%BC%D1%96%D0%B6%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84_%D0%A1%D1%82%D1%80%D0%B0%D1%82%D0%B5%D0%B3%D1%96%D1%97-%D0%B3%D0%BB%D0%BE%D0%B1%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%97-%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D0%B5%D0%BD%D1%82%D0%BE%D1%81%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%96_%D1%81%D0%BE%D1%86%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE-%D0%B5%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D1%96%D1%87%D0%BD%D1%96-%D0%B2%D0%B8%D0%BC%D1%96%D1%80%D0%B8-3.pdf"),
     ("2022", "Дослідження чинників, що впливають на рішення співвласників щодо модернізації багатоквартирних будинків", "Матеріали IX Міжнародної науково-практичної конференції, ЧДТУ", "https://er.chdtu.edu.ua/handle/ChSTU/4287"),
   ],
-  "trust_title": "Програми й організації, з якими працюю",
-  "trust": ["IFC (Група Світового банку)", "GIZ", "UNIDO", "Програма ЄС LIFE", "Фонд енергоефективності", "ГО «Е-ТЕАМ»"],
+  "trust_title": "Програми й організації, з якими працюю, і моя роль",
+  "trust": [("IFC (Група Світового банку)", "регіональний радник, проєкт «Ukraine EE Fund», 2019–2025"),
+            ("GIZ", "регіональний радник у мережі ГО «Е-ТЕАМ», з 2026"),
+            ("UNIDO", "МЕП Сміли, 2026, у команді ГО «Е-ТЕАМ»"),
+            ("Програма ЄС LIFE", "національний координатор LIFE-ECOss, з 2026, від ГО «Е-ТЕАМ»"),
+            ("Фонд енергоефективності", "супровід ОСББ у програмах «Енергодім» і «ВідновиДІМ»")],
+  "partners_title": "Для міжнародних програм і партнерів",
+  "partners_sub": "Працюю як незалежний експерт (ФОП) або в складі команди ГО «Е-ТЕАМ» — залежно від вимог програми.",
+  "partners": ["Муніципальне енергетичне планування за Методикою № 1163 і аналіз енергетичних даних громад",
+               "Навчання й консультації для ОСББ та органів місцевого самоврядування — понад 70 заходів",
+               "Координація українського партнера в консорціумах ЄС: національний координатор LIFE-ECOss, LEAR організації на порталі Funding & Tenders",
+               "Адаптація європейських практик енергетичного переходу до українських умов"],
   "prep_title": "Підготуйтеся до першої розмови",
   "prep_sub": "Перша консультація коротша і корисніша, коли під рукою є ці дані. Не все обов’язково: принесіть те, що є.",
   "prep": [("ОСББ", ["Рахунки або дані про споживання тепла за 2–3 останні опалювальні сезони", "Технічний паспорт будинку: рік, поверховість, площа, кількість квартир", "Протоколи зборів щодо модернізації, якщо вже були", "Енергетичний сертифікат або енергоаудит, якщо є", "Фото фасаду, підвалу і теплового пункту"]),
            ("Громада", ["Дані про споживання енергії бюджетними будівлями за 3 роки", "Чинні програми енергоефективності, SECAP чи МЕП, якщо є", "Контакт відповідальної особи: енергоменеджер, відділ ЖКГ чи економіки", "Перелік проєктів, які громада вже розглядає"]),
            ("Ініціативна група", ["Склад групи і хто має намір стати учасником", "Можливий об’єкт: дах, ділянка, котельня", "Орієнтовне річне споживання електроенергії чи тепла учасниками", "Позиція органу місцевого самоврядування"])],
   "form_title": "Опишіть ваше питання",
-  "form_sub": "Заповніть кілька полів — сторінка складе звернення. Скопіюйте його і надішліть на пошту або в месенджер за номером нижче.",
-  "f_role": "Хто звертається", "roles": ["ОСББ або управитель", "Громада (ОМС)", "Ініціативна група / енергоспільнота", "Інше"],
-  "f_need": "Що потрібно", "needs": ["Консультація", "Участь у загальних зборах ОСББ", "Огляд будинку і розрахунок", "Муніципальний енергетичний план", "Запуск енергетичної спільноти"],
+  "form_sub": "Заповніть кілька полів — сторінка складе текст звернення. Повідомлення не надсилається автоматично: скопіюйте його і надішліть мені на пошту чи в месенджер. Дані з форми нікуди не передаються і не зберігаються.",
+  "f_role": "Хто звертається", "roles": ["ОСББ або управитель", "Громада (ОМС)", "Ініціативна група / енергоспільнота", "Міжнародна організація / донор", "Інше"],
+  "f_need": "Що потрібно", "needs": ["Консультація", "Участь у загальних зборах ОСББ", "Огляд будинку і розрахунок", "Муніципальний енергетичний план", "Запуск енергетичної спільноти", "Експертна участь у проєкті"],
   "f_place": "Населений пункт", "f_name": "Ваше ім’я", "f_contact": "Телефон або email", "f_msg": "Коротко про питання",
-  "f_btn": "Скласти звернення", "f_err": "Вкажіть ім’я і контакт, щоб я міг відповісти.",
+  "f_btn": "Скласти звернення", "f_err": "Оберіть, хто звертається, і вкажіть ім’я та контакт, щоб я міг відповісти.", "f_send": "Надіслати листом", "f_call": "Зателефонувати",
   "f_out_title": "Ваше звернення — скопіюйте і надішліть",
   "f_hdr": "Звернення з сайту", "f_lab": ["Хто", "Населений пункт", "Що потрібно", "Питання", "Контакт"],
   "c_title": "Контакти",
@@ -230,6 +261,10 @@ T = {
  "en": {
   "lang": "en", "file": "en.html", "other": "index.html", "other_label": "UA",
   "title": "Dmytro Palamarchuk",
+  "seo_title": "Dmytro Palamarchuk — energy efficiency, municipal energy planning, energy communities",
+  "lead2": "Municipal energy plans for municipalities, renovation preparation for homeowner associations, energy community models for community groups.",
+  "quick": [("#svc-0", "Municipalities"), ("#svc-1", "Homeowner associations"), ("#svc-2", "Energy communities"), ("#partners", "International programmes")],
+  "pub_more": "Full list of publications on ORCID",
   "description": "Dmytro Palamarchuk — energy efficiency consultant in Ukraine: municipal energy plans for communities, advisory to homeowner associations on Energy Efficiency Fund programmes, support for energy communities.",
   "nav": [("#how", "How I work"), ("#services", "Services"), ("#experience", "Experience"), ("#publications", "Publications"), ("#contact", "Contact")],
   "eyebrow": "Energy efficiency · Municipal energy planning · Energy communities",
@@ -238,10 +273,10 @@ T = {
   "path_title": "How I work",
   "path_sub": "Whatever you come with, the path is the same. You deal with one person; I bring in the engineers, lawyers and finance specialists I have worked with for years when the task needs them.",
   "path": [("Understand the question", "What exists today, what the problem is, which data are available and which are missing."), ("Run the numbers", "Baseline, options, costs, savings and payback."), ("Find the financing", "Energy Efficiency Fund programmes, donor grants, loans, municipal budgets."), ("Deliver the result", "General meetings, applications, contractors, verification, reporting.")],
-  "meta": "Cherkasy, Ukraine · PhD in Economics · Board member, NGO E-TEAM",
-  "cta1": "Get in touch", "cta2": "ORCID profile",
+  "meta": "Based in Cherkasy, working with municipalities across Ukraine · PhD in Economics · Board member, NGO E-TEAM",
+  "cta1": "Get in touch", "cta2": "What I do",
   "scale_title": "Building energy performance class",
-  "scale_note": "The scale from a building energy certificate. Moving a building, or a whole community, closer to class A is the work described below.",
+  "scale_note": "Illustration based on the building energy certificate scale. The aim of the work is to move a building or a community closer to class A.",
   "s_title": "Who comes to me, and with what",
   "s_sub": "Three groups of clients. Each gets its own instrument, backed by delivered projects.",
   "services": [
@@ -252,8 +287,8 @@ T = {
      "Building inspection, financial outcome calculation, preparation of general meetings and applications to the Energy Efficiency Fund programmes EnergoDim and VidnovyDIM, support through verification.",
      "Regional adviser in Cherkasy oblast: 2019–2025 under the IFC programme, since 2026 in the NGO E-TEAM adviser network (GIZ project)."),
     ("Energy communities", "Setting up an energy community",
-     "Advice to initiative groups and municipalities on the community model, legal framework, business model and financing.",
-     "National coordinator of the EU LIFE project LIFE-ECOss, which sets up an energy community One-Stop-Shop in Lutsk."),
+     "Available now: advice for an initiative group or municipality, a preliminary assessment of the community model, a launch plan covering the legal framework, business model and financing.",
+     "National coordinator of the EU LIFE project LIFE-ECOss (started September 2026), which is setting up an energy community One-Stop-Shop in Lutsk."),
   ],
   "f_title": "Work with homeowner associations in figures",
   "figures": [("41", "successful HOA applications to the Energy Efficiency Fund"),
@@ -277,22 +312,32 @@ T = {
   "p_title": "Publications",
   "pubs": [
     ("2024", "Information campaigns as a tool for changing consumer energy behaviour: EU experience", "Proceedings of the III International Scientific and Practical Conference, Ternopil, WUNU (in Ukrainian)", "http://dspace.wunu.edu.ua/handle/316497/50505"),
-    ("2023", "Energy efficiency in Ukraine’s housing sector", "Strategies of Global Competitiveness: Socio-Economic Dimensions, X International Conference, ChSTU (in Ukrainian)", "https://bit.ly/3OaJAVb"),
+    ("2023", "Energy efficiency in Ukraine’s housing sector", "Strategies of Global Competitiveness: Socio-Economic Dimensions, X International Conference, ChSTU (in Ukrainian)", "https://dntb.gov.ua/wp-content/uploads/2023/05/X-%D0%BC%D1%96%D0%B6%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84_%D0%A1%D1%82%D1%80%D0%B0%D1%82%D0%B5%D0%B3%D1%96%D1%97-%D0%B3%D0%BB%D0%BE%D0%B1%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%97-%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D0%B5%D0%BD%D1%82%D0%BE%D1%81%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%96_%D1%81%D0%BE%D1%86%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE-%D0%B5%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D1%96%D1%87%D0%BD%D1%96-%D0%B2%D0%B8%D0%BC%D1%96%D1%80%D0%B8-3.pdf"),
     ("2022", "Factors influencing homeowners’ decisions on the modernisation of multi-apartment buildings", "IX International Scientific and Practical Conference, ChSTU (in Ukrainian)", "https://er.chdtu.edu.ua/handle/ChSTU/4287"),
   ],
-  "trust_title": "Programmes and organisations I work with",
-  "trust": ["IFC (World Bank Group)", "GIZ", "UNIDO", "EU LIFE Programme", "Energy Efficiency Fund of Ukraine", "NGO E-TEAM"],
+  "trust_title": "Programmes and organisations I work with, and my role",
+  "trust": [("IFC (World Bank Group)", "regional adviser, “Ukraine EE Fund” project, 2019–2025"),
+            ("GIZ", "regional adviser in the NGO E-TEAM network, since 2026"),
+            ("UNIDO", "Smila municipal energy plan, 2026, with the NGO E-TEAM team"),
+            ("EU LIFE Programme", "national coordinator of LIFE-ECOss, since 2026, for NGO E-TEAM"),
+            ("Energy Efficiency Fund of Ukraine", "support to HOAs in the EnergoDim and VidnovyDIM programmes")],
+  "partners_title": "For international programmes and partners",
+  "partners_sub": "I work as an independent expert (registered sole proprietor) or as part of the NGO E-TEAM team, depending on programme requirements.",
+  "partners": ["Municipal energy planning under Ukraine's official methodology (Order No. 1163) and analysis of municipal energy data",
+               "Training and advisory for homeowner associations and local authorities — more than 70 events",
+               "Coordinating the Ukrainian partner in EU consortia: national coordinator of LIFE-ECOss, LEAR on the Funding & Tenders Portal",
+               "Adapting European energy transition practice to Ukrainian conditions"],
   "prep_title": "Prepare for the first conversation",
   "prep_sub": "A first consultation is shorter and more useful when you have this information at hand. Bring what you have.",
   "prep": [("Homeowner association", ["Heat bills or consumption data for the last 2–3 heating seasons", "Building passport: year, storeys, floor area, number of flats", "Minutes of meetings on renovation, if any", "Energy certificate or energy audit, if available", "Photos of the facade, basement and heating substation"]),
            ("Municipality", ["Energy consumption of public buildings for 3 years", "Current energy efficiency programmes, SECAP or energy plan, if any", "Contact of the responsible person: energy manager, housing or economic department", "List of projects the municipality is already considering"]),
            ("Community group", ["Members of the group and who intends to join", "Possible site: roof, land plot, boiler house", "Approximate annual electricity or heat use of members", "Position of the local authority"])],
   "form_title": "Describe your question",
-  "form_sub": "Fill in a few fields and the page will compose a message. Copy it and send it by email or messenger to the contacts below.",
-  "f_role": "Who you are", "roles": ["Homeowner association or manager", "Municipality", "Community group / energy community", "Other"],
-  "f_need": "What you need", "needs": ["Consultation", "Attendance at an HOA general meeting", "Building inspection and calculation", "Municipal energy plan", "Setting up an energy community"],
+  "form_sub": "Fill in a few fields and the page will compose a message. It is not sent automatically: copy it and send it to me by email or messenger. Form data is not transmitted or stored anywhere.",
+  "f_role": "Who you are", "roles": ["Homeowner association or manager", "Municipality", "Community group / energy community", "International organisation / donor", "Other"],
+  "f_need": "What you need", "needs": ["Consultation", "Attendance at an HOA general meeting", "Building inspection and calculation", "Municipal energy plan", "Setting up an energy community", "Expert input to a project"],
   "f_place": "Town or village", "f_name": "Your name", "f_contact": "Phone or email", "f_msg": "Your question in brief",
-  "f_btn": "Compose message", "f_err": "Please enter your name and a contact so I can reply.",
+  "f_btn": "Compose message", "f_err": "Please choose who you are and enter your name and a contact so I can reply.", "f_send": "Send by email", "f_call": "Call",
   "f_out_title": "Your message — copy and send it",
   "f_hdr": "Request from the website", "f_lab": ["Who", "Location", "Needs", "Question", "Contact"],
   "c_title": "Contact",
@@ -310,21 +355,39 @@ BASE = "https://dmytropalamarchuk-svg.github.io/"
 FAVICON = "data:image/svg+xml," + "%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%231d6b66%27/%3E%3Cpath d=%27M7 10h11l3 3-3 3H7z%27 fill=%27%23fff%27/%3E%3Cpath d=%27M7 18h16l3 3-3 3H7z%27 fill=%27%23b6e0d9%27/%3E%3C/svg%3E"
 
 
+def make_og(path):
+    from PIL import Image, ImageDraw, ImageFont
+    W, H = 1200, 630
+    im = Image.new("RGB", (W, H), (243, 246, 245)); d = ImageDraw.Draw(im)
+    fb = "/usr/share/fonts/truetype/dejavu/DejaVuSerif-Bold.ttf"; fr = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+    d.text((80, 150), "Дмитро Паламарчук", font=ImageFont.truetype(fb, 74), fill=(20, 38, 43))
+    d.text((80, 250), "Dmytro Palamarchuk", font=ImageFont.truetype(fr, 40), fill=(75, 95, 99))
+    for i, line in enumerate(["Енергоефективність · Муніципальні енергетичні плани", "Консультації ОСББ · Енергетичні спільноти"]):
+        d.text((80, 340 + i * 46), line, font=ImageFont.truetype(fr, 32), fill=(29, 107, 102))
+    cols = [(47,125,79),(92,154,69),(155,181,64),(210,178,58),(212,138,52),(200,100,47),(178,65,46)]
+    for i, c in enumerate(cols):
+        x0 = 80 + i * 150
+        d.rectangle([x0, 500, x0 + 140, 530], fill=c)
+    im.save(path)
+
+
 def esc(s):
     return (s.replace("&", "&amp;").replace("<", "&lt;").replace(">", "&gt;").replace('"', "&quot;"))
 
 
-def page(t, skeleton):
+def page(t, skeleton, seo=False):
     nav = "".join(f'<a href="{h}">{esc(l)}</a>' for h, l in t["nav"])
     nav += f'<a class="lang" href="{t["other"]}" hreflang="{"en" if t["lang"]=="uk" else "uk"}">{t["other_label"]}</a>'
     bars = "".join(f'<div class="bar" style="width:{w}%;background:var({c})"><span>{k}</span></div>' for k, w, c in SCALE_WIDTHS)
     svcs = "".join(
-        f'<article class="svc"><p class="who">{esc(a)}</p><h3>{esc(h)}</h3><p>{esc(p)}</p><p class="proof">{esc(pr)}</p></article>'
-        for a, h, p, pr in t["services"])
+        f'<article class="svc" id="svc-{i}"><p class="who">{esc(a)}</p><h3>{esc(h)}</h3><p>{esc(p)}</p><p class="proof">{esc(pr)}</p></article>'
+        for i, (a, h, p, pr) in enumerate(t["services"]))
+    quick = "".join(f'<a href="{h}">{esc(l)}</a>' for h, l in t["quick"])
+    partners = "".join(f'<li>{esc(x)}</li>' for x in t["partners"])
     path = "".join(f'<li><h3>{esc(a)}</h3><p>{esc(b)}</p></li>' for a, b in t["path"])
-    trust = f'<div class="trust"><span class="tt">{esc(t["trust_title"])}</span>' + "".join(f'<span class="tn">{esc(x)}</span>' for x in t["trust"]) + '</div>'
+    trust = f'<div class="trust"><span class="tt">{esc(t["trust_title"])}</span>' + "".join(f'<div class="ti"><span class="tn">{esc(x)}</span><span class="tr">{esc(r)}</span></div>' for x, r in t["trust"]) + '</div>'
     prep = "".join(f'<div class="card"><h3>{esc(h)}</h3><ul>' + "".join(f'<li>{esc(i)}</li>' for i in items) + '</ul></div>' for h, items in t["prep"])
-    roles = "".join(f'<label><input type="radio" name="role" value="{esc(r)}" id="role-{k}"{" checked" if k==0 else ""}> {esc(r)}</label>' for k, r in enumerate(t["roles"]))
+    roles = "".join(f'<label><input type="radio" name="role" value="{esc(r)}" id="role-{k}"{" checked" if k==0 else ""}> {esc(r)}</label>' for k, r in enumerate(t["roles"])).replace(" checked", "")
     needs = "".join(f'<label><input type="checkbox" name="need" value="{esc(r)}" id="need-{k}"> {esc(r)}</label>' for k, r in enumerate(t["needs"]))
     form = f"""<div class="req"><form class="form" id="reqform" novalidate>
 <fieldset><legend>{esc(t['f_role'])}</legend><div class="chips">{roles}</div></fieldset>
@@ -336,7 +399,7 @@ def page(t, skeleton):
 <p class="err" id="f-err" hidden>{esc(t['f_err'])}</p>
 <div><button class="btn primary" type="submit" style="cursor:pointer">{esc(t['f_btn'])}</button></div>
 </form>
-<div class="out" id="f-out" hidden><h3>{esc(t['f_out_title'])}</h3><pre class="v" id="f-text"></pre><button class="copy" type="button" id="copy-msg">{t['copy']}</button><p class="hint">{esc(t['contacts'][0][1])} · {esc(t['contacts'][1][1])}</p></div>
+<div class="out" id="f-out" hidden><h3>{esc(t['f_out_title'])}</h3><pre class="v" id="f-text"></pre><button class="copy" type="button" id="copy-msg">{t['copy']}</button><p class="hint"><a id="f-mail" href="mailto:{t['contacts'][0][1]}">{esc(t['f_send'])}: {esc(t['contacts'][0][1])}</a> · <a href="tel:{t['contacts'][1][1].replace(' ','')}">{esc(t['f_call'])}: {esc(t['contacts'][1][1])}</a></p></div>
 </div>"""
     figs = "".join(f'<li><span class="num">{esc(n)}</span><span class="lbl">{esc(l)}</span></li>' for n, l in t["figures"])
     tl = ""
@@ -348,7 +411,8 @@ def page(t, skeleton):
     cts = ""
     for i, (k, v, cp) in enumerate(t["contacts"]):
         btn = f'<button class="copy" type="button" id="copy-{i}" data-v="{esc(v)}">{t["copy"]}</button>' if cp else f'<a href="{ORCID}" rel="noopener">orcid.org</a>'
-        cts += f'<div class="ct"><span class="k">{k}</span><span class="v">{esc(v)}</span>{btn}</div>'
+        href = f"mailto:{v}" if "@" in v else (f"tel:{v.replace(' ','')}" if v.startswith("+") else ORCID)
+        cts += f'<div class="ct"><span class="k">{k}</span><a class="v" href="{href}">{esc(v)}</a>{btn}</div>'
     ld = {"@context": "https://schema.org", "@type": "Person", "name": t["name"],
           "alternateName": ["Дмитро Паламарчук", "Dmytro Palamarchuk", "Паламарчук Дмитро Миколайович"],
           "jobTitle": t["jobTitle"], "address": {"@type": "PostalAddress", "addressLocality": "Cherkasy", "addressCountry": "UA"},
@@ -357,12 +421,14 @@ def page(t, skeleton):
                        {"@type": "CollegeOrUniversity", "name": "Cherkasy State Technological University"}],
           "knowsAbout": ["Energy efficiency", "Municipal energy planning", "Energy communities", "Homeowner associations", "EU energy policy"],
           "sameAs": [ORCID]}
-    head = (f'<title>{esc(t["title"])}</title>'
-            f'<meta name="claude:viewport-fit-sides" content="cover">'
+    ttl = t["seo_title"] if seo else t["title"]
+    head = (f'<title>{esc(ttl)}</title>'
+            + ('' if seo else '<meta name="claude:viewport-fit-sides" content="cover">') +
+            f'<meta property="og:image" content="{BASE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">'
             f'<meta name="description" content="{esc(t["description"])}">'
             f'<link rel="canonical" href="{BASE}{"" if t["file"]=="index.html" else t["file"]}">'
             f'<link rel="alternate" hreflang="uk" href="{BASE}"><link rel="alternate" hreflang="en" href="{BASE}en.html"><link rel="alternate" hreflang="x-default" href="{BASE}">'
-            f'<meta property="og:type" content="profile"><meta property="og:title" content="{esc(t["title"])}"><meta property="og:description" content="{esc(t["description"])}"><meta property="og:url" content="{BASE}{"" if t["file"]=="index.html" else t["file"]}">'
+            f'<meta property="og:type" content="profile"><meta property="og:title" content="{esc(ttl)}"><meta property="og:description" content="{esc(t["description"])}"><meta property="og:url" content="{BASE}{"" if t["file"]=="index.html" else t["file"]}">'
             f'<link rel="icon" href="{FAVICON}">'
             f'{FONTS}<style>{CSS}</style>'
             f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>')
@@ -375,8 +441,10 @@ def page(t, skeleton):
     <p class="eyebrow">{esc(t['eyebrow'])}</p>
     <h1>{esc(t['name'])}</h1>
     <p class="lead">{esc(t['lead'])}</p>
+    <p class="lead2">{esc(t['lead2'])}</p>
+    <nav class="quick" aria-label="Quick">{quick}</nav>
     <p class="meta">{esc(t['meta'])}</p>
-    <div class="cta"><a class="btn primary" href="#contact">{esc(t['cta1'])}</a><a class="btn ghost" href="{ORCID}" rel="noopener">{esc(t['cta2'])}</a></div>
+    <div class="cta"><a class="btn primary" href="#contact">{esc(t['cta1'])}</a><a class="btn ghost" href="#services">{esc(t['cta2'])}</a></div>
   </div>
   <figure class="scale" aria-label="{esc(t['scale_title'])}" style="margin:0">
     <p class="scale-title">{esc(t['scale_title'])}</p>
@@ -386,11 +454,12 @@ def page(t, skeleton):
 </div>
 <section id="how"><h2>{esc(t['path_title'])}</h2><p class="sub">{esc(t['path_sub'])}</p><ol class="path">{path}</ol></section>
 <section id="services"><h2>{esc(t['s_title'])}</h2><p class="sub">{esc(t['s_sub'])}</p><div class="services">{svcs}</div></section>
+<section id="partners"><h2>{esc(t['partners_title'])}</h2><p class="sub">{esc(t['partners_sub'])}</p><ul class="plist">{partners}</ul></section>
 {trust}
 <section id="figures" aria-label="{esc(t['f_title'])}"><h2>{esc(t['f_title'])}</h2><ul class="figures" style="margin-top:28px">{figs}</ul><p class="src">{esc(t['f_src'])}</p></section>
 <section id="prepare"><h2>{esc(t['prep_title'])}</h2><p class="sub">{esc(t['prep_sub'])}</p><div class="prep">{prep}</div></section>
 <section id="experience"><h2>{esc(t['e_title'])}</h2><ul class="tl" style="margin-top:28px">{tl}</ul><dl class="edu">{edu}</dl></section>
-<section id="publications"><h2>{esc(t['p_title'])}</h2><ul class="pubs" style="margin-top:28px">{pubs}</ul></section>
+<section id="publications"><h2>{esc(t['p_title'])}</h2><ul class="pubs" style="margin-top:28px">{pubs}</ul><p class="src"><a href="{ORCID}" rel="noopener">{esc(t['pub_more'])}</a></p></section>
 <section id="contact"><h2>{esc(t['c_title'])}</h2><p class="sub">{esc(t['c_sub'])}</p><h3 style="font-family:var(--f-display);font-size:21px;margin:0 0 6px">{esc(t['form_title'])}</h3><p class="sub" style="margin-bottom:20px">{esc(t['form_sub'])}</p>{form}<div class="contact">{cts}</div></section>
 </main>
 <footer><span>{esc(t['footer_l'])}</span><a href="https://www.eteamngo.org/" rel="noopener">{esc(t['footer_r'])}</a></footer>
@@ -400,8 +469,8 @@ var lab={json.dumps(t['f_lab'], ensure_ascii=False)}, hdr={json.dumps(t['f_hdr']
 document.getElementById('reqform').addEventListener('submit',function(e){{e.preventDefault();
   var g=function(id){{return document.getElementById(id).value.trim();}};
   var name=g('f-name'), contact=g('f-contact'), err=document.getElementById('f-err');
-  if(!name||!contact){{err.hidden=false;return;}} err.hidden=true;
   var role=(document.querySelector('input[name=role]:checked')||{{}}).value||'';
+  if(!name||!contact||!role){{err.hidden=false;return;}} err.hidden=true;
   var needs=[].slice.call(document.querySelectorAll('input[name=need]:checked')).map(function(x){{return x.value;}}).join(', ');
   var lines=[hdr, lab[0]+': '+role];
   if(g('f-place')) lines.push(lab[1]+': '+g('f-place'));
@@ -409,8 +478,14 @@ document.getElementById('reqform').addEventListener('submit',function(e){{e.prev
   if(g('f-msg')) lines.push(lab[3]+': '+g('f-msg'));
   lines.push(lab[4]+': '+name+', '+contact);
   document.getElementById('f-text').textContent=lines.join('\\n');
+  var m=document.getElementById('f-mail'); m.href=m.href.split('?')[0]+'?subject='+encodeURIComponent(hdr)+'&body='+encodeURIComponent(lines.join('\\n'));
   var o=document.getElementById('f-out'); o.hidden=false; o.scrollIntoView({{behavior:'smooth',block:'nearest'}});
 }});
+var NEED_MAP=[[0,1,2],[0,3],[0,4],[0,5],[0,1,2,3,4,5]];
+document.querySelectorAll('input[name=role]').forEach(function(r,ri){{r.addEventListener('change',function(){{
+  var ok=NEED_MAP[ri]||NEED_MAP[4];
+  document.querySelectorAll('input[name=need]').forEach(function(c,ci){{var show=ok.indexOf(ci)>-1;c.parentNode.hidden=!show;if(!show)c.checked=false;}});
+}});}});
 document.getElementById('copy-msg').setAttribute('data-v','');
 document.getElementById('copy-msg').addEventListener('click',function(){{this.setAttribute('data-v',document.getElementById('f-text').textContent);}},true);
 document.querySelectorAll('.copy').forEach(function(b){{b.addEventListener('click',function(){{
@@ -432,8 +507,9 @@ if __name__ == "__main__":
         os.makedirs(os.path.join(HERE, d), exist_ok=True)
     open(os.path.join(HERE, "preview", "index.html"), "w").write(page(T["ua"], False))
     open(os.path.join(HERE, "preview", "en.html"), "w").write(page(T["en"], True))
-    open(os.path.join(HERE, "dist", "index.html"), "w").write(page(T["ua"], True))
-    open(os.path.join(HERE, "dist", "en.html"), "w").write(page(T["en"], True))
+    open(os.path.join(HERE, "dist", "index.html"), "w").write(page(T["ua"], True, seo=True))
+    open(os.path.join(HERE, "dist", "en.html"), "w").write(page(T["en"], True, seo=True))
+    make_og(os.path.join(HERE, "dist", "og.png"))
     open(os.path.join(HERE, "dist", "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
     open(os.path.join(HERE, "dist", "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
