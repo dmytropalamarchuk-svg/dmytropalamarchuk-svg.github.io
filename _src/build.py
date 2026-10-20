@@ -177,14 +177,13 @@ h3{font-weight:700;letter-spacing:-.01em}
 .svc .pick::after{content:"";display:inline-block;width:7px;height:7px;border-right:2px solid currentColor;border-top:2px solid currentColor;transform:rotate(45deg);margin-left:8px;vertical-align:2px}
 .out .hint{color:var(--ink-2);font-size:14.5px;margin:0}
 .contact{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:0;border-top:1px solid var(--rule)}
-.ct{padding:22px 24px 4px 0;display:flex;flex-direction:column;gap:4px;min-width:0}
-.ct + .ct{padding-left:24px;border-left:1px solid var(--rule)}
+.ct{border-bottom:1px solid var(--rule);padding:22px 16px 18px 0;display:flex;flex-direction:column;gap:4px;min-width:0}
+.ct:not(:nth-child(3n+1)){padding-left:24px;border-left:1px solid var(--rule)}
 .ct .k{font-size:14px;font-weight:600;color:var(--ink-2)}
-.ct .v{font-size:18px;font-weight:600;word-break:break-word;color:var(--ink);text-decoration:none}
+.ct .v{font-size:16.5px;font-weight:600;overflow-wrap:anywhere;color:var(--ink);text-decoration:none}
 .ct a.v:hover{color:var(--accent)}
 .copy{align-self:flex-start;margin-top:8px;font:inherit;font-size:13.5px;background:none;border:1px solid var(--rule);color:var(--ink);border-radius:6px;padding:4px 11px;cursor:pointer}
 .copy:hover{border-color:var(--accent);color:var(--accent)}
-.ct > a:not(.v){font-size:14px;margin-top:8px}
 
 footer.night .wrap{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:30px 40px;font-size:14.5px;color:var(--on-night-2)}
 footer.night a{color:var(--on-night)}
@@ -213,7 +212,7 @@ footer.night a{color:var(--on-night)}
   .path li{padding:0 0 0 60px;min-height:41px}
   .figures{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:28px 20px}
   .contact{grid-template-columns:minmax(0,1fr)}
-  .ct,.ct + .ct{padding:18px 0 14px;border-left:0;border-bottom:1px solid var(--rule)}
+  .contact .ct{padding:18px 0 14px;border-left:0}
   .trust li{grid-template-columns:minmax(0,1fr);gap:2px}
   .form{padding:20px}
   section{padding-block:60px}
@@ -231,7 +230,7 @@ T = {
   "seo_title": "Дмитро Паламарчук — енергоефективність, МЕП, енергоспільноти",
   "lead2": "Громадам — муніципальні енергетичні плани, ОСББ — підготовка до енергомодернізації, ініціативним групам — моделі енергетичних спільнот.",
   "quick": [("#svc-0", "Громаді"), ("#svc-1", "ОСББ"), ("#svc-2", "Енергоспільноті"), ("#partners", "Міжнародним програмам")],
-  "pub_more": "Повний перелік публікацій — у профілі ORCID",
+  "pub_more": "Повний перелік публікацій:",
   "description": "Дмитро Паламарчук — консультант з енергоефективності: муніципальні енергетичні плани для громад, консультації ОСББ щодо програм Фонду енергоефективності, підтримка енергетичних спільнот. Черкаси.",
   "nav": [("#how", "Як працюю"), ("#services", "Послуги"), ("#experience", "Досвід"), ("#contact", "Контакти")],
   "eyebrow": "Енергоефективність · Енергетичне планування громад · Енергетичні спільноти",
@@ -313,7 +312,7 @@ T = {
   "f_hdr": "Звернення з сайту", "f_lab": ["Хто", "Населений пункт", "Що потрібно", "Питання", "Контакт"],
   "c_title": "Контакти",
   "c_sub": "Пишіть щодо МЕП для вашої громади, консультації для ОСББ чи енергетичної спільноти.",
-  "contacts": [("Email", "dmytropalamarchuk@gmail.com", True), ("Телефон", "+380 97 889 13 85", True), ("ORCID", "0000-0002-6023-9780", False)],
+  "contacts": [("Email", "dmytropalamarchuk@gmail.com", "mailto:dmytropalamarchuk@gmail.com", True), ("Корпоративна пошта, ГО «Е-ТЕАМ»", "dmytro.palamarchuk@eteamngo.org", "mailto:dmytro.palamarchuk@eteamngo.org", True), ("Телефон", "+380 97 889 13 85", "tel:+380978891385", True), ("Сайт ГО «Е-ТЕАМ»", "eteamngo.org", "https://www.eteamngo.org/", False), ("Google Scholar", "Профіль і цитування", "https://scholar.google.com/citations?user=g-yRUywAAAAJ", False), ("ORCID", "0000-0002-6023-9780", "https://orcid.org/0000-0002-6023-9780", False)],
   "copy": "Копіювати", "copied": "Скопійовано",
   "svc_cta": ["Обговорити МЕП для громади", "Записатися на консультацію ОСББ", "Обговорити енергоспільноту"], "partners_cta": "Запросити до проєкту",
   "footer_l": "© 2026 Дмитро Паламарчук",
@@ -326,7 +325,7 @@ T = {
   "seo_title": "Dmytro Palamarchuk — energy efficiency, municipal energy planning, energy communities",
   "lead2": "Municipal energy plans for municipalities, renovation preparation for homeowner associations, energy community models for community groups.",
   "quick": [("#svc-0", "Municipalities"), ("#svc-1", "Homeowner associations"), ("#svc-2", "Energy communities"), ("#partners", "International programmes")],
-  "pub_more": "Full list of publications on ORCID",
+  "pub_more": "Full list of publications:",
   "description": "Dmytro Palamarchuk — energy efficiency consultant in Ukraine: municipal energy plans for communities, advisory to homeowner associations on Energy Efficiency Fund programmes, support for energy communities.",
   "nav": [("#how", "How I work"), ("#services", "Services"), ("#experience", "Experience"), ("#contact", "Contact")],
   "eyebrow": "Energy efficiency · Municipal energy planning · Energy communities",
@@ -408,7 +407,7 @@ T = {
   "f_hdr": "Request from the website", "f_lab": ["Who", "Location", "Needs", "Question", "Contact"],
   "c_title": "Contact",
   "c_sub": "Write about an energy plan for your municipality, HOA advisory or an energy community.",
-  "contacts": [("Email", "dmytropalamarchuk@gmail.com", True), ("Phone", "+380 97 889 13 85", True), ("ORCID", "0000-0002-6023-9780", False)],
+  "contacts": [("Email", "dmytropalamarchuk@gmail.com", "mailto:dmytropalamarchuk@gmail.com", True), ("Work email, NGO E-TEAM", "dmytro.palamarchuk@eteamngo.org", "mailto:dmytro.palamarchuk@eteamngo.org", True), ("Phone", "+380 97 889 13 85", "tel:+380978891385", True), ("NGO E-TEAM website", "eteamngo.org", "https://www.eteamngo.org/", False), ("Google Scholar", "Profile and citations", "https://scholar.google.com/citations?user=g-yRUywAAAAJ", False), ("ORCID", "0000-0002-6023-9780", "https://orcid.org/0000-0002-6023-9780", False)],
   "copy": "Copy", "copied": "Copied",
   "svc_cta": ["Discuss a municipal energy plan", "Book an HOA consultation", "Discuss an energy community"], "partners_cta": "Invite to a project",
   "footer_l": "© 2026 Dmytro Palamarchuk",
@@ -418,6 +417,7 @@ T = {
 }
 
 ORCID = "https://orcid.org/0000-0002-6023-9780"
+SCHOLAR = "https://scholar.google.com/citations?user=g-yRUywAAAAJ"
 BASE = "https://dmytropalamarchuk-svg.github.io/"
 FAVICON = "data:image/svg+xml," + "%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%231d6b66%27/%3E%3Cpath d=%27M7 10h11l3 3-3 3H7z%27 fill=%27%23fff%27/%3E%3Cpath d=%27M7 18h16l3 3-3 3H7z%27 fill=%27%23b6e0d9%27/%3E%3C/svg%3E"
 
@@ -534,7 +534,7 @@ def page(t, skeleton, seo=False):
 <p class="err" id="f-err" hidden>{esc(t['f_err'])}</p>
 <div><button class="btn primary" type="submit" style="cursor:pointer">{esc(t['f_btn'])}</button></div>
 </form>
-<div class="out" id="f-out" hidden><h3>{esc(t['f_out_title'])}</h3><pre class="v" id="f-text"></pre><button class="copy" type="button" id="copy-msg">{t['copy']}</button><div class="acts"><a class="btn primary" id="f-mail" href="mailto:{t['contacts'][0][1]}">{esc(t['f_send'])}</a><a class="btn ghost" href="tel:{t['contacts'][1][1].replace(' ','')}">{esc(t['f_call'])}</a></div><p class="hint">{esc(t['contacts'][0][1])}, {esc(t['contacts'][1][1])}</p></div>
+<div class="out" id="f-out" hidden><h3>{esc(t['f_out_title'])}</h3><pre class="v" id="f-text"></pre><button class="copy" type="button" id="copy-msg">{t['copy']}</button><div class="acts"><a class="btn primary" id="f-mail" href="mailto:{t['contacts'][0][1]}">{esc(t['f_send'])}</a><a class="btn ghost" href="{t['contacts'][2][2]}">{esc(t['f_call'])}</a></div><p class="hint">{esc(t['contacts'][0][1])}, {esc(t['contacts'][2][1])}</p></div>
 </div>"""
     figs = "".join(f'<li><span class="num">{esc(n)}</span><span class="lbl">{esc(l)}</span></li>' for n, l in t["figures"])
     tl = ""
@@ -544,10 +544,10 @@ def page(t, skeleton, seo=False):
     edu = "".join(f'<dt>{y}</dt><dd>{esc(x)}</dd>' for y, x in t["edu"])
     pubs = "".join(f'<li><span class="y">{y}</span><div><a href="{u}" rel="noopener">{esc(ti)}</a><span class="org">{esc(v)}</span></div></li>' for y, ti, v, u in t["pubs"])
     cts = ""
-    for i, (k, v, cp) in enumerate(t["contacts"]):
-        btn = f'<button class="copy" type="button" id="copy-{i}" data-v="{esc(v)}">{t["copy"]}</button>' if cp else f'<a href="{ORCID}" rel="noopener">orcid.org</a>'
-        href = f"mailto:{v}" if "@" in v else (f"tel:{v.replace(' ','')}" if v.startswith("+") else ORCID)
-        cts += f'<div class="ct"><span class="k">{k}</span><a class="v" href="{href}">{esc(v)}</a>{btn}</div>'
+    for i, (k, v, href, cp) in enumerate(t["contacts"]):
+        ext = href.startswith("http")
+        btn = f'<button class="copy" type="button" id="copy-{i}" data-v="{esc(v)}">{t["copy"]}</button>' if cp else ''
+        cts += f'<div class="ct"><span class="k">{esc(k)}</span><a class="v" href="{esc(href)}"{' rel="noopener"' if ext else ''}>{esc(v)}</a>{btn}</div>'
     ld = {"@context": "https://schema.org", "@type": "Person", "name": t["name"],
           "alternateName": ["Дмитро Паламарчук", "Dmytro Palamarchuk", "Паламарчук Дмитро Миколайович"],
           "jobTitle": t["jobTitle"], "address": {"@type": "PostalAddress", "addressLocality": "Cherkasy", "addressCountry": "UA"},
@@ -555,7 +555,7 @@ def page(t, skeleton, seo=False):
           "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Taras Shevchenko National University of Kyiv"},
                        {"@type": "CollegeOrUniversity", "name": "Cherkasy State Technological University"}],
           "knowsAbout": ["Energy efficiency", "Municipal energy planning", "Energy communities", "Homeowner associations", "EU energy policy"],
-          "sameAs": [ORCID]}
+          "email": "mailto:dmytropalamarchuk@gmail.com", "sameAs": [ORCID, SCHOLAR]}
     ttl = t["seo_title"] if seo else t["title"]
     head = (f'<title>{esc(ttl)}</title>'
             + ('' if seo else '<meta name="claude:viewport-fit-sides" content="cover">') +
@@ -598,7 +598,7 @@ def page(t, skeleton, seo=False):
 <section id="prepare" class="band"><div class="wrap"><h2>{esc(t['prep_title'])}</h2><p class="sub">{esc(t['prep_sub'])}</p><div class="prep">{prep}</div></div></section>
 <section id="experience"><div class="wrap"><h2>{esc(t['e_title'])}</h2><ul class="tl" style="margin-top:40px">{tl}</ul>
 <h3 class="sub-h">{esc(t['edu_h'])}</h3><dl class="edu">{edu}</dl>
-<h3 class="sub-h" id="publications">{esc(t['pubs_h'])}</h3><ul class="pubs">{pubs}</ul><p class="src"><a href="{ORCID}" rel="noopener">{esc(t['pub_more'])}</a></p></div></section>
+<h3 class="sub-h" id="publications">{esc(t['pubs_h'])}</h3><ul class="pubs">{pubs}</ul><p class="src">{esc(t['pub_more'])} <a href="{esc(SCHOLAR)}" rel="noopener">Google Scholar</a>, <a href="{ORCID}" rel="noopener">ORCID</a></p></div></section>
 <section id="contact" class="band"><div class="wrap"><h2>{esc(t['c_title'])}</h2><p class="sub">{esc(t['c_sub'])}</p><h3 class="form-h">{esc(t['form_title'])}</h3><p class="sub" style="margin-bottom:24px;font-size:16px">{esc(t['form_sub'])}</p>{form}<div class="contact">{cts}</div></div></section>
 </main>
 <footer class="night"><div class="wrap"><span>{esc(t['footer_l'])}</span><a href="https://www.eteamngo.org/" rel="noopener">{esc(t['footer_r'])}</a></div></footer>
