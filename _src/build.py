@@ -219,7 +219,11 @@ footer .wrap{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(
 footer b{color:var(--on-footer);font-weight:600;display:block;font-size:16px}
 footer a{color:var(--on-footer)}
 footer :focus-visible{outline-color:var(--on-footer)}
-footer .base{grid-column:1/-1;border-top:1px solid #2c3846;padding-top:var(--s-4)}
+footer .base{grid-column:1/-1;border-top:1px solid #2c3846;padding-top:var(--s-5);margin-top:var(--s-2);display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s-5);flex-wrap:wrap}
+footer .legal{margin:0;display:flex;flex-direction:column;gap:3px;padding-left:var(--s-4);border-left:2px solid #4fb3a8}
+footer .lg-k{font-size:13px;line-height:1.3;letter-spacing:.02em;color:var(--on-footer-2)}
+footer .lg-n{font-family:var(--serif);font-weight:600;font-size:19px;line-height:1.25;color:var(--on-footer);letter-spacing:-.005em}
+footer .cr{margin:0;font-size:13px;color:var(--on-footer-2)}
 
 @media (max-width:900px){
   .hero{grid-template-columns:minmax(0,1fr);gap:var(--s-7);padding-block:var(--s-7) var(--s-9)}
@@ -250,7 +254,7 @@ footer .base{grid-column:1/-1;border-top:1px solid #2c3846;padding-top:var(--s-4
   .ct:nth-child(n){padding:var(--s-4) 0;border-left:0}
   .form{padding:var(--s-4)}
 }
-@media print{.hdr .links,.tools .lang,.explain,.req,footer .base{display:none}section{padding-block:24px}}
+@media print{.hdr .links,.tools .lang,.explain,.req,footer .cr{display:none}section{padding-block:24px}}
 """
 
 ICONS = [
@@ -385,8 +389,9 @@ T = {
   "contacts": [("Email", MAIL, "mailto:" + MAIL, True), ("Корпоративна пошта, ГО «Е-ТЕАМ»", MAIL_W, "mailto:" + MAIL_W, True),
                ("Телефон", TEL_H, TEL, True), ("Сайт ГО «Е-ТЕАМ»", "eteamngo.org", ETEAM, False),
                ("Google Scholar", "Профіль і цитування", SCHOLAR, False), ("ORCID", "0000-0002-6023-9780", ORCID, False)],
-  "ft_role": "Незалежний експерт (ФОП) · Черкаси", "ft_board": "Член правління ГО «Е-ТЕАМ»",
+  "ft_role": "Незалежний експерт · Черкаси", "ft_board": "Член правління ГО «Е-ТЕАМ»",
   "ft_base": "© 2026 Дмитро Паламарчук · Оновлено: жовтень 2026",
+  "lg_k": "Фізична особа — підприємець", "lg_n": "Паламарчук Дмитро Миколайович", "lg_aria": "Юридична особа, що надає послуги",
   "jobTitle": "Консультант з енергоефективності та муніципального енергетичного планування",
  },
  "en": {
@@ -508,6 +513,7 @@ T = {
                ("Google Scholar", "Profile and citations", SCHOLAR, False), ("ORCID", "0000-0002-6023-9780", ORCID, False)],
   "ft_role": "Independent expert · Cherkasy, Ukraine", "ft_board": "Board member, NGO E-TEAM",
   "ft_base": "© 2026 Dmytro Palamarchuk · Updated: October 2026",
+  "lg_k": "Sole proprietor (Ukrainian FOP)", "lg_n": "Dmytro Mykolaiovych Palamarchuk", "lg_aria": "Legal entity providing the services",
   "jobTitle": "Energy efficiency and municipal energy planning consultant",
  },
 }
@@ -694,7 +700,7 @@ def page(t, skeleton, seo=False):
   <div><b>{esc(t['name'])}</b>{esc(t['ft_role'])}<br>{esc(t['ft_board'])}</div>
   <div><b><a href="{TEL}">{TEL_H}</a></b><a href="mailto:{MAIL}">{MAIL}</a><br><a href="mailto:{MAIL_W}">{MAIL_W}</a></div>
   <div><a href="{ORCID}" rel="noopener">ORCID</a> · <a href="{SCHOLAR}" rel="noopener">Google Scholar</a> · <a href="{ETEAM}" rel="noopener">{'ГО «Е-ТЕАМ»' if t['lang']=='uk' else 'NGO E-TEAM'}</a></div>
-  <p class="base">{esc(t['ft_base'])}</p>
+  <div class="base"><p class="legal" aria-label="{esc(t['lg_aria'])}"><span class="lg-k">{esc(t['lg_k'])}</span><span class="lg-n">{esc(t['lg_n'])}</span></p><p class="cr">{esc(t['ft_base'])}</p></div>
 </div></footer>
 <script>{js}</script>"""
     main_html, script = body.split("<script>", 1)
