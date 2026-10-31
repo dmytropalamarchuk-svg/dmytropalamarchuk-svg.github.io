@@ -1,4 +1,5 @@
-"""Personal site of Dmytro Palamarchuk (UA + EN) — trust-first design (DESIGN.md, 20.10.2026).
+"""Personal site of Dmytro Palamarchuk — multi-page (рішення № 36): index, osbb, mep, energospilnoty (UA) + en (EN home).
+Trust-first design (DESIGN.md, 20.10.2026).
 
 Outputs:
   preview/index.html  - UA page without document skeleton (Artifact preview)
@@ -7,7 +8,7 @@ Outputs:
 Texts: positioning and copy from «Особистий сайт — позиціонування і тексти 20.10.2026»,
 figures from «Особистий сайт — реєстр фактів 20.10.2026» (IFC report EEFP_Report_#2-22_Cherkasy-2025_06).
 """
-import json, os
+import json, os, re
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 BASE = "https://dmytropalamarchuk-svg.github.io/"
@@ -271,253 +272,6 @@ PUBS_URLS = ["http://dspace.wunu.edu.ua/handle/316497/50505",
              "https://dntb.gov.ua/wp-content/uploads/2023/05/X-%D0%BC%D1%96%D0%B6%D0%BD%D0%B0%D1%80%D0%BE%D0%B4%D0%BD%D0%B0-%D0%BA%D0%BE%D0%BD%D1%84_%D0%A1%D1%82%D1%80%D0%B0%D1%82%D0%B5%D0%B3%D1%96%D1%97-%D0%B3%D0%BB%D0%BE%D0%B1%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE%D1%97-%D0%BA%D0%BE%D0%BD%D0%BA%D1%83%D1%80%D0%B5%D0%BD%D1%82%D0%BE%D1%81%D0%BF%D1%80%D0%BE%D0%BC%D0%BE%D0%B6%D0%BD%D0%BE%D1%81%D1%82%D1%96_%D1%81%D0%BE%D1%86%D1%96%D0%B0%D0%BB%D1%8C%D0%BD%D0%BE-%D0%B5%D0%BA%D0%BE%D0%BD%D0%BE%D0%BC%D1%96%D1%87%D0%BD%D1%96-%D0%B2%D0%B8%D0%BC%D1%96%D1%80%D0%B8-3.pdf",
              "https://er.chdtu.edu.ua/handle/ChSTU/4287"]
 
-T = {
- "ua": {
-  "lang": "uk", "file": "index.html", "other": "en.html", "other_lang": "en", "other_label": "EN",
-  "title": "Дмитро Паламарчук",
-  "seo_title": "Дмитро Паламарчук — енергоефективність, МЕП, консультації ОСББ",
-  "description": "Дмитро Паламарчук — консультант з енергоефективності: муніципальні енергетичні плани для громад, безкоштовні консультації ОСББ щодо програм Фонду енергоефективності, енергетичні спільноти. Черкаси.",
-  "skip": "Перейти до змісту",
-  "brand_sub": "Енергоефективність · МЕП · ОСББ",
-  "nav": [("#services", "Послуги"), ("#figures", "Цифри"), ("#experience", "Досвід"), ("#contact", "Контакти")],
-  "nav_label": "Основна навігація",
-  "kicker": "Черкаси · працюю з громадами різних областей",
-  "name": "Дмитро Паламарчук",
-  "role": "Допомагаю ОСББ і громадам ухвалити рішення про енергомодернізацію — і дійти до фінансування",
-  "lead": "Рахую, чи вигідна модернізація, готую рішення для загальних зборів ОСББ і матеріали для робочої групи громади, підбираю джерела фінансування й супроводжую заявку до Фонду енергоефективності.",
-  "cta1": "Описати своє питання", "call": "Зателефонувати",
-  "routes_lbl": "Я звертаюся як:",
-  "routes": [("#svc-1", "ОСББ"), ("#svc-0", "громада"), ("#svc-2", "ініціативна група"), ("#partners", "міжнародна програма")],
-  "facts_h": "Програми, у яких працюю, і моя роль",
-  "facts": [("IFC (Група Світового банку)", "Регіональний радник з енергоефективності, проєкт «Ukraine EE Fund», 2019–2025"),
-            ("GIZ", "Регіональний радник у мережі ГО «Е-ТЕАМ», з 2026"),
-            ("UNIDO", "МЕП Сміли, 2026 — у команді ГО «Е-ТЕАМ»"),
-            ("Програма ЄС LIFE", "Координатор проєкту LIFE-ECOss від ГО «Е-ТЕАМ», з 2026"),
-            ("Фонд енергоефективності", "Консультую ОСББ — учасників програм «Енергодім» і «ВідновиДІМ»")],
-  "facts_more": "Повний досвід",
-  "fig_h": "Робота з ОСББ у цифрах",
-  "fig_sub": "Регіональний радник з енергоефективності в Черкаській області, проєкт IFC «Ukraine EE Fund», 2019–2025.",
-  "figs": [("380+", "ОСББ Черкащини отримали мої консультації"),
-           ("41", "ОСББ, яких я консультував, уклали грантові договори з Фондом енергоефективності («Енергодім»)"),
-           ("4 200+", "квартир у будинках цих 41 ОСББ"),
-           ("70+", "навчальних заходів для ОСББ і громад: семінари, вебінари, форуми, 2019–2024")],
-  "fig_note": "Джерело: звіти регіонального радника IFC по Черкаській області (станом на червень 2025) і архів навчальних заходів. Рішення ухвалювали співвласники, роботи виконували ОСББ та їхні підрядники; моя роль — консультування на етапах рішення, розрахунків і заявки.",
-  "how_h": "Як я працюю",
-  "how_sub": "З якою б темою ви не прийшли — будинок, громада чи енергоспільнота, — порядок роботи той самий, і співрозмовник у вас один. Коли потрібен інженер, юрист чи проєктант, підключаю колег із команди ГО «Е-ТЕАМ» або фахівців, з якими працював на проєктах ОСББ.",
-  "steps": [("Розбираємося з питанням", "Що є зараз, що турбує, які дані вже зібрано і яких бракує. Після першої розмови ви знатимете, чи варто йти далі."),
-            ("Рахуємо", "Варіанти заходів, орієнтовна вартість, економія й окупність. Для ОСББ рахую ще й фінансовий результат для квартири, а не лише для будинку в цілому."),
-            ("Підбираємо фінансування", "Програми Фонду енергоефективності, донорські гранти, кредити, місцеві програми співфінансування, бюджет громади."),
-            ("Супроводжую процедури", "Готуємо рішення загальних зборів або сесії, заявки та звіти. До верифікації консультую голову ОСББ, проєктного менеджера й підрядника.")],
-  "who_h": "Хто що робить",
-  "who_p": "Рішення ухвалюють співвласники або депутати. Проєкт готує проєктант, роботи виконує підрядник, якість контролює технагляд. Я консультую на кожному етапі й стежу, щоб документи відповідали вимогам програми.",
-  "s_h": "З чим до мене звертаються",
-  "s_sub": "Громади, ОСББ та ініціативні групи. Для кожної — свій інструмент і робота, яку можна перевірити.",
-  "proof_lbl": "Підтвердження",
-  "services": [
-    ("Громадам", "Муніципальний енергетичний план",
-     "МЕП за Методикою, затвердженою наказом № 1163 від 21.12.2023: збір і перевірка даних, енергетичний баланс і базова лінія, цілі до 2030 року, каталог проєктів і план фінансування. За потреби команда навчає працівників громади, щоб план можна було оновлювати самостійно.",
-     None, "МЕП Смілянської громади (проєкт UNIDO, 2026) передано на публічне обговорення. МЕП Сарненської громади — у роботі. Обидва плани — у команді ГО «Е-ТЕАМ».",
-     "Обговорити МЕП для громади"),
-    ("ОСББ", "Консультації з енергомодернізації будинку",
-     "Огляд будинку й розрахунок: що модернізувати, скільки це коштуватиме, якою буде частка кожної квартири і яку економію можна очікувати. Підготовка загальних зборів, заявки до програм «Енергодім» і «ВідновиДІМ» Фонду енергоефективності, консультації до верифікації.",
-     "Для ОСББ консультації безкоштовні — у межах проєкту GIZ",
-     "Регіональний радник: 2019–2025 — у програмі IFC (Черкаська область, з 2024 — також Сумська), з 2026 — у мережі радників ГО «Е-ТЕАМ» (проєкт GIZ). Понад 380 ОСББ Черкащини отримали мої консультації; 41 з них уклали грантові договори з Фондом.",
-     "Записатися на консультацію для ОСББ"),
-    ("Енергетичним спільнотам", "Енергетична спільнота: з чого почати",
-     "Для ініціативної групи, ОСББ чи громади. Оцінюємо, чи є підстави для спільноти, яка правова форма підходить, на якій бізнес-моделі вона триматиметься і звідки взяти гроші. Результат — план підготовки, з яким можна йти до учасників і партнерів.",
-     None, "Координую участь ГО «Е-ТЕАМ» у проєкті ЄС LIFE-ECOss (2026–2029): у Луцьку створюємо центр підтримки енергетичних спільнот.",
-     "Обговорити енергоспільноту")],
-  "svc_cond": [None, None, "Правила для енергоспільнот в Україні лише формуються, тому починаємо з оцінки, а не з купівлі обладнання."],
-  "th_kicker": "Для ОСББ", "th_h": "Що показує тепловізор",
-  "th_p": "Тепловізор забарвлює теплі ділянки фасаду в жовтий і помаранчевий. Так видно, де будинок втрачає тепло: шви між панелями, вікна, балкони. Після утеплення фасад на знімку «холоднішає», бо тепло лишається всередині. З цього зазвичай починається розмова про те, які заходи має сенс фінансувати.",
-  "th_cap": "Схема, не знімок конкретного будинку", "th_before": "До утеплення", "th_after": "Після",
-  "th_aria": "Схема: панельний будинок до утеплення з теплими швами і вікнами, та після утеплення з холодним рівномірним фасадом",
-  "th_cold": "холодніше", "th_warm": "тепліше",
-  "p_h": "Для міжнародних програм і партнерів",
-  "p_sub": "Працюю як незалежний експерт (ФОП) або в складі команди ГО «Е-ТЕАМ», залежно від вимог програми.",
-  "p_list": ["Муніципальне енергетичне планування за Методикою № 1163 і аналіз енергетичних даних громад",
-             "Регіональне консультування ОСББ у програмах Фонду енергоефективності: IFC (2019–2025), GIZ (з 2026)",
-             "Навчання для ОСББ і посадовців громад: понад 70 заходів у 2019–2024 роках",
-             "Робота в консорціумах ЄС: координую участь ГО «Е-ТЕАМ» у LIFE-ECOss, представляю організацію як LEAR на порталі Funding & Tenders",
-             "Адаптація європейських практик підтримки енергоспільнот до українських умов"],
-  "p_cta": "Запросити до проєкту",
-  "prep_h": "Що підготувати до першої розмови",
-  "prep_sub": "З цими даними перша консультація буде коротшою і кориснішою. Не все обов’язково — принесіть те, що є.",
-  "prep": [("ОСББ", ["Рахунки або дані про споживання тепла за 2–3 останні опалювальні сезони",
-                     "Технічний паспорт будинку: рік побудови, поверховість, площа, кількість квартир",
-                     "Протоколи зборів щодо модернізації, якщо вже були",
-                     "Енергетичний сертифікат або енергоаудит, якщо є",
-                     "Фото фасаду, підвалу і теплового пункту"]),
-           ("Громада", ["Дані про споживання енергії бюджетними будівлями за останні 3 роки",
-                        "Чинні програми енергоефективності, SECAP або МЕП, якщо є",
-                        "Контакт відповідальної особи: енергоменеджер, відділ ЖКГ чи економіки",
-                        "Перелік проєктів, які громада вже розглядає"]),
-           ("Ініціативна група", ["Склад групи і хто має намір стати учасником",
-                                  "Можливий об’єкт: дах, ділянка, котельня",
-                                  "Орієнтовне річне споживання електроенергії чи тепла учасниками",
-                                  "Позиція органу місцевого самоврядування"])],
-  "e_h": "Досвід",
-  "timeline": [
-    ("2025 — дотепер", "Член правління, координатор проєктів міжнародної співпраці", "ГО «Е-ТЕАМ»", ETEAM,
-     "Керую розробкою муніципальних енергетичних планів у команді ГО: МЕП Сарненської громади (у роботі), МЕП Смілянської громади (проєкт UNIDO, передано на публічне обговорення у 2026 році). Координатор проєкту ЄС LIFE-ECOss від ГО «Е-ТЕАМ». Уповноважений представник (LEAR) організації на порталі Funding & Tenders Європейської Комісії."),
-    ("2026 — дотепер", "Регіональний радник з енергоефективності, Черкаська область", "Мережа регіональних радників ГО «Е-ТЕАМ», проєкт GIZ", None,
-     "Консультую ОСББ щодо програм «Енергодім» і «ВідновиДІМ». Організовую навчальні заходи: у липні 2026 — семінар для ОСББ і посадовців Черкас та навчальний візит для посадовців громад області."),
-    ("2019 — 2025", "Регіональний радник з енергоефективності, Черкаська область (з 2024 — також Сумська)", "Проєкт IFC «Ukraine EE Fund», Група Світового банку", None,
-     "Консультував ОСББ, їхніх проєктних менеджерів і підрядників, рахував фінансовий результат модернізації для будинків, проводив навчання для ОСББ і органів місцевого самоврядування. Понад 380 ОСББ Черкащини отримали консультації; 41 з них уклали грантові договори з Фондом енергоефективності. Консультував громади щодо місцевих програм підтримки ОСББ."),
-    ("2012 — 2026", "Викладач, з 2017 — доцент", "Черкаський державний технологічний університет", None,
-     "Курси «Міжнародна економіка», «Європейська інтеграція», «Економіка сталого розвитку»; дослідження адаптації енергетичної політики ЄС до українських умов.")],
-  "edu_h": "Освіта",
-  "edu": [("2014", "Кандидат економічних наук — Київський національний університет імені Тараса Шевченка"),
-          ("2010", "Магістр економіки та підприємництва (з відзнакою) — Черкаський державний технологічний університет")],
-  "pubs_h": "Наукові публікації",
-  "pubs": [("2024", "Інформаційні кампанії як інструмент зміни поведінки споживачів щодо використання енергії: досвід ЄС", "Матеріали III Міжнародної науково-практичної конференції, Тернопіль, ЗУНУ"),
-           ("2023", "Енергоефективність у житловому секторі України", "Стратегії глобальної конкурентоспроможності: соціально-економічний вимір. Матеріали X Міжнародної науково-практичної конференції, ЧДТУ"),
-           ("2022", "Дослідження чинників, що впливають на рішення співвласників щодо модернізації багатоквартирних будинків", "Матеріали IX Міжнародної науково-практичної конференції, ЧДТУ")],
-  "pub_more": "Повний перелік:",
-  "c_h": "Напишіть, з чим звертаєтеся",
-  "c_sub": "МЕП для громади, консультація для ОСББ, енергоспільнота чи участь у міжнародному проєкті — опишіть питання в кількох словах, і я відповім.",
-  "form_h": "Опишіть ваше питання",
-  "form_hint": "Форма складе текст листа. Ви надішлете його поштою або скопіюєте в месенджер — дані нікуди не передаються автоматично і не зберігаються.",
-  "f_role": "Хто звертається", "roles": ["ОСББ або управитель", "Громада (ОМС)", "Ініціативна група / енергоспільнота", "Міжнародна організація / донор", "Інше"],
-  "f_need": "Що потрібно", "needs": ["Консультація", "Участь у загальних зборах ОСББ", "Огляд будинку і розрахунок", "Муніципальний енергетичний план", "Енергетична спільнота: з чого почати", "Експертна участь у проєкті"],
-  "f_place": "Населений пункт", "f_place_ph": "напр., Сміла", "f_name": "Ваше ім’я", "f_contact": "Телефон або email",
-  "f_msg": "Коротко про питання", "f_msg_ph": "що є зараз і що хочете змінити",
-  "f_err": "Оберіть, хто звертається, і вкажіть ім’я та контакт, щоб я міг відповісти.",
-  "f_btn": "Скласти лист", "f_out_h": "Лист готовий. Перевірте текст і надішліть.",
-  "f_send": "Надіслати поштою", "copy": "Копіювати текст", "copied": "Скопійовано", "copy_short": "Копіювати",
-  "f_hdr": "Звернення з сайту", "f_lab": ["Хто", "Населений пункт", "Що потрібно", "Питання", "Контакт"],
-  "contacts": [("Email", MAIL, "mailto:" + MAIL, True), ("Корпоративна пошта, ГО «Е-ТЕАМ»", MAIL_W, "mailto:" + MAIL_W, True),
-               ("Телефон", TEL_H, TEL, True), ("Сайт ГО «Е-ТЕАМ»", "eteamngo.org", ETEAM, False),
-               ("Google Scholar", "Профіль і цитування", SCHOLAR, False), ("ORCID", "0000-0002-6023-9780", ORCID, False)],
-  "ft_role": "Незалежний експерт · Черкаси", "ft_board": "Член правління ГО «Е-ТЕАМ»",
-  "ft_base": "© 2026 Дмитро Паламарчук · Оновлено: жовтень 2026",
-  "lg_k": "Фізична особа — підприємець", "lg_n": "Паламарчук Дмитро Миколайович", "lg_aria": "Юридична особа, що надає послуги",
-  "jobTitle": "Консультант з енергоефективності та муніципального енергетичного планування",
- },
- "en": {
-  "lang": "en", "file": "en.html", "other": "index.html", "other_lang": "uk", "other_label": "UA",
-  "title": "Dmytro Palamarchuk",
-  "seo_title": "Dmytro Palamarchuk — energy efficiency, municipal energy planning, HOA advisory (Ukraine)",
-  "description": "Dmytro Palamarchuk — energy efficiency consultant in Ukraine: municipal energy plans, free advisory for homeowner associations on Energy Efficiency Fund programmes, energy communities. Cherkasy.",
-  "skip": "Skip to content",
-  "brand_sub": "Energy efficiency · Energy plans · HOAs",
-  "nav": [("#services", "Services"), ("#figures", "Figures"), ("#experience", "Experience"), ("#contact", "Contact")],
-  "nav_label": "Main navigation",
-  "kicker": "Cherkasy, Ukraine · working with municipalities across regions",
-  "name": "Dmytro Palamarchuk",
-  "role": "I help homeowner associations and municipalities decide on energy renovation — and get it financed",
-  "lead": "I calculate whether renovation pays off, prepare decisions for HOA general meetings and materials for municipal working groups, identify funding sources and guide applications to Ukraine’s Energy Efficiency Fund.",
-  "cta1": "Describe your question", "call": "Call",
-  "routes_lbl": "I am contacting you as:",
-  "routes": [("#svc-1", "an HOA"), ("#svc-0", "a municipality"), ("#svc-2", "a community group"), ("#partners", "an international programme")],
-  "facts_h": "Programmes I work in, and my role",
-  "facts": [("IFC (World Bank Group)", "Regional energy efficiency advisor, “Ukraine EE Fund” project, 2019–2025"),
-            ("GIZ", "Regional advisor in the NGO E-TEAM network, since 2026"),
-            ("UNIDO", "Municipal energy plan for Smila, 2026 — in the NGO E-TEAM team"),
-            ("EU LIFE Programme", "Project coordinator of LIFE-ECOss for NGO E-TEAM, since 2026"),
-            ("Energy Efficiency Fund", "Advising HOAs in the “Energodim” and “VidnovyDIM” programmes")],
-  "facts_more": "Full experience",
-  "fig_h": "HOA advisory in figures",
-  "fig_sub": "Regional energy efficiency advisor in Cherkasy oblast, IFC “Ukraine EE Fund” project, 2019–2025.",
-  "figs": [("380+", "homeowner associations in Cherkasy oblast received my advice"),
-           ("41", "HOAs I advised signed grant agreements with the Energy Efficiency Fund (“Energodim”)"),
-           ("4,200+", "flats in the buildings of these 41 HOAs"),
-           ("70+", "training events for HOAs and municipalities: seminars, webinars, forums, 2019–2024")],
-  "fig_note": "Source: IFC regional advisor reports for Cherkasy oblast (as of June 2025) and the training-event archive. Decisions were taken by the co-owners; works were carried out by the HOAs and their contractors. My role was advice at the decision, calculation and application stages.",
-  "how_h": "How I work",
-  "how_sub": "Whatever you come with — a building, a municipality or an energy community — the sequence is the same, and you have one counterpart. When an engineer, lawyer or designer is needed, I bring in colleagues from the NGO E-TEAM team or specialists I have worked with on HOA projects.",
-  "steps": [("Understanding the question", "What exists now, what the concern is, which data are available and which are missing. After the first conversation you will know whether it is worth going further."),
-            ("Calculating", "Options, indicative cost, savings and payback. For HOAs I also calculate the financial result per flat, not just for the building."),
-            ("Finding funding", "Energy Efficiency Fund programmes, donor grants, loans, local co-financing programmes, the municipal budget."),
-            ("Guiding the procedures", "We prepare general meeting or council decisions, applications and reports. Up to verification I advise the HOA head, the project manager and the contractor.")],
-  "who_h": "Who does what",
-  "who_p": "Decisions are taken by co-owners or councillors. The design is prepared by a designer, works are done by a contractor, quality is checked by technical supervision. I advise at every stage and make sure documents meet the programme requirements.",
-  "s_h": "What people come to me with",
-  "s_sub": "Municipalities, homeowner associations and community groups. Each has its own tool and work that can be checked.",
-  "proof_lbl": "Track record",
-  "services": [
-    ("Municipalities", "Municipal energy plan",
-     "Energy plans under the national methodology (Order No. 1163 of 21.12.2023): data collection and validation, energy balance and baseline, targets to 2030, project catalogue and financing plan. If needed, the team trains municipal staff so the plan can be updated in-house.",
-     None, "The Smila energy plan (UNIDO project, 2026) has been released for public consultation. The Sarny plan is in progress. Both with the NGO E-TEAM team.",
-     "Discuss an energy plan"),
-    ("Homeowner associations", "Building energy renovation advice",
-     "Building walk-through and calculation: what to renovate, what it will cost, each flat’s share and the expected savings. Preparing the general meeting and applications to the Energy Efficiency Fund’s “Energodim” and “VidnovyDIM” programmes, advice up to verification.",
-     "Advice for HOAs is free of charge under the GIZ project",
-     "Regional advisor: 2019–2025 in the IFC programme (Cherkasy oblast, from 2024 also Sumy), since 2026 in the NGO E-TEAM advisor network (GIZ project). 380+ HOAs in Cherkasy oblast received my advice; 41 of them signed grant agreements with the Fund.",
-     "Book an HOA consultation"),
-    ("Energy communities", "Energy community: where to start",
-     "For a community group, an HOA or a municipality. We assess whether there is a case for a community, which legal form fits, which business model will carry it and where the money can come from. The result is a preparation plan to take to members and partners.",
-     None, "I coordinate NGO E-TEAM’s participation in the EU LIFE-ECOss project (2026–2029): we are setting up an energy community support centre in Lutsk.",
-     "Discuss an energy community")],
-  "svc_cond": [None, None, "Rules for energy communities in Ukraine are still being formed, so we start with an assessment, not with buying equipment."],
-  "th_kicker": "For HOAs", "th_h": "What a thermal camera shows",
-  "th_p": "A thermal camera colours warm parts of a facade yellow and orange. It shows where a building loses heat: panel joints, windows, balconies. After insulation the facade looks “colder” on the image because the heat stays inside. That is usually where the conversation about which measures are worth financing begins.",
-  "th_cap": "Diagram, not an image of a specific building", "th_before": "Before insulation", "th_after": "After",
-  "th_aria": "Diagram: a panel apartment block before insulation with warm joints and windows, and after insulation with an evenly cold facade",
-  "th_cold": "colder", "th_warm": "warmer",
-  "p_h": "For international programmes and partners",
-  "p_sub": "I work as an independent expert (registered sole proprietor) or as part of the NGO E-TEAM team, depending on programme requirements.",
-  "p_list": ["Municipal energy planning under the national methodology and analysis of municipal energy data",
-             "Regional advice to homeowner associations in Energy Efficiency Fund programmes: IFC (2019–2025), GIZ (since 2026)",
-             "Training for HOAs and municipal officials: 70+ events in 2019–2024",
-             "EU consortia: I coordinate NGO E-TEAM’s participation in LIFE-ECOss and act as the organisation’s LEAR on the Funding & Tenders portal",
-             "Adapting European energy-community support practice to Ukrainian conditions"],
-  "p_cta": "Invite to a project",
-  "prep_h": "What to prepare for the first conversation",
-  "prep_sub": "With this information the first consultation is shorter and more useful. Not everything is required — bring what you have.",
-  "prep": [("Homeowner association", ["Heat bills or consumption data for the last 2–3 heating seasons",
-                                      "Building passport: year built, storeys, floor area, number of flats",
-                                      "Minutes of meetings on renovation, if any",
-                                      "Energy certificate or energy audit, if available",
-                                      "Photos of the facade, basement and heating substation"]),
-           ("Municipality", ["Energy consumption of public buildings for the last 3 years",
-                             "Current energy efficiency programmes, SECAP or energy plan, if any",
-                             "Contact of the responsible person: energy manager, housing or economic department",
-                             "List of projects the municipality is already considering"]),
-           ("Community group", ["Members of the group and who intends to join",
-                                "Possible site: roof, land plot, boiler house",
-                                "Approximate annual electricity or heat use of members",
-                                "Position of the local authority"])],
-  "e_h": "Experience",
-  "timeline": [
-    ("2025 — present", "Board member, international cooperation projects coordinator", "NGO E-TEAM", ETEAM,
-     "Lead the development of municipal energy plans in the NGO team: Sarny (in progress), Smila (UNIDO project, released for public consultation in 2026). Project coordinator of the EU LIFE-ECOss project for NGO E-TEAM. Legal Entity Appointed Representative (LEAR) of the organisation on the European Commission’s Funding & Tenders portal."),
-    ("2026 — present", "Regional energy efficiency advisor, Cherkasy oblast", "NGO E-TEAM regional advisor network, GIZ project", None,
-     "Advising HOAs on the “Energodim” and “VidnovyDIM” programmes. Organising training: in July 2026 a seminar for HOAs and Cherkasy city officials and a study visit for officials of oblast municipalities."),
-    ("2019 — 2025", "Regional energy efficiency advisor, Cherkasy oblast (from 2024 also Sumy)", "IFC “Ukraine EE Fund” project, World Bank Group", None,
-     "Advised HOAs, their project managers and contractors, calculated the financial result of building renovation, trained HOAs and local authorities. 380+ HOAs in Cherkasy oblast received advice; 41 of them signed grant agreements with the Energy Efficiency Fund. Advised municipalities on local HOA support programmes."),
-    ("2012 — 2026", "Lecturer, Associate Professor from 2017", "Cherkasy State Technological University", None,
-     "Courses in International Economics, European Integration and Economics of Sustainable Development; research on adapting EU energy policy to Ukraine.")],
-  "edu_h": "Education",
-  "edu": [("2014", "PhD in Economics — Taras Shevchenko National University of Kyiv"),
-          ("2010", "Master’s in Economics and Entrepreneurship (Honours) — Cherkasy State Technological University")],
-  "pubs_h": "Research publications",
-  "pubs": [("2024", "Information campaigns as a tool for changing consumer energy behaviour: EU experience", "Proceedings of the III International Scientific and Practical Conference, Ternopil, WUNU (in Ukrainian)"),
-           ("2023", "Energy efficiency in Ukraine’s housing sector", "Strategies of Global Competitiveness: Socio-Economic Dimensions, X International Conference, ChSTU (in Ukrainian)"),
-           ("2022", "Factors influencing homeowners’ decisions on the modernisation of multi-apartment buildings", "IX International Scientific and Practical Conference, ChSTU (in Ukrainian)")],
-  "pub_more": "Full list:",
-  "c_h": "Tell me what you need",
-  "c_sub": "An energy plan for a municipality, HOA advice, an energy community or expert input to an international project — describe the question in a few words and I will reply.",
-  "form_h": "Describe your question",
-  "form_hint": "The form composes an email. You send it from your mail app or copy it into a messenger — nothing is transmitted automatically or stored.",
-  "f_role": "Who you are", "roles": ["Homeowner association or manager", "Municipality", "Community group / energy community", "International organisation / donor", "Other"],
-  "f_need": "What you need", "needs": ["Consultation", "Attendance at an HOA general meeting", "Building walk-through and calculation", "Municipal energy plan", "Energy community: where to start", "Expert input to a project"],
-  "f_place": "Town or village", "f_place_ph": "e.g. Smila", "f_name": "Your name", "f_contact": "Phone or email",
-  "f_msg": "Your question in brief", "f_msg_ph": "what exists now and what you want to change",
-  "f_err": "Please choose who you are and enter your name and a contact so I can reply.",
-  "f_btn": "Compose email", "f_out_h": "Your message is ready. Check the text and send it.",
-  "f_send": "Send by email", "copy": "Copy text", "copied": "Copied", "copy_short": "Copy",
-  "f_hdr": "Request from the website", "f_lab": ["Who", "Location", "Needs", "Question", "Contact"],
-  "contacts": [("Email", MAIL, "mailto:" + MAIL, True), ("Work email, NGO E-TEAM", MAIL_W, "mailto:" + MAIL_W, True),
-               ("Phone", TEL_H, TEL, True), ("NGO E-TEAM website", "eteamngo.org", ETEAM, False),
-               ("Google Scholar", "Profile and citations", SCHOLAR, False), ("ORCID", "0000-0002-6023-9780", ORCID, False)],
-  "ft_role": "Independent expert · Cherkasy, Ukraine", "ft_board": "Board member, NGO E-TEAM",
-  "ft_base": "© 2026 Dmytro Palamarchuk · Updated: October 2026",
-  "lg_k": "Sole proprietor (Ukrainian FOP)", "lg_n": "Dmytro Mykolaiovych Palamarchuk", "lg_aria": "Legal entity providing the services",
-  "jobTitle": "Energy efficiency and municipal energy planning consultant",
- },
-}
-
 JS = r"""
 var lab=__LAB__, hdr=__HDR__, COPY=__COPY__, COPIED=__COPIED__;
 document.getElementById('reqform').addEventListener('submit',function(e){e.preventDefault();
@@ -573,146 +327,6 @@ def scheme(t):
 </figure>"""
 
 
-def page(t, skeleton, seo=False):
-    links = "".join(f'<a href="{h}">{esc(l)}</a>' for h, l in t["nav"])
-    routes = " ".join(f'<a href="{h}">{esc(l)}</a>' for h, l in t["routes"])
-    facts = "".join(f'<div class="r"><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>' for a, b in t["facts"])
-    figs = "".join(f'<li><span class="fig-n">{esc(n)}</span><p class="def">{esc(d)}</p></li>' for n, d in t["figs"])
-    steps = "".join(f'<li><span class="n">{i+1}</span><div><h3>{esc(a)}</h3><p>{esc(b)}</p></div></li>' for i, (a, b) in enumerate(t["steps"]))
-    svcs = ""
-    for i, (aud, h, d, free, proof, cta) in enumerate(t["services"]):
-        cond = t["svc_cond"][i]
-        svcs += (f'<li id="svc-{i}"><div class="aud">{ICONS[i]}{esc(aud)}</div>'
-                 f'<div><h3>{esc(h)}</h3><p class="d">{esc(d)}</p>'
-                 + (f'<p class="c">{esc(cond)}</p>' if cond else '')
-                 + (f'<span class="free">{esc(free)}</span>' if free else '') +
-                 f'</div><div class="proof"><p><b>{esc(t["proof_lbl"])}</b>{esc(proof)}</p>'
-                 f'<a class="go pick" href="#contact" data-role="{SVC_PICK[i][0]}" data-need="{SVC_PICK[i][1]}">{esc(cta)} →</a></div></li>')
-    plist = "".join(f'<li>{esc(x)}</li>' for x in t["p_list"])
-    prep = "".join(f'<div><h3>{esc(h)}</h3><ul>' + "".join(f'<li>{esc(x)}</li>' for x in items) + '</ul></div>' for h, items in t["prep"])
-    tl = ""
-    for yr, role, org, url, d in t["timeline"]:
-        o = f'<a href="{url}" rel="noopener">{esc(org)}</a>' if url else esc(org)
-        tl += f'<li><div class="yr">{esc(yr)}</div><div><h3>{esc(role)}</h3><p class="org">{o}</p><p class="d">{esc(d)}</p></div></li>'
-    edu = "".join(f'<li><span class="y">{y}</span><span>{esc(x)}</span></li>' for y, x in t["edu"])
-    pubs = "".join(f'<li><span class="y">{y}</span><div><a href="{u}" rel="noopener">{esc(ti)}</a><span class="org">{esc(v)}</span></div></li>'
-                   for (y, ti, v), u in zip(t["pubs"], PUBS_URLS))
-    roles = "".join(f'<label><input type="radio" name="role" value="{esc(r)}" id="role-{k}"> {esc(r)}</label>' for k, r in enumerate(t["roles"]))
-    needs = "".join(f'<label><input type="checkbox" name="need" value="{esc(r)}" id="need-{k}"> {esc(r)}</label>' for k, r in enumerate(t["needs"]))
-    cts = ""
-    for i, (k, v, href, cp) in enumerate(t["contacts"]):
-        ext = ' rel="noopener"' if href.startswith("http") else ''
-        btn = f'<button class="copy" type="button" data-v="{esc(v)}">{esc(t["copy_short"])}</button>' if cp else ''
-        cts += f'<div class="ct"><span class="k">{esc(k)}</span><a class="v" href="{esc(href)}"{ext}>{esc(v)}</a>{btn}</div>'
-    form = f"""<div class="req"><form class="form" id="reqform" novalidate>
-<h3>{esc(t['form_h'])}</h3><p class="hint">{esc(t['form_hint'])}</p>
-<fieldset><legend>{esc(t['f_role'])}</legend><div class="opts">{roles}</div></fieldset>
-<fieldset><legend>{esc(t['f_need'])}</legend><div class="opts">{needs}</div></fieldset>
-<div class="row2"><div><label class="l" for="f-place">{esc(t['f_place'])}</label><input type="text" id="f-place" autocomplete="address-level2" placeholder="{esc(t['f_place_ph'])}"></div>
-<div><label class="l" for="f-name">{esc(t['f_name'])}</label><input type="text" id="f-name" autocomplete="name"></div></div>
-<div><label class="l" for="f-contact">{esc(t['f_contact'])}</label><input type="text" id="f-contact" autocomplete="email"></div>
-<div><label class="l" for="f-msg">{esc(t['f_msg'])}</label><textarea id="f-msg" placeholder="{esc(t['f_msg_ph'])}"></textarea></div>
-<p class="err" id="f-err" tabindex="-1" hidden>{esc(t['f_err'])}</p>
-<div><button class="btn btn-p" type="submit">{esc(t['f_btn'])}</button></div>
-</form>
-<div class="out" id="f-out" hidden aria-live="polite"><h3>{esc(t['f_out_h'])}</h3><pre id="f-text"></pre>
-<div class="acts"><a class="btn btn-p" id="f-mail" href="mailto:{MAIL}">{esc(t['f_send'])}</a><a class="btn btn-s" href="{TEL}">{esc(t['call'])}</a></div>
-<button class="copy" type="button" id="copy-msg" data-v="">{esc(t['copy'])}</button></div>
-</div>"""
-    ld = {"@context": "https://schema.org", "@type": "Person", "name": t["name"],
-          "alternateName": ["Дмитро Паламарчук", "Dmytro Palamarchuk", "Паламарчук Дмитро Миколайович"],
-          "jobTitle": t["jobTitle"], "email": "mailto:" + MAIL, "telephone": TEL_H,
-          "address": {"@type": "PostalAddress", "addressLocality": "Cherkasy", "addressCountry": "UA"},
-          "worksFor": {"@type": "Organization", "name": "NGO E-TEAM", "url": ETEAM},
-          "alumniOf": [{"@type": "CollegeOrUniversity", "name": "Taras Shevchenko National University of Kyiv"},
-                       {"@type": "CollegeOrUniversity", "name": "Cherkasy State Technological University"}],
-          "knowsAbout": ["Energy efficiency", "Municipal energy planning", "Energy communities", "Homeowner associations", "EU energy policy"],
-          "sameAs": [ORCID, SCHOLAR]}
-    ttl = t["seo_title"] if seo else t["title"]
-    url = BASE + ("" if t["file"] == "index.html" else t["file"])
-    head = (f'<title>{esc(ttl)}</title>' + ('' if seo else '<meta name="claude:viewport-fit-sides" content="cover">') +
-            f'<meta name="description" content="{esc(t["description"])}"><link rel="canonical" href="{url}">'
-            f'<link rel="alternate" hreflang="uk" href="{BASE}"><link rel="alternate" hreflang="en" href="{BASE}en.html"><link rel="alternate" hreflang="x-default" href="{BASE}">'
-            f'<meta property="og:type" content="profile"><meta property="og:title" content="{esc(ttl)}"><meta property="og:description" content="{esc(t["description"])}"><meta property="og:url" content="{url}">'
-            f'<meta property="og:image" content="{BASE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">'
-            f'<link rel="icon" href="{FAVICON}">{FONTS}<style>{CSS}</style>'
-            f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>')
-    js = (JS.replace("__LAB__", json.dumps(t["f_lab"], ensure_ascii=False)).replace("__HDR__", json.dumps(t["f_hdr"], ensure_ascii=False))
-            .replace("__COPY__", json.dumps(t["copy"], ensure_ascii=False)).replace("__COPIED__", json.dumps(t["copied"], ensure_ascii=False)))
-    p0, p1 = SVC_PICK[0]
-    body = f"""
-<a class="skip" href="#main">{esc(t['skip'])}</a>
-<header class="hdr"><div class="wrap">
-  <a class="brand" href="{t['file']}"><b>{esc(t['name'])}</b><span>{esc(t['brand_sub'])}</span></a>
-  <nav class="nav" aria-label="{esc(t['nav_label'])}">
-    <div class="links">{links}</div>
-    <div class="tools"><a class="tel" href="{TEL}">{TEL_H}</a><a class="lang" href="{t['other']}" hreflang="{t['other_lang']}" lang="{t['other_lang']}">{t['other_label']}</a></div>
-  </nav>
-</div></header>
-<main id="main">
-<div class="wrap hero">
-  <div>
-    <p class="kicker">{esc(t['kicker'])}</p>
-    <h1>{esc(t['name'])}</h1>
-    <p class="role">{esc(t['role'])}</p>
-    <p class="lead">{esc(t['lead'])}</p>
-    <div class="acts"><a class="btn btn-p" href="#contact">{esc(t['cta1'])}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(t['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
-    <p class="routes"><span>{esc(t['routes_lbl'])}</span> {routes}</p>
-  </div>
-  <aside class="facts" aria-labelledby="facts-h"><h2 id="facts-h">{esc(t['facts_h'])}</h2><dl>{facts}</dl><a class="more" href="#experience">{esc(t['facts_more'])} →</a></aside>
-</div>
-<section id="figures" class="band" aria-labelledby="fig-h"><div class="wrap">
-  <div class="sh"><h2 id="fig-h">{esc(t['fig_h'])}</h2><p>{esc(t['fig_sub'])}</p></div>
-  <ul class="figs">{figs}</ul><p class="note">{esc(t['fig_note'])}</p>
-</div></section>
-<section id="how" aria-labelledby="how-h"><div class="wrap">
-  <div class="sh"><h2 id="how-h">{esc(t['how_h'])}</h2><p>{esc(t['how_sub'])}</p></div>
-  <ol class="steps">{steps}</ol>
-  <div class="who"><h3>{esc(t['who_h'])}</h3><p>{esc(t['who_p'])}</p></div>
-</div></section>
-<section id="services" class="band" aria-labelledby="svc-h"><div class="wrap">
-  <div class="sh"><h2 id="svc-h">{esc(t['s_h'])}</h2><p>{esc(t['s_sub'])}</p></div>
-  <ul class="svc">{svcs}</ul>
-  <div class="explain"><div><p class="kicker">{esc(t['th_kicker'])}</p><h3>{esc(t['th_h'])}</h3><p>{esc(t['th_p'])}</p></div>{scheme(t)}</div>
-</div></section>
-<section id="partners" aria-labelledby="p-h"><div class="wrap split">
-  <div class="sh" style="margin:0"><h2 id="p-h">{esc(t['p_h'])}</h2><p>{esc(t['p_sub'])}</p><p style="margin-top:var(--s-5)"><a class="btn btn-s pick" href="#contact" data-role="3" data-need="5">{esc(t['p_cta'])}</a></p></div>
-  <ul class="plist">{plist}</ul>
-</div></section>
-<section id="prepare" class="band" aria-labelledby="prep-h"><div class="wrap">
-  <div class="sh"><h2 id="prep-h">{esc(t['prep_h'])}</h2><p>{esc(t['prep_sub'])}</p></div>
-  <div class="prep">{prep}</div>
-</div></section>
-<section id="experience" aria-labelledby="e-h"><div class="wrap">
-  <div class="sh"><h2 id="e-h">{esc(t['e_h'])}</h2></div>
-  <ul class="tl">{tl}</ul>
-  <h3 class="subh">{esc(t['edu_h'])}</h3><ul class="rows">{edu}</ul>
-  <h3 class="subh" id="publications">{esc(t['pubs_h'])}</h3><ul class="rows">{pubs}</ul>
-  <p class="note">{esc(t['pub_more'])} <a href="{SCHOLAR}" rel="noopener">Google Scholar</a>, <a href="{ORCID}" rel="noopener">ORCID</a></p>
-</div></section>
-<section id="contact" class="band" aria-labelledby="c-h"><div class="wrap">
-  <div class="sh"><h2 id="c-h">{esc(t['c_h'])}</h2><p>{esc(t['c_sub'])}</p></div>
-  {form}
-  <div class="contact">{cts}</div>
-</div></section>
-</main>
-<footer><div class="wrap">
-  <div><b>{esc(t['name'])}</b>{esc(t['ft_role'])}<br>{esc(t['ft_board'])}</div>
-  <div><b><a href="{TEL}">{TEL_H}</a></b><a href="mailto:{MAIL}">{MAIL}</a><br><a href="mailto:{MAIL_W}">{MAIL_W}</a></div>
-  <div><a href="{ORCID}" rel="noopener">ORCID</a> · <a href="{SCHOLAR}" rel="noopener">Google Scholar</a> · <a href="{ETEAM}" rel="noopener">{'ГО «Е-ТЕАМ»' if t['lang']=='uk' else 'NGO E-TEAM'}</a></div>
-  <div class="base"><p class="legal" aria-label="{esc(t['lg_aria'])}"><span class="lg-k">{esc(t['lg_k'])}</span><span class="lg-n">{esc(t['lg_n'])}</span></p><p class="cr">{esc(t['ft_base'])}</p></div>
-</div></footer>
-<script>{js}</script>"""
-    main_html, script = body.split("<script>", 1)
-    for w in ("«Е-ТЕАМ»", "E-TEAM"):
-        main_html = main_html.replace(w, f'<span class="nw">{w}</span>')
-    body = main_html + "<script>" + script
-    if skeleton:
-        return (f'<!doctype html><html lang="{t["lang"]}"><head><meta charset="utf-8">'
-                f'<meta name="viewport" content="width=device-width, initial-scale=1">{head}</head><body>{body}</body></html>')
-    return head + body
-
-
 def make_og(path):
     from PIL import Image, ImageDraw, ImageFont
     W, H = 1200, 630
@@ -731,17 +345,554 @@ def make_og(path):
     im.save(path)
 
 
+
+# ---------------------------------------------------------------------------
+# Multi-page structure (рішення № 36): головна + ОСББ (проєкт GIZ) + МЕП + енергоспільноти; EN — лише головна.
+# ---------------------------------------------------------------------------
+
+CSS_PAGES = r"""
+.nav .links a[aria-current="page"]{color:var(--primary);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
+.phero{padding-block:64px var(--s-8)}
+@media (max-width:400px){.links{font-size:14.5px !important;gap:var(--s-2) !important}}
+.phero .kicker{margin-bottom:var(--s-3)}
+.phero h1{font-size:clamp(32px,4.4vw,44px);max-width:20em;text-wrap:balance}
+.phero .lead{margin-bottom:var(--s-5)}
+.tag-free{display:inline-block;background:var(--tint);color:var(--ink);font-weight:600;font-size:var(--fs-small);padding:6px 12px;border-radius:var(--r-1);margin:0 0 var(--s-5)}
+.entries{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.entries li{border-bottom:1px solid var(--rule)}
+.entries a{display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:var(--s-5);align-items:center;padding-block:var(--s-5);text-decoration:none;color:var(--ink)}
+.entries a:hover h3{color:var(--primary);text-decoration:underline;text-underline-offset:4px}
+.entries svg{width:32px;height:32px;color:var(--ink-2)}
+.entries h3{margin:0 0 2px}
+.entries p{color:var(--ink-2);font-size:16px;max-width:60ch}
+.entries .arr{color:var(--primary);font-weight:600;white-space:nowrap}
+.plan{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
+.plan>li{display:grid;grid-template-columns:64px minmax(0,1fr) minmax(0,.75fr);gap:var(--s-6);padding-block:var(--s-6);border-bottom:1px solid var(--rule)}
+.plan .n{font-family:var(--serif);font-weight:600;font-size:28px;line-height:1;color:var(--primary)}
+.plan h3{margin-bottom:var(--s-2)}
+.plan .first{display:inline-block;margin-left:var(--s-2);vertical-align:3px;font-family:var(--sans);font-size:13px;font-weight:600;color:var(--primary);border:1px solid var(--primary);border-radius:var(--r-1);padding:1px 7px}
+.plan p{max-width:var(--measure)}
+.plan .you{font-size:var(--fs-small);color:var(--ink-2);border-left:2px solid var(--rule);padding-left:var(--s-4)}
+.plan .you b{display:block;color:var(--ink-3);font-weight:600;margin-bottom:2px}
+.plan-note{margin-top:var(--s-5);color:var(--ink-2);max-width:var(--measure)}
+.check{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-3);max-width:760px}
+.check li{position:relative;padding-left:32px;font-size:17px}
+.check li::before{content:"?";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center}
+.links-out{margin:var(--s-5) 0 0;padding-left:20px;display:grid;gap:var(--s-2)}
+.mentions{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-3)}
+.mentions li{display:grid;grid-template-columns:170px minmax(0,1fr);gap:var(--s-6)}
+.mentions .y{font-weight:600;color:var(--ink-2);font-size:var(--fs-small);padding-top:2px}
+.practice{margin-top:var(--s-6);padding:var(--s-4) var(--s-5);border-left:3px solid var(--primary);background:var(--band);max-width:860px}
+.practice p{color:var(--ink-2)}
+@media (max-width:900px){
+  .plan>li{grid-template-columns:44px minmax(0,1fr);gap:var(--s-3) var(--s-4)}
+  .plan .you{grid-column:2}
+}
+@media (max-width:560px){
+  .entries a{grid-template-columns:32px minmax(0,1fr);gap:var(--s-3)}
+  .entries .arr{grid-column:2}
+  .mentions li{grid-template-columns:minmax(0,1fr);gap:var(--s-1)}
+  .phero{padding-block:var(--s-6) var(--s-7)}
+}
+"""
+
+JS_PAGES = r"""
+(function(){var dr=document.body.getAttribute('data-role'); if(dr===null||dr==='') return;
+  var r=document.getElementById('role-'+dr); if(r){r.checked=true;r.dispatchEvent(new Event('change'));}})();
+"""
+
+ROLES_UA = ["ОСББ або управитель", "Громада (ОМС)", "Ініціативна група / енергоспільнота", "Міжнародна організація / донор", "Інше"]
+NEEDS_UA = ["Консультація", "Участь у загальних зборах ОСББ", "Огляд будинку і розрахунок", "Муніципальний енергетичний план", "Енергетична спільнота: з чого почати", "Експертна участь у проєкті"]
+ROLES_EN = ["Homeowner association or manager", "Municipality", "Community group / energy community", "International organisation / donor", "Other"]
+NEEDS_EN = ["Consultation", "Attendance at an HOA general meeting", "Building walk-through and calculation", "Municipal energy plan", "Energy community: where to start", "Expert input to a project"]
+
+COMMON = {
+ "ua": dict(lang="uk", skip="Перейти до змісту", nav_label="Основна навігація", call="Зателефонувати",
+            brand_sub="Енергоефективність · МЕП · енергоспільноти",
+            f_role="Хто звертається", roles=ROLES_UA, f_need="Що потрібно", needs=NEEDS_UA,
+            f_place="Населений пункт", f_place_ph="напр., Сміла", f_name="Ваше ім’я", f_contact="Телефон або email",
+            f_msg="Коротко про питання", f_msg_ph="що є зараз і що хочете змінити",
+            f_err="Оберіть, хто звертається, і вкажіть ім’я та контакт, щоб я міг відповісти.",
+            f_btn="Скласти лист", f_out_h="Лист готовий. Перевірте текст і надішліть.", f_send="Надіслати поштою",
+            copy="Копіювати текст", copied="Скопійовано", copy_short="Копіювати",
+            f_hdr="Звернення з сайту", f_lab=["Хто", "Населений пункт", "Що потрібно", "Питання", "Контакт"],
+            form_h="Опишіть ваше питання",
+            form_hint="Форма складе текст листа. Ви надішлете його поштою або скопіюєте в месенджер — дані нікуди не передаються автоматично і не зберігаються.",
+            contacts=[("Email", MAIL, "mailto:" + MAIL, True), ("Корпоративна пошта, ГО «Е-ТЕАМ»", MAIL_W, "mailto:" + MAIL_W, True),
+                      ("Телефон", TEL_H, TEL, True), ("Сайт ГО «Е-ТЕАМ»", "eteamngo.org", ETEAM, False),
+                      ("Google Scholar", "Профіль і цитування", SCHOLAR, False), ("ORCID", "0000-0002-6023-9780", ORCID, False)],
+            name="Дмитро Паламарчук", ft_role="Незалежний експерт · Черкаси", ft_board="Член правління ГО «Е-ТЕАМ»", ft_org="ГО «Е-ТЕАМ»",
+            ft_base="© 2026 Дмитро Паламарчук · Оновлено: жовтень 2026",
+            lg_k="Фізична особа — підприємець", lg_n="Паламарчук Дмитро Миколайович", lg_aria="Юридична особа, що надає послуги",
+            c_h="Напишіть, з чим звертаєтеся", c_sub="Опишіть питання в кількох словах — я відповім. Або просто зателефонуйте.",
+            th_cap="Схема, не знімок конкретного будинку", th_before="До утеплення", th_after="Після",
+            th_aria="Схема: панельний будинок до утеплення з теплими швами і вікнами, та після утеплення з холодним рівномірним фасадом",
+            th_cold="холодніше", th_warm="тепліше",
+            jobTitle="Консультант з енергоефективності та муніципального енергетичного планування"),
+ "en": dict(lang="en", skip="Skip to content", nav_label="Main navigation", call="Call",
+            brand_sub="Energy efficiency · Energy plans · Energy communities",
+            f_role="Who you are", roles=ROLES_EN, f_need="What you need", needs=NEEDS_EN,
+            f_place="Town or village", f_place_ph="e.g. Smila", f_name="Your name", f_contact="Phone or email",
+            f_msg="Your question in brief", f_msg_ph="what exists now and what you want to change",
+            f_err="Please choose who you are and enter your name and a contact so I can reply.",
+            f_btn="Compose email", f_out_h="Your message is ready. Check the text and send it.", f_send="Send by email",
+            copy="Copy text", copied="Copied", copy_short="Copy",
+            f_hdr="Request from the website", f_lab=["Who", "Location", "Needs", "Question", "Contact"],
+            form_h="Describe your question",
+            form_hint="The form composes an email. You send it from your mail app or copy it into a messenger — nothing is transmitted automatically or stored.",
+            contacts=[("Email", MAIL, "mailto:" + MAIL, True), ("Work email, NGO E-TEAM", MAIL_W, "mailto:" + MAIL_W, True),
+                      ("Phone", TEL_H, TEL, True), ("NGO E-TEAM website", "eteamngo.org", ETEAM, False),
+                      ("Google Scholar", "Profile and citations", SCHOLAR, False), ("ORCID", "0000-0002-6023-9780", ORCID, False)],
+            name="Dmytro Palamarchuk", ft_role="Independent expert · Cherkasy, Ukraine", ft_board="Board member, NGO E-TEAM", ft_org="NGO E-TEAM",
+            ft_base="© 2026 Dmytro Palamarchuk · Updated: October 2026",
+            lg_k="Sole proprietor (Ukrainian FOP)", lg_n="Dmytro Mykolaiovych Palamarchuk", lg_aria="Legal entity providing the services",
+            c_h="Get in touch", c_sub="Describe your question in a few words and I will reply — or simply call.",
+            jobTitle="Energy efficiency and municipal energy planning consultant"),
+}
+
+NAV_UA = [("index.html", "Головна"), ("osbb.html", "ОСББ"), ("mep.html", "МЕП громадам"), ("energospilnoty.html", "Енергоспільноти")]
+
+MENTIONS_UA = [
+    ("2023", "Фонд енергоефективності — брошура з історіями успіху: регіональний радник по Черкаській області",
+     "https://eefund.org.ua/wp-content/uploads/2023/12/broshura-istoriyi-uspihu.pdf"),
+    ("2019", "«Дзвін»: семінар для співвласників у Черкасах — регіональний консультант IFC з енергоефективності в житловому секторі",
+     "https://dzvin.media/news/trend-na-energooshhadnist-cherkashhan-navchaly-zaluchaty-koshty-na-vtilennya-enregoefektyvnyh-zahodiv/"),
+]
+PUB_JOURNAL = ("2021", "Регіональний вимір енергоефективності та енергетичної безпеки України",
+               "Бізнесінформ, 2021, № 7, с. 127–134. DOI 10.32983/2222-4459-2021-7-127-134",
+               "https://doi.org/10.32983/2222-4459-2021-7-127-134")
+PUB_JOURNAL_EN = ("2021", "Regional dimension of energy efficiency and energy security of Ukraine",
+                  "Business Inform, 2021, No. 7, pp. 127–134 (in Ukrainian). DOI 10.32983/2222-4459-2021-7-127-134",
+                  "https://doi.org/10.32983/2222-4459-2021-7-127-134")
+
+HOME_UA = dict(
+  file="index.html", other="en.html", other_label="EN", other_lang="en", role_default="",
+  title="Дмитро Паламарчук", seo_title="Дмитро Паламарчук — енергоефективність, МЕП, енергоспільноти",
+  description="Дмитро Паламарчук — консультант з енергоефективності: консультації ОСББ у проєкті GIZ, муніципальні енергетичні плани для громад, енергетичні спільноти. Черкаси.",
+  kicker="Черкаси · працюю з громадами різних областей",
+  role="Енергоефективність житла й енергетичне планування громад",
+  lead="Консультую ОСББ щодо програм Фонду енергоефективності, розробляю муніципальні енергетичні плани в команді ГО «Е-ТЕАМ», допомагаю ініціативним групам зрозуміти, з чого почати енергетичну спільноту.",
+  cta1="Описати своє питання",
+  facts_h="Програми, у яких працюю, і моя роль",
+  facts=[("IFC (Група Світового банку)", "Регіональний радник з енергоефективності, проєкт «Ukraine EE Fund», 2019–2025"),
+         ("GIZ", "Регіональний радник з енергоефективності в мережі ГО «Е-ТЕАМ», з 2026"),
+         ("UNIDO", "МЕП Сміли, 2026 — у команді ГО «Е-ТЕАМ»"),
+         ("Програма ЄС LIFE", "Координатор проєкту LIFE-ECOss від ГО «Е-ТЕАМ», з 2026"),
+         ("Фонд енергоефективності", "Консультую ОСББ — учасників програм «Енергодім» і «ВідновиДІМ»")],
+  facts_more="Досвід",
+  entries_h="З чим звертатися",
+  entries=[("osbb.html", 1, "ОСББ: консультації щодо енергомодернізації", "Безкоштовно в межах проєкту GIZ. Як проходить шлях від першої розмови до рішення співвласників і що підготувати."),
+           ("mep.html", 0, "Громадам: муніципальний енергетичний план", "МЕП за Методикою (наказ № 1163 від 21.12.2023): етапи, що потрібно від громади, приклади."),
+           ("energospilnoty.html", 2, "Ініціативним групам: енергетичні спільноти", "З чого почати і як оцінити, чи є підстави для спільноти, — до купівлі обладнання.")],
+  entries_go="Детальніше",
+  e_h="Досвід",
+  timeline=[
+    ("2025 — дотепер", "Член правління, координатор проєктів міжнародної співпраці", "ГО «Е-ТЕАМ»", ETEAM,
+     "Керую розробкою муніципальних енергетичних планів у команді ГО: МЕП Сарненської громади (у роботі), МЕП Смілянської громади (проєкт UNIDO, передано на публічне обговорення у 2026 році). Координатор проєкту ЄС LIFE-ECOss від ГО «Е-ТЕАМ». Уповноважений представник (LEAR) організації на порталі Funding & Tenders Європейської Комісії."),
+    ("2026 — дотепер", "Регіональний радник з енергоефективності, Черкаська область", "Мережа регіональних радників ГО «Е-ТЕАМ», проєкт GIZ", None,
+     "Консультую ОСББ щодо програм «Енергодім» і «ВідновиДІМ», проводжу семінари для ОСББ і посадовців громад."),
+    ("2019 — 2025", "Регіональний радник з енергоефективності, Черкаська область (з 2024 — також Сумська)", "Проєкт IFC «Ukraine EE Fund», Група Світового банку", None,
+     "Консультував ОСББ, їхніх менеджерів проєктів і підрядників, оглядав будинки й рахував фінансовий результат модернізації, брав участь у загальних зборах співвласників, проводив семінари для ОСББ і органів місцевого самоврядування."),
+    ("2012 — 2026", "Викладач, з 2017 — доцент", "Черкаський державний технологічний університет", None,
+     "Курси «Міжнародна економіка», «Європейська інтеграція», «Економіка сталого розвитку»; дослідження адаптації енергетичної політики ЄС до українських умов.")],
+  practice_h="Практика в цифрах, 2019–2026",
+  practice="1 200+ консультацій для ОСББ · 50 загальних зборів співвласників, у яких я брав участь · 81 семінар, вебінар чи форум, на яких я виступав (40 організував). Джерело — щомісячні звіти регіонального радника IFC і GIZ.",
+  edu_h="Освіта",
+  edu=[("2014", "Кандидат економічних наук — Київський національний університет імені Тараса Шевченка"),
+       ("2010", "Магістр економіки та підприємництва (з відзнакою) — Черкаський державний технологічний університет")],
+  pubs_h="Публікації",
+  pubs=[PUB_JOURNAL,
+        ("2024", "Інформаційні кампанії як інструмент зміни поведінки споживачів щодо використання енергії: досвід ЄС", "Матеріали III Міжнародної науково-практичної конференції, Тернопіль, ЗУНУ", PUBS_URLS[0]),
+        ("2022", "Дослідження чинників, що впливають на рішення співвласників щодо модернізації багатоквартирних будинків", "Матеріали IX Міжнародної науково-практичної конференції, ЧДТУ", PUBS_URLS[2])],
+  pub_more="Повний перелік:",
+  mentions_h="Згадки в інших джерелах",
+  mentions=MENTIONS_UA,
+)
+
+OSBB_UA = dict(
+  file="osbb.html", role_default="0",
+  title="Консультації для ОСББ — Дмитро Паламарчук",
+  seo_title="Консультації для ОСББ щодо енергомодернізації — Черкаська область, проєкт GIZ",
+  description="Безкоштовні консультації для ОСББ Черкаської області щодо програм Фонду енергоефективності «Енергодім» і «ВідновиДІМ»: огляд будинку, розрахунок, підготовка рішення співвласників і заявки.",
+  kicker="Для ОСББ · Черкаська область",
+  h1="Консультації для ОСББ щодо енергомодернізації будинку",
+  lead="Консультую ОСББ як регіональний радник з енергоефективності мережі ГО «Е-ТЕАМ» у проєкті GIZ: допомагаю розібратися з програмами Фонду енергоефективності, порахувати, чи має сенс модернізація для вашого будинку, і пройти процедури.",
+  free="Для ОСББ консультації безкоштовні",
+  plan_h="Як проходить робота",
+  plan_sub="Шлях однаковий для більшості будинків. На кожному кроці рішення за правлінням і співвласниками; я пояснюю, рахую і допомагаю з документами.",
+  you_lbl="Ваша частина",
+  plan=[("Знайомство", True, "Семінар для ОСББ або перша розмова телефоном чи зустріч. Говоримо про будинок, про програми Фонду і про те, чи варто рухатися далі.", "Розповісти про будинок і про те, що турбує мешканців."),
+        ("Огляд будинку", False, "Приїжджаю й оглядаю будинок разом із головою правління: фасад, дах, підвал, тепловий пункт, вікна й двері в під'їздах.", "Забезпечити доступ до технічних приміщень, підготувати рахунки за тепло і технічний паспорт."),
+        ("Розрахунок і орієнтовні ціни", False, "Рахую варіанти заходів, орієнтовну вартість, внесок кожної квартири і можливу економію; пояснюю умови програм і різницю між пакетами.", "Обговорити варіанти на правлінні."),
+        ("Рішення співвласників", False, "Співвласники вирішують, чи йти в програму і з яким набором заходів. За потреби допомагаю підготувати питання до загальних зборів і пояснюю програму мешканцям.", "Провести загальні збори й ухвалити рішення."),
+        ("Заявка до Фонду", False, "Консультую щодо пакета документів, перевіряю його перед поданням, пояснюю зауваження Фонду.", "Зібрати документи, укласти договори з енергоаудитором і проєктантом."),
+        ("Супровід до завершення", False, "Консультую голову ОСББ, менеджера проєкту і підрядника на етапах проєктування, робіт і верифікації.", "Керувати проєктом і ухвалювати рішення.")],
+  plan_note="Не кожен будинок доходить до проєкту — і це нормально. Після огляду й розрахунку стає видно, чи готові співвласники до модернізації зараз.",
+  self_h="Перш ніж почати — кілька запитань до себе",
+  self_sub="Від відповідей на них залежить, чи дійде будинок до проєкту.",
+  selfcheck=["Чи є в правлінні людина, готова вести проєкт кілька місяців?",
+             "Як співвласники ставляться до внесків на модернізацію будинку?",
+             "Чи немає в ОСББ значних боргів за внесками?",
+             "Чи є технічний паспорт будинку і рахунки за тепло за останні сезони?",
+             "Чи зможете зібрати загальні збори з потрібною кількістю голосів?"],
+  prep_h="Що підготувати до першої розмови",
+  prep=["Рахунки або дані про споживання тепла за 2–3 останні опалювальні сезони",
+        "Технічний паспорт будинку: рік побудови, поверховість, площа, кількість квартир",
+        "Протоколи зборів щодо модернізації, якщо вже були",
+        "Енергетичний сертифікат або енергоаудит, якщо є",
+        "Фото фасаду, підвалу і теплового пункту"],
+  progs_h="Умови програм — у першоджерелі",
+  progs_sub="Умови й ліміти програм змінюються, тому посилаюся на сайт Фонду, а на консультації пояснюю, що вони означають для вашого будинку.",
+  progs=[("Фонд енергоефективності — офіційний сайт", "https://eefund.org.ua/")],
+  th_kicker="Огляд будинку", th_h="Що показує тепловізор",
+  th_p="Тепловізор забарвлює теплі ділянки фасаду в жовтий і помаранчевий. Так видно, де будинок втрачає тепло: шви між панелями, вікна, балкони. Після утеплення фасад на знімку «холоднішає», бо тепло лишається всередині.",
+)
+
+MEP_UA = dict(
+  file="mep.html", role_default="1",
+  title="Муніципальний енергетичний план — Дмитро Паламарчук",
+  seo_title="Муніципальний енергетичний план (МЕП) для громади — розробка за Методикою № 1163",
+  description="Розробка муніципального енергетичного плану (МЕП) для громади за Методикою, затвердженою наказом № 1163 від 21.12.2023: етапи, що потрібно від громади, приклади — Сміла, Сарни.",
+  kicker="Для громад",
+  h1="Муніципальний енергетичний план, який громада може виконати",
+  lead="Розробляю МЕП у команді ГО «Е-ТЕАМ» або як незалежний експерт — залежно від вимог замовника. Мета — план, у якому громада розуміє кожну цифру і може його оновлювати.",
+  plan_h="Етапи роботи",
+  plan_sub="За Методикою, затвердженою наказом № 1163 від 21.12.2023. Порядок і обсяг кожного етапу уточнюємо з громадою на старті.",
+  you_lbl="Що потрібно від громади",
+  plan=[("Старт і робоча група", True, "Узгоджуємо межі плану, строки й відповідальних; громада визначає робочу групу.", "Рішення про розробку, відповідальна особа, контакти структурних підрозділів."),
+        ("Збір і перевірка даних", False, "Збираємо дані про споживання енергії бюджетними будівлями, житлом, теплопостачанням, освітленням, транспортом; перевіряємо їх на повноту й узгодженість.", "Дані від підрозділів і комунальних підприємств."),
+        ("Енергетичний баланс і базова лінія", False, "Будуємо енергетичний баланс громади і базову лінію, з якою порівнюватимуться результати.", "Погодити методичні рішення щодо даних."),
+        ("Цілі й заходи", False, "Визначаємо цілі й формуємо каталог заходів і проєктів з оцінкою вартості та ефекту.", "Пріоритети громади, перелік проєктів, які вже розглядаються."),
+        ("План фінансування і реалізації", False, "Пов'язуємо заходи з джерелами фінансування й строками.", "Узгодити план з бюджетними можливостями."),
+        ("Обговорення й затвердження", False, "Супроводжую доопрацювання плану після обговорення.", "Організувати обговорення і затвердження."),
+        ("Моніторинг", False, "Допомагаю налагодити щорічний звіт про виконання плану.", "Щороку збирати дані для звіту.")],
+  plan_note="Стратегічна екологічна оцінка і громадські обговорення — окремі роботи; обговорюємо їх окремо.",
+  ex_h="Приклади",
+  examples=[("МЕП Смілянської громади", "Проєкт UNIDO, 2026, у команді ГО «Е-ТЕАМ». План передано на публічне обговорення."),
+            ("МЕП Сарненської громади", "У роботі, у команді ГО «Е-ТЕАМ».")],
+  prep_h="Що підготувати до першої розмови",
+  prep=["Дані про споживання енергії бюджетними будівлями за останні 3 роки",
+        "Чинні програми енергоефективності, SECAP або МЕП, якщо є",
+        "Контакт відповідальної особи: енергоменеджер, відділ ЖКГ чи економіки",
+        "Перелік проєктів, які громада вже розглядає"],
+)
+
+EC_UA = dict(
+  file="energospilnoty.html", role_default="2",
+  title="Енергетичні спільноти — Дмитро Паламарчук",
+  seo_title="Енергетична спільнота: з чого почати — консультації для ініціативних груп і громад",
+  description="Енергетичні спільноти: з чого почати ініціативній групі, ОСББ чи громаді — оцінка учасників, об'єкта, споживання, правової форми й фінансування. Проєкт ЄС LIFE-ECOss.",
+  kicker="Для ініціативних груп, ОСББ і громад",
+  h1="Енергетична спільнота: почати з оцінки, а не з купівлі обладнання",
+  lead="Енергетична спільнота — це коли люди, ОСББ, бізнес чи громада разом виробляють, зберігають або купують енергію для себе. Правила для таких спільнот в Україні ще формуються, тому перший крок — чесна оцінка, чи є для неї підстави.",
+  plan_h="З чого почати",
+  plan_sub="Ці питання ми проходимо на першій консультації.",
+  you_lbl="Що підготувати",
+  plan=[("Хто учасники", True, "Хто має намір увійти до спільноти і з якою метою: економія, надійність, власна генерація.", "Склад групи і контакти."),
+        ("Об'єкт і споживання", False, "Де може бути генерація чи накопичення — дах, ділянка, котельня — і скільки енергії споживають учасники.", "Адреса об'єкта, орієнтовне річне споживання."),
+        ("Правова форма", False, "Яка організаційно-правова форма підходить і чи може нею стати, наприклад, ваше ОСББ.", "Документи наявної організації, якщо є."),
+        ("Бізнес-модель і фінансування", False, "На чому спільнота триматиметься економічно і звідки взяти гроші на старт.", "Очікування учасників щодо внесків."),
+        ("План підготовки", False, "Результат — план, з яким можна йти до учасників, громади й партнерів.", "Позиція органу місцевого самоврядування.")],
+  plan_note="Координую участь ГО «Е-ТЕАМ» у проєкті ЄС LIFE-ECOss (2026–2029): у Луцьку створюємо центр підтримки енергетичних спільнот.",
+)
+
+HOME_EN = dict(
+  file="en.html", other="index.html", other_label="UA", other_lang="uk", role_default="",
+  title="Dmytro Palamarchuk", seo_title="Dmytro Palamarchuk — energy efficiency, municipal energy planning, energy communities (Ukraine)",
+  description="Dmytro Palamarchuk — energy efficiency consultant in Ukraine: regional advisor to homeowner associations (GIZ project), municipal energy plans, energy communities. Cherkasy.",
+  kicker="Cherkasy, Ukraine · working with municipalities across regions",
+  role="Residential energy efficiency and municipal energy planning in Ukraine",
+  lead="Regional energy efficiency advisor to homeowner associations (IFC 2019–2025, GIZ since 2026), developer of municipal energy plans with NGO E-TEAM, project coordinator of the EU LIFE-ECOss energy community project.",
+  cta1="Get in touch",
+  facts_h="Programmes I work in, and my role",
+  facts=[("IFC (World Bank Group)", "Regional energy efficiency advisor, “Ukraine EE Fund” project, 2019–2025"),
+         ("GIZ", "Regional energy efficiency advisor in the NGO E-TEAM network, since 2026"),
+         ("UNIDO", "Municipal energy plan for Smila, 2026 — in the NGO E-TEAM team"),
+         ("EU LIFE Programme", "Project coordinator of LIFE-ECOss for NGO E-TEAM, since 2026"),
+         ("Energy Efficiency Fund of Ukraine", "Advising HOAs in the “Energodim” and “VidnovyDIM” programmes")],
+  facts_more="Experience",
+  formats_h="How I work with programmes and partners",
+  formats="As an independent expert (registered sole proprietor) or as part of the NGO E-TEAM team, depending on programme requirements. Pages for Ukrainian homeowner associations and municipalities are in Ukrainian.",
+  e_h="Experience",
+  timeline=[
+    ("2025 — present", "Board member, international cooperation projects coordinator", "NGO E-TEAM", ETEAM,
+     "Lead the development of municipal energy plans in the NGO team: Sarny (in progress), Smila (UNIDO project, released for public consultation in 2026). Project coordinator of the EU LIFE-ECOss project for NGO E-TEAM. LEAR of the organisation on the European Commission’s Funding & Tenders portal."),
+    ("2026 — present", "Regional energy efficiency advisor, Cherkasy oblast", "NGO E-TEAM regional advisor network, GIZ project", None,
+     "Advising homeowner associations on the “Energodim” and “VidnovyDIM” programmes; seminars for HOAs and municipal officials."),
+    ("2019 — 2025", "Regional energy efficiency advisor, Cherkasy oblast (from 2024 also Sumy)", "IFC “Ukraine EE Fund” project, World Bank Group", None,
+     "Advised HOAs, their project managers and contractors; building walk-throughs and financial calculations; participation in co-owners’ general meetings; seminars for HOAs and local authorities."),
+    ("2012 — 2026", "Lecturer, Associate Professor from 2017", "Cherkasy State Technological University", None,
+     "Courses in International Economics, European Integration and Economics of Sustainable Development; research on adapting EU energy policy to Ukraine.")],
+  practice_h="Practice in figures, 2019–2026",
+  practice="1,200+ consultations for homeowner associations · 50 co-owners’ general meetings attended · 81 seminars, webinars and forums as a speaker (40 organised). Source: monthly regional advisor reports to IFC and GIZ.",
+  edu_h="Education",
+  edu=[("2014", "PhD in Economics — Taras Shevchenko National University of Kyiv"),
+       ("2010", "Master’s in Economics and Entrepreneurship (Honours) — Cherkasy State Technological University")],
+  pubs_h="Publications",
+  pubs=[PUB_JOURNAL_EN,
+        ("2024", "Information campaigns as a tool for changing consumer energy behaviour: EU experience", "III International Scientific and Practical Conference, Ternopil, WUNU (in Ukrainian)", PUBS_URLS[0]),
+        ("2022", "Factors influencing homeowners’ decisions on the modernisation of multi-apartment buildings", "IX International Scientific and Practical Conference, ChSTU (in Ukrainian)", PUBS_URLS[2])],
+  pub_more="Full list:",
+  mentions_h="Mentioned in",
+  mentions=[("2023", "Energy Efficiency Fund of Ukraine — success stories brochure: regional advisor for Cherkasy oblast (in Ukrainian)", MENTIONS_UA[0][2]),
+            ("2019", "Dzvin media: seminar for co-owners in Cherkasy — IFC regional energy efficiency consultant (in Ukrainian)", MENTIONS_UA[1][2])],
+)
+
+
+# ----------------------------------------------------------------- components
+
+def c_header(c, cur, nav, other=None):
+    links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == cur else ""}>{esc(l)}</a>' for h, l in nav)
+    lang = f'<a class="lang" href="{other[0]}" hreflang="{other[2]}" lang="{other[2]}">{other[1]}</a>' if other else ''
+    return f"""<a class="skip" href="#main">{esc(c['skip'])}</a>
+<header class="hdr"><div class="wrap">
+  <a class="brand" href="{nav[0][0]}"><b>{esc(c['name'])}</b><span>{esc(c['brand_sub'])}</span></a>
+  <nav class="nav" aria-label="{esc(c['nav_label'])}">
+    <div class="links">{links}</div>
+    <div class="tools"><a class="tel" href="{TEL}">{TEL_H}</a>{lang}</div>
+  </nav>
+</div></header>"""
+
+
+def c_footer(c):
+    return f"""<footer><div class="wrap">
+  <div><b>{esc(c['name'])}</b>{esc(c['ft_role'])}<br>{esc(c['ft_board'])}</div>
+  <div><b><a href="{TEL}">{TEL_H}</a></b><a href="mailto:{MAIL}">{MAIL}</a><br><a href="mailto:{MAIL_W}">{MAIL_W}</a></div>
+  <div><a href="{ORCID}" rel="noopener">ORCID</a> · <a href="{SCHOLAR}" rel="noopener">Google Scholar</a> · <a href="{ETEAM}" rel="noopener">{esc(c['ft_org'])}</a></div>
+  <div class="base"><p class="legal" aria-label="{esc(c['lg_aria'])}"><span class="lg-k">{esc(c['lg_k'])}</span><span class="lg-n">{esc(c['lg_n'])}</span></p><p class="cr">{esc(c['ft_base'])}</p></div>
+</div></footer>"""
+
+
+def c_contact(c, band=True):
+    roles = "".join(f'<label><input type="radio" name="role" value="{esc(r)}" id="role-{k}"> {esc(r)}</label>' for k, r in enumerate(c["roles"]))
+    needs = "".join(f'<label><input type="checkbox" name="need" value="{esc(r)}" id="need-{k}"> {esc(r)}</label>' for k, r in enumerate(c["needs"]))
+    cts = ""
+    for k, v, href, cp in c["contacts"]:
+        ext = ' rel="noopener"' if href.startswith("http") else ''
+        btn = f'<button class="copy" type="button" data-v="{esc(v)}">{esc(c["copy_short"])}</button>' if cp else ''
+        cts += f'<div class="ct"><span class="k">{esc(k)}</span><a class="v" href="{esc(href)}"{ext}>{esc(v)}</a>{btn}</div>'
+    return f"""<section id="contact" class="{'band' if band else ''}" aria-labelledby="c-h"><div class="wrap">
+  <div class="sh"><h2 id="c-h">{esc(c['c_h'])}</h2><p>{esc(c['c_sub'])}</p></div>
+  <div class="req"><form class="form" id="reqform" novalidate>
+<h3>{esc(c['form_h'])}</h3><p class="hint">{esc(c['form_hint'])}</p>
+<fieldset><legend>{esc(c['f_role'])}</legend><div class="opts">{roles}</div></fieldset>
+<fieldset><legend>{esc(c['f_need'])}</legend><div class="opts">{needs}</div></fieldset>
+<div class="row2"><div><label class="l" for="f-place">{esc(c['f_place'])}</label><input type="text" id="f-place" autocomplete="address-level2" placeholder="{esc(c['f_place_ph'])}"></div>
+<div><label class="l" for="f-name">{esc(c['f_name'])}</label><input type="text" id="f-name" autocomplete="name"></div></div>
+<div><label class="l" for="f-contact">{esc(c['f_contact'])}</label><input type="text" id="f-contact" autocomplete="email"></div>
+<div><label class="l" for="f-msg">{esc(c['f_msg'])}</label><textarea id="f-msg" placeholder="{esc(c['f_msg_ph'])}"></textarea></div>
+<p class="err" id="f-err" tabindex="-1" hidden>{esc(c['f_err'])}</p>
+<div><button class="btn btn-p" type="submit">{esc(c['f_btn'])}</button></div>
+</form>
+<div class="out" id="f-out" hidden aria-live="polite"><h3>{esc(c['f_out_h'])}</h3><pre id="f-text"></pre>
+<div class="acts"><a class="btn btn-p" id="f-mail" href="mailto:{MAIL}">{esc(c['f_send'])}</a><a class="btn btn-s" href="{TEL}">{esc(c['call'])}</a></div>
+<button class="copy" type="button" id="copy-msg" data-v="">{esc(c['copy'])}</button></div>
+</div>
+  <div class="contact">{cts}</div>
+</div></section>"""
+
+
+def c_plan(p, sid="plan"):
+    items = ""
+    for i, (h, first, d, you) in enumerate(p["plan"]):
+        fl = f'<span class="first">{"почніть із цього"}</span>' if first else ''
+        items += (f'<li><span class="n">{i+1}</span><div><h3>{esc(h)}{fl}</h3><p>{esc(d)}</p></div>'
+                  f'<p class="you"><b>{esc(p["you_lbl"])}</b>{esc(you)}</p></li>')
+    note = f'<p class="plan-note">{esc(p["plan_note"])}</p>' if p.get("plan_note") else ''
+    return f"""<section id="{sid}" aria-labelledby="{sid}-h"><div class="wrap">
+  <div class="sh"><h2 id="{sid}-h">{esc(p['plan_h'])}</h2><p>{esc(p['plan_sub'])}</p></div>
+  <ol class="plan">{items}</ol>{note}
+</div></section>"""
+
+
+def c_rows(items, with_link=True):
+    out = ""
+    for it in items:
+        y, ti, v, u = it
+        out += f'<li><span class="y">{y}</span><div><a href="{u}" rel="noopener">{esc(ti)}</a><span class="org">{esc(v)}</span></div></li>'
+    return out
+
+
+def c_experience(p):
+    tl = ""
+    for yr, role, org, url, d in p["timeline"]:
+        o = f'<a href="{url}" rel="noopener">{esc(org)}</a>' if url else esc(org)
+        tl += f'<li><div class="yr">{esc(yr)}</div><div><h3>{esc(role)}</h3><p class="org">{o}</p><p class="d">{esc(d)}</p></div></li>'
+    edu = "".join(f'<li><span class="y">{y}</span><span>{esc(x)}</span></li>' for y, x in p["edu"])
+    ment = "".join(f'<li><span class="y">{y}</span><a href="{u}" rel="noopener">{esc(t)}</a></li>' for y, t, u in p["mentions"])
+    return f"""<section id="experience" aria-labelledby="e-h"><div class="wrap">
+  <div class="sh"><h2 id="e-h">{esc(p['e_h'])}</h2></div>
+  <ul class="tl">{tl}</ul>
+  <div class="practice"><h3>{esc(p['practice_h'])}</h3><p>{esc(p['practice'])}</p></div>
+  <h3 class="subh">{esc(p['edu_h'])}</h3><ul class="rows">{edu}</ul>
+  <h3 class="subh" id="publications">{esc(p['pubs_h'])}</h3><ul class="rows">{c_rows(p['pubs'])}</ul>
+  <p class="note">{esc(p['pub_more'])} <a href="{SCHOLAR}" rel="noopener">Google Scholar</a>, <a href="{ORCID}" rel="noopener">ORCID</a></p>
+  <h3 class="subh">{esc(p['mentions_h'])}</h3><ul class="mentions">{ment}</ul>
+</div></section>"""
+
+
+def c_facts(p):
+    facts = "".join(f'<div class="r"><dt>{esc(a)}</dt><dd>{esc(b)}</dd></div>' for a, b in p["facts"])
+    return f'<aside class="facts" aria-labelledby="facts-h"><h2 id="facts-h">{esc(p["facts_h"])}</h2><dl>{facts}</dl><a class="more" href="#experience">{esc(p["facts_more"])} →</a></aside>'
+
+
+def doc(c, p, body, seo, alt=True, extra_ld=None):
+    ttl = p["seo_title"] if seo else p["title"]
+    url = BASE + ("" if p["file"] == "index.html" else p["file"])
+    ld = {"@context": "https://schema.org", "@type": "Person", "name": c["name"],
+          "alternateName": ["Дмитро Паламарчук", "Dmytro Palamarchuk", "Паламарчук Дмитро Миколайович"],
+          "jobTitle": c["jobTitle"], "email": "mailto:" + MAIL, "telephone": TEL_H, "url": BASE,
+          "address": {"@type": "PostalAddress", "addressLocality": "Cherkasy", "addressCountry": "UA"},
+          "worksFor": {"@type": "Organization", "name": "NGO E-TEAM", "url": ETEAM},
+          "knowsAbout": ["Energy efficiency", "Municipal energy planning", "Energy communities", "Homeowner associations"],
+          "sameAs": [ORCID, SCHOLAR]}
+    alts = (f'<link rel="alternate" hreflang="uk" href="{BASE}"><link rel="alternate" hreflang="en" href="{BASE}en.html"><link rel="alternate" hreflang="x-default" href="{BASE}">' if alt else '')
+    head = (f'<title>{esc(ttl)}</title>' + ('' if seo else '<meta name="claude:viewport-fit-sides" content="cover">') +
+            f'<meta name="description" content="{esc(p["description"])}"><link rel="canonical" href="{url}">{alts}'
+            f'<meta property="og:type" content="website"><meta property="og:title" content="{esc(ttl)}"><meta property="og:description" content="{esc(p["description"])}"><meta property="og:url" content="{url}">'
+            f'<meta property="og:image" content="{BASE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">'
+            f'<link rel="icon" href="{FAVICON}">{FONTS}<style>{CSS}{CSS_PAGES}</style>'
+            f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>')
+    js = (JS.replace("__LAB__", json.dumps(c["f_lab"], ensure_ascii=False)).replace("__HDR__", json.dumps(c["f_hdr"], ensure_ascii=False))
+            .replace("__COPY__", json.dumps(c["copy"], ensure_ascii=False)).replace("__COPIED__", json.dumps(c["copied"], ensure_ascii=False))) + JS_PAGES
+    def _nw(m):
+        t = m.group(1)
+        for w in ("«Е-ТЕАМ»", "E-TEAM"):
+            t = t.replace(w, f'<span class="nw">{w}</span>')
+        return '>' + t + '<'
+    body = re.sub(r'>([^<]+)<', _nw, body)  # text nodes only, never attributes
+    full_body = f'{body}<script>{js}</script>'
+    return (f'<!doctype html><html lang="{c["lang"]}"><head><meta charset="utf-8">'
+            f'<meta name="viewport" content="width=device-width, initial-scale=1">{head}</head>'
+            f'<body data-role="{p.get("role_default", "")}">{full_body}</body></html>')
+
+
+# ----------------------------------------------------------------- pages
+
+ENTRY_ICONS = {0: ICONS[0], 1: ICONS[1], 2: ICONS[2]}
+
+
+def home(c, p, nav, other, lang_ua=True):
+    if lang_ua:
+        entries = "".join(f'<li><a href="{h}">{ENTRY_ICONS[ic]}<div><h3>{esc(t)}</h3><p>{esc(d)}</p></div><span class="arr">{esc(p["entries_go"])} →</span></a></li>'
+                          for h, ic, t, d in p["entries"])
+        mid = f"""<section id="services" class="band" aria-labelledby="en-h"><div class="wrap">
+  <div class="sh"><h2 id="en-h">{esc(p['entries_h'])}</h2></div><ul class="entries">{entries}</ul>
+</div></section>"""
+    else:
+        mid = f"""<section id="services" class="band" aria-labelledby="fm-h"><div class="wrap">
+  <div class="sh"><h2 id="fm-h">{esc(p['formats_h'])}</h2><p>{esc(p['formats'])}</p></div>
+</div></section>"""
+    body = f"""{c_header(c, p['file'], nav, other)}
+<main id="main">
+<div class="wrap hero">
+  <div>
+    <p class="kicker">{esc(p['kicker'])}</p>
+    <h1>{esc(c['name'])}</h1>
+    <p class="role">{esc(p['role'])}</p>
+    <p class="lead">{esc(p['lead'])}</p>
+    <div class="acts"><a class="btn btn-p" href="#contact">{esc(p['cta1'])}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+  </div>
+  {c_facts(p)}
+</div>
+{mid}
+{c_experience(p)}
+{c_contact(c)}
+</main>
+{c_footer(c)}"""
+    return body
+
+
+def osbb(c, p, nav):
+    selfc = "".join(f'<li>{esc(x)}</li>' for x in p["selfcheck"])
+    prep = "".join(f'<li>{esc(x)}</li>' for x in p["prep"])
+    progs = "".join(f'<li><a href="{u}" rel="noopener">{esc(t)}</a></li>' for t, u in p["progs"])
+    th = dict(c); th.update(th_cap=c["th_cap"])
+    body = f"""{c_header(c, p['file'], nav)}
+<main id="main">
+<div class="wrap phero">
+  <p class="kicker">{esc(p['kicker'])}</p>
+  <h1>{esc(p['h1'])}</h1>
+  <p class="lead">{esc(p['lead'])}</p>
+  <p class="tag-free">{esc(p['free'])}</p>
+  <div class="acts"><a class="btn btn-p" href="#contact">{esc('Записатися на консультацію')}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+</div>
+{c_plan(p)}
+<section id="self" class="band" aria-labelledby="self-h"><div class="wrap split">
+  <div class="sh" style="margin:0"><h2 id="self-h">{esc(p['self_h'])}</h2><p>{esc(p['self_sub'])}</p></div>
+  <ul class="check">{selfc}</ul>
+</div></section>
+<section id="prepare" aria-labelledby="prep-h"><div class="wrap split">
+  <div class="sh" style="margin:0"><h2 id="prep-h">{esc(p['prep_h'])}</h2></div>
+  <div class="prep" style="display:block"><ul>{prep}</ul></div>
+</div></section>
+<section id="thermo" class="band" aria-labelledby="th-h"><div class="wrap">
+  <div class="explain" style="margin-top:0"><div><p class="kicker">{esc(p['th_kicker'])}</p><h2 id="th-h" style="font-size:var(--fs-h2)">{esc(p['th_h'])}</h2><p>{esc(p['th_p'])}</p></div>{scheme(th)}</div>
+</div></section>
+<section id="programs" aria-labelledby="pr-h"><div class="wrap">
+  <div class="sh"><h2 id="pr-h">{esc(p['progs_h'])}</h2><p>{esc(p['progs_sub'])}</p></div>
+  <ul class="links-out">{progs}</ul>
+</div></section>
+{c_contact(c)}
+</main>
+{c_footer(c)}"""
+    return body
+
+
+def generic(c, p, nav):
+    prep = "".join(f'<li>{esc(x)}</li>' for x in p.get("prep", []))
+    ex = ""
+    if p.get("examples"):
+        ex = f"""<section id="examples" class="band" aria-labelledby="ex-h"><div class="wrap">
+  <div class="sh"><h2 id="ex-h">{esc(p['ex_h'])}</h2></div>
+  <ul class="rows">{''.join(f'<li><span class="y">{esc(a)}</span><span>{esc(b)}</span></li>' for a, b in p['examples'])}</ul>
+</div></section>"""
+    prep_s = f"""<section id="prepare" aria-labelledby="prep-h"><div class="wrap split">
+  <div class="sh" style="margin:0"><h2 id="prep-h">{esc(p['prep_h'])}</h2></div>
+  <div class="prep" style="display:block"><ul>{prep}</ul></div>
+</div></section>""" if prep else ''
+    body = f"""{c_header(c, p['file'], nav)}
+<main id="main">
+<div class="wrap phero">
+  <p class="kicker">{esc(p['kicker'])}</p>
+  <h1>{esc(p['h1'])}</h1>
+  <p class="lead">{esc(p['lead'])}</p>
+  <div class="acts"><a class="btn btn-p" href="#contact">{esc('Обговорити ваше питання')}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+</div>
+{c_plan(p)}
+{ex}
+{prep_s}
+{c_contact(c)}
+</main>
+{c_footer(c)}"""
+    return body
+
+
+def build_all():
+    cu, ce = COMMON["ua"], COMMON["en"]
+    nav_en = [("en.html", "Home"), ("#experience", "Experience"), ("#contact", "Contact")]
+    pages = {
+        "index.html": doc(cu, HOME_UA, home(cu, HOME_UA, NAV_UA, ("en.html", "EN", "en")), True),
+        "en.html": doc(ce, HOME_EN, home(ce, HOME_EN, nav_en, ("index.html", "UA", "uk"), lang_ua=False), True),
+        "osbb.html": doc(cu, OSBB_UA, osbb(cu, OSBB_UA, NAV_UA), True, alt=False),
+        "mep.html": doc(cu, MEP_UA, generic(cu, MEP_UA, NAV_UA), True, alt=False),
+        "energospilnoty.html": doc(cu, EC_UA, generic(cu, EC_UA, NAV_UA), True, alt=False),
+    }
+    return pages
+
+
 if __name__ == "__main__":
     for d in ("preview", "dist"):
         os.makedirs(os.path.join(HERE, d), exist_ok=True)
-    open(os.path.join(HERE, "preview", "index.html"), "w").write(page(T["ua"], False))
-    open(os.path.join(HERE, "preview", "en.html"), "w").write(page(T["en"], True))
-    open(os.path.join(HERE, "dist", "index.html"), "w").write(page(T["ua"], True, seo=True))
-    open(os.path.join(HERE, "dist", "en.html"), "w").write(page(T["en"], True, seo=True))
+    pages = build_all()
+    for fn, html in pages.items():
+        open(os.path.join(HERE, "dist", fn), "w").write(html)
+        open(os.path.join(HERE, "preview", fn), "w").write(html)
     make_og(os.path.join(HERE, "dist", "og.png"))
     open(os.path.join(HERE, "dist", "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
+    urls = ["", "osbb.html", "mep.html", "energospilnoty.html", "en.html"]
     open(os.path.join(HERE, "dist", "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-        f'<url><loc>{BASE}</loc><lastmod>2026-10-20</lastmod></url>\n<url><loc>{BASE}en.html</loc><lastmod>2026-10-20</lastmod></url>\n</urlset>\n')
+        + "".join(f'<url><loc>{BASE}{u}</loc><lastmod>2026-10-31</lastmod></url>\n' for u in urls) + '</urlset>\n')
     open(os.path.join(HERE, "dist", ".nojekyll"), "w").write("")
-    print("ok")
+    print("ok", list(pages))
