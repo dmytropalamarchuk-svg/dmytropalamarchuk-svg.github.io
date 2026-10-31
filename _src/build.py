@@ -18,10 +18,16 @@ ETEAM = "https://www.eteamngo.org/"
 TEL, TEL_H = "tel:+380978891385", "+380 97 889 13 85"
 MAIL, MAIL_W = "dmytropalamarchuk@gmail.com", "dmytro.palamarchuk@eteamngo.org"
 
-FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-         '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-         '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?'
-         'family=Source+Serif+4:opsz,wght@8..60,600&family=Commissioner:wght@400;600&display=swap">')
+FONTS = ('<link rel="preload" href="fonts/commissioner-cyrillic-400-normal.woff2" as="font" type="font/woff2" crossorigin>')
+# fonts/: WOFF2 from npm @fontsource/commissioner@5 (400, 600) and @fontsource/source-serif-4@5 (600), cyrillic + latin subsets
+FONT_FACES = r"""
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/commissioner-cyrillic-400-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/commissioner-latin-400-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/commissioner-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Commissioner";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/commissioner-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/source-serif-4-cyrillic-600-normal.woff2) format("woff2");unicode-range:U+0301,U+0400-045F,U+0490-0491,U+04B0-04B1,U+2116}
+@font-face{font-family:"Source Serif 4";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/source-serif-4-latin-600-normal.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+"""
 FAVICON = ("data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E"
            "%3Crect width=%2732%27 height=%2732%27 rx=%274%27 fill=%27%2314202e%27/%3E"
            "%3Ctext x=%2716%27 y=%2722%27 font-family=%27Georgia,serif%27 font-size=%2716%27 font-weight=%27700%27 "
@@ -39,8 +45,8 @@ CSS = r"""
   --footer:#14202e; --on-footer:#e8edf2; --on-footer-2:#aab6c2;
   --serif:"Source Serif 4",Georgia,"Times New Roman",serif;
   --sans:"Commissioner","Segoe UI",system-ui,sans-serif;
-  --fs-fig:56px; --fs-h1:44px; --fs-h2:34px; --fs-h3:21px; --fs-lead:20px; --fs-body:17px; --fs-small:15px;
-  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:88px;
+  --fs-fig:56px; --fs-h1:44px; --fs-h2:30px; --fs-h3:21px; --fs-lead:20px; --fs-body:17px; --fs-small:15px;
+  --s-1:4px; --s-2:8px; --s-3:12px; --s-4:16px; --s-5:24px; --s-6:32px; --s-7:48px; --s-8:64px; --s-9:64px;
   --r-1:4px; --r-2:6px; --wrap:1120px; --measure:68ch;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -57,7 +63,7 @@ CSS = r"""
   --primary:#6cc6bb; --primary-hover:#8fd6cc; --on-primary:#ffffff;
   --btn:#1f7a72; --btn-hover:#1a6f68; --tint:#16302e;
   --focus:#8fd6cc; --error:#f2857a; --footer:#0a0f14; color-scheme:dark}
-@media (max-width:560px){:root{--fs-fig:44px; --fs-h1:34px; --fs-h2:28px; --fs-h3:20px; --fs-lead:18px; --fs-body:16px; --s-9:56px}}
+@media (max-width:560px){:root{--fs-fig:44px; --fs-h1:34px; --fs-h2:24px; --fs-h3:19px; --fs-lead:18px; --fs-body:16px; --s-9:40px}}
 
 *{box-sizing:border-box}
 [hidden]{display:none !important}
@@ -87,7 +93,7 @@ p{margin:0}
 .nav a{color:var(--ink);text-decoration:none}
 .nav a:hover{color:var(--primary);text-decoration:underline}
 .nav .tel{font-weight:600;white-space:nowrap;font-variant-numeric:tabular-nums}
-.nav .lang{border:1px solid var(--field);border-radius:var(--r-1);padding:2px 9px;font-weight:600;font-size:var(--fs-small)}
+.nav .lang{font-weight:600;font-size:var(--fs-small);color:var(--primary);text-decoration:underline}
 .links{display:flex;gap:var(--s-5)}
 .tools{display:flex;align-items:center;gap:var(--s-5)}
 
@@ -114,11 +120,41 @@ p{margin:0}
 .facts .more{display:inline-block;margin-top:var(--s-3);font-weight:600;font-size:var(--fs-small);text-decoration:none}
 .facts .more:hover{text-decoration:underline}
 
+/* hero entries (decision 38) */
+.gates{border-top:2px solid var(--ink);margin-top:6px}
+.gates .lbl{font-size:var(--fs-small);font-weight:600;color:var(--ink-2);margin:var(--s-3) 0 var(--s-1)}
+.gates ul{list-style:none;margin:0;padding:0}
+.gates li{border-bottom:1px solid var(--rule)}
+.gates a{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s-2) var(--s-4);align-items:start;padding:var(--s-4) 0;text-decoration:none;color:var(--ink)}
+.gates b{display:block;font-size:19px;font-weight:600;line-height:1.3}
+.gates span.r{display:block;margin-top:3px;color:var(--ink-2);font-size:var(--fs-small);line-height:1.45}
+.gates .arr{color:var(--primary);font-weight:600;font-size:20px;line-height:1.2}
+.gates a:hover b{color:var(--primary);text-decoration:underline;text-underline-offset:4px}
+/* call-to-action strip instead of the form on each page */
+.cta-s .wrap{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:var(--s-5) var(--s-7);align-items:center}
+.cta-s h2{margin:0 0 var(--s-2)}
+.cta-s p{color:var(--ink-2);max-width:40em}
+.cta-s .acts{justify-content:flex-end}
+.cta-s .mail{display:block;margin-top:var(--s-3);font-size:var(--fs-small)}
+@media (max-width:900px){.cta-s .wrap{grid-template-columns:minmax(0,1fr)}.cta-s .acts{justify-content:flex-start}}
+.back{color:var(--ink-3)}
+.back a{font-weight:600}
+
+.sub2{color:var(--ink-2);margin:0 0 var(--s-4);max-width:34em}
+#self h2{margin-bottom:var(--s-3)}
+
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+#contact.plain{border-top:0;padding-top:0}
+
+@media (max-width:360px){.phero h1{font-size:28px}}
+
+.form .hint:first-child{margin-top:0}
+
 /* sections */
 section{padding-block:var(--s-9);border-top:1px solid var(--rule)}
 .band{background:var(--band)}
-.sh{margin-bottom:var(--s-7)}
-.sh::before{content:"";display:block;width:32px;height:3px;background:var(--primary);margin-bottom:var(--s-4)}
+.sh{margin-bottom:var(--s-6)}
+.sh h2{margin-bottom:var(--s-4)}
 .sh p{font-size:var(--fs-lead);line-height:1.5;color:var(--ink-2);max-width:38em}
 
 /* figures */
@@ -168,8 +204,7 @@ section{padding-block:var(--s-9);border-top:1px solid var(--rule)}
 /* prepare */
 .prep{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-6)}
 .prep ul{margin:0;padding:0;list-style:none;display:grid;gap:var(--s-2);font-size:16px}
-.prep li{position:relative;padding-left:28px}
-.prep li::before{content:"";position:absolute;left:0;top:5px;width:15px;height:15px;border:1.5px solid var(--field);border-radius:3px}
+
 
 /* experience */
 .tl{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
@@ -243,6 +278,10 @@ footer .cr{margin:0;font-size:13px;color:var(--on-footer-2)}
   .wrap{padding-inline:16px}
   .hdr .wrap{flex-wrap:wrap;row-gap:var(--s-3)}
   .nav{display:contents}
+  .brand span{display:none}
+  .tools .tel{display:none}
+  .hdr .wrap{flex-wrap:wrap}
+  .hdr .wrap{padding-block:var(--s-3)}
   .links{order:2;width:100%;justify-content:space-between;border-top:1px solid var(--rule);padding-top:var(--s-3);font-size:15.5px;gap:var(--s-3)}
   .tools{gap:var(--s-4)}
   .hero{padding-top:var(--s-6)}
@@ -353,9 +392,10 @@ def make_og(path):
 CSS_PAGES = r"""
 .nav .links a[aria-current="page"]{color:var(--primary);text-decoration:underline;text-decoration-thickness:2px;text-underline-offset:6px}
 .phero{padding-block:64px var(--s-8)}
+@media (max-width:480px){.links .home{display:none}.links{flex-wrap:wrap;row-gap:var(--s-1)}}
 @media (max-width:400px){.links{font-size:14.5px !important;gap:var(--s-2) !important}}
 .phero .kicker{margin-bottom:var(--s-3)}
-.phero h1{font-size:clamp(32px,4.4vw,44px);max-width:20em;text-wrap:balance}
+.phero h1{hyphens:auto;overflow-wrap:break-word;font-size:clamp(32px,4vw,40px);max-width:20em;text-wrap:balance}
 .phero .lead{margin-bottom:var(--s-5)}
 .tag-free{display:inline-block;background:var(--tint);color:var(--ink);font-weight:600;font-size:var(--fs-small);padding:6px 12px;border-radius:var(--r-1);margin:0 0 var(--s-5)}
 .entries{list-style:none;margin:0;padding:0;border-top:2px solid var(--ink)}
@@ -376,8 +416,8 @@ CSS_PAGES = r"""
 .plan .you b{display:block;color:var(--ink-3);font-weight:600;margin-bottom:2px}
 .plan-note{margin-top:var(--s-5);color:var(--ink-2);max-width:var(--measure)}
 .check{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-3);max-width:760px}
-.check li{position:relative;padding-left:32px;font-size:17px}
-.check li::before{content:"?";position:absolute;left:0;top:1px;width:22px;height:22px;border-radius:50%;border:1.5px solid var(--primary);color:var(--primary);font-weight:600;font-size:13px;display:flex;align-items:center;justify-content:center}
+.check li,.prep li{position:relative;padding-left:22px}
+.check li::before,.prep li::before{content:"";position:absolute;left:2px;top:.68em;width:7px;height:7px;border-radius:50%;background:var(--ink-2)}
 .links-out{margin:var(--s-5) 0 0;padding-left:20px;display:grid;gap:var(--s-2)}
 .mentions{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-3)}
 .mentions li{display:grid;grid-template-columns:170px minmax(0,1fr);gap:var(--s-6)}
@@ -397,7 +437,7 @@ CSS_PAGES = r"""
 """
 
 JS_PAGES = r"""
-(function(){var dr=document.body.getAttribute('data-role'); if(dr===null||dr==='') return;
+(function(){var q=new URLSearchParams(location.search).get('role'); var dr=(q!==null&&/^[0-4]$/.test(q))?q:document.body.getAttribute('data-role'); if(dr===null||dr==='') return;
   var r=document.getElementById('role-'+dr); if(r){r.checked=true;r.dispatchEvent(new Event('change'));}})();
 """
 
@@ -424,6 +464,7 @@ COMMON = {
             name="Дмитро Паламарчук", ft_role="Незалежний експерт · Черкаси", ft_board="Член правління ГО «Е-ТЕАМ»", ft_org="ГО «Е-ТЕАМ»",
             ft_base="© 2026 Дмитро Паламарчук · Оновлено: жовтень 2026",
             lg_k="Фізична особа — підприємець", lg_n="Паламарчук Дмитро Миколайович", lg_aria="Юридична особа, що надає послуги",
+            cta_btn="Описати питання", back="← Головна",
             c_h="Напишіть, з чим звертаєтеся", c_sub="Опишіть питання в кількох словах — я відповім. Або просто зателефонуйте.",
             th_cap="Схема, не знімок конкретного будинку", th_before="До утеплення", th_after="Після",
             th_aria="Схема: панельний будинок до утеплення з теплими швами і вікнами, та після утеплення з холодним рівномірним фасадом",
@@ -446,6 +487,7 @@ COMMON = {
             name="Dmytro Palamarchuk", ft_role="Independent expert · Cherkasy, Ukraine", ft_board="Board member, NGO E-TEAM", ft_org="NGO E-TEAM",
             ft_base="© 2026 Dmytro Palamarchuk · Updated: October 2026",
             lg_k="Sole proprietor (Ukrainian FOP)", lg_n="Dmytro Mykolaiovych Palamarchuk", lg_aria="Legal entity providing the services",
+            cta_btn="Describe your question", back="← Home",
             c_h="Get in touch", c_sub="Describe your question in a few words and I will reply — or simply call.",
             jobTitle="Energy efficiency and municipal energy planning consultant"),
 }
@@ -471,14 +513,19 @@ HOME_UA = dict(
   description="Дмитро Паламарчук — консультант з енергоефективності: консультації ОСББ у проєкті GIZ, муніципальні енергетичні плани для громад, енергетичні спільноти. Черкаси.",
   kicker="Черкаси · працюю з громадами різних областей",
   role="Енергоефективність житла й енергетичне планування громад",
-  lead="Консультую ОСББ щодо програм Фонду енергоефективності, розробляю муніципальні енергетичні плани в команді ГО «Е-ТЕАМ», допомагаю ініціативним групам зрозуміти, з чого почати енергетичну спільноту.",
+  lead="Пояснюю, як працюють програми енергомодернізації та енергетичного планування, рахую варіанти й допомагаю пройти процедури.",
   cta1="Описати своє питання",
+  gates_h="З чим звертатися",
+  gates=[("osbb.html", "ОСББ", "Консультації щодо енергомодернізації будинку. Регіональний радник мережі ГО «Е-ТЕАМ» у проєкті GIZ; для ОСББ безкоштовно"),
+         ("mep.html", "Громадам", "Муніципальні енергетичні плани за наказом № 1163. Розробляю в команді ГО «Е-ТЕАМ»"),
+         ("energospilnoty.html", "Ініціативним групам", "Енергетичні спільноти: з чого почати. Координатор проєкту ЄС LIFE-ECOss від ГО «Е-ТЕАМ»")],
+  cta_h="Маєте питання?", cta_sub="Опишіть його в кількох словах — я відповім. Або просто зателефонуйте.",
   facts_h="Програми, у яких працюю, і моя роль",
   facts=[("IFC (Група Світового банку)", "Регіональний радник з енергоефективності, проєкт «Ukraine EE Fund», 2019–2025"),
          ("GIZ", "Регіональний радник з енергоефективності в мережі ГО «Е-ТЕАМ», з 2026"),
          ("UNIDO", "МЕП Сміли, 2026 — у команді ГО «Е-ТЕАМ»"),
          ("Програма ЄС LIFE", "Координатор проєкту LIFE-ECOss від ГО «Е-ТЕАМ», з 2026"),
-         ("Фонд енергоефективності", "Консультую ОСББ — учасників програм «Енергодім» і «ВідновиДІМ»")],
+         ("Фонд енергоефективності", "Консультую ОСББ — учасників програм «Енергодім», «ВідновиДІМ» і «ГрінДІМ»")],
   facts_more="Досвід",
   entries_h="З чим звертатися",
   entries=[("osbb.html", 1, "ОСББ: консультації щодо енергомодернізації", "Безкоштовно в межах проєкту GIZ. Як проходить шлях від першої розмови до рішення співвласників і що підготувати."),
@@ -490,7 +537,7 @@ HOME_UA = dict(
     ("2025 — дотепер", "Член правління, координатор проєктів міжнародної співпраці", "ГО «Е-ТЕАМ»", ETEAM,
      "Керую розробкою муніципальних енергетичних планів у команді ГО: МЕП Сарненської громади (у роботі), МЕП Смілянської громади (проєкт UNIDO, передано на публічне обговорення у 2026 році). Координатор проєкту ЄС LIFE-ECOss від ГО «Е-ТЕАМ». Уповноважений представник (LEAR) організації на порталі Funding & Tenders Європейської Комісії."),
     ("2026 — дотепер", "Регіональний радник з енергоефективності, Черкаська область", "Мережа регіональних радників ГО «Е-ТЕАМ», проєкт GIZ", None,
-     "Консультую ОСББ щодо програм «Енергодім» і «ВідновиДІМ», проводжу семінари для ОСББ і посадовців громад."),
+     "Консультую ОСББ щодо програм «Енергодім», «ВідновиДІМ» і «ГрінДІМ», проводжу семінари для ОСББ і посадовців громад."),
     ("2019 — 2025", "Регіональний радник з енергоефективності, Черкаська область (з 2024 — також Сумська)", "Проєкт IFC «Ukraine EE Fund», Група Світового банку", None,
      "Консультував ОСББ, їхніх менеджерів проєктів і підрядників, оглядав будинки й рахував фінансовий результат модернізації, брав участь у загальних зборах співвласників, проводив семінари для ОСББ і органів місцевого самоврядування."),
     ("2012 — 2026", "Викладач, з 2017 — доцент", "Черкаський державний технологічний університет", None,
@@ -510,13 +557,14 @@ HOME_UA = dict(
 )
 
 OSBB_UA = dict(
+  cta_h='Хочете обговорити ваш будинок?', cta_sub='Консультація для ОСББ безкоштовна. Опишіть будинок у кількох словах — я відповім, або просто зателефонуйте.',
   file="osbb.html", role_default="0",
   title="Консультації для ОСББ — Дмитро Паламарчук",
   seo_title="Консультації для ОСББ щодо енергомодернізації — Черкаська область, проєкт GIZ",
-  description="Безкоштовні консультації для ОСББ Черкаської області щодо програм Фонду енергоефективності «Енергодім» і «ВідновиДІМ»: огляд будинку, розрахунок, підготовка рішення співвласників і заявки.",
+  description="Безкоштовні консультації для ОСББ Черкаської області щодо програм Фонду енергоефективності «Енергодім», «ВідновиДІМ» і «ГрінДІМ»: огляд будинку, розрахунок, підготовка рішення співвласників і заявки.",
   kicker="Для ОСББ · Черкаська область",
   h1="Консультації для ОСББ щодо енергомодернізації будинку",
-  lead="Консультую ОСББ як регіональний радник з енергоефективності мережі ГО «Е-ТЕАМ» у проєкті GIZ: допомагаю розібратися з програмами Фонду енергоефективності, порахувати, чи має сенс модернізація для вашого будинку, і пройти процедури.",
+  lead="Консультую ОСББ як регіональний радник з енергоефективності мережі ГО «Е-ТЕАМ» у проєкті GIZ: допомагаю розібратися з програмами Фонду енергоефективності («Енергодім», «ВідновиДІМ», «ГрінДІМ»), порахувати, чи має сенс модернізація для вашого будинку, і пройти процедури.",
   free="Для ОСББ консультації безкоштовні",
   plan_h="Як проходить робота",
   plan_sub="Шлях однаковий для більшості будинків. На кожному кроці рішення за правлінням і співвласниками; я пояснюю, рахую і допомагаю з документами.",
@@ -549,6 +597,7 @@ OSBB_UA = dict(
 )
 
 MEP_UA = dict(
+  cta_h='Громада думає про МЕП?', cta_sub='Опишіть, на якому етапі громада і що вже є, — я відповім, або просто зателефонуйте.',
   file="mep.html", role_default="1",
   title="Муніципальний енергетичний план — Дмитро Паламарчук",
   seo_title="Муніципальний енергетичний план (МЕП) для громади — розробка за Методикою № 1163",
@@ -578,6 +627,7 @@ MEP_UA = dict(
 )
 
 EC_UA = dict(
+  cta_h='Ваша група думає про енергоспільноту?', cta_sub='Опишіть, хто ви і що хочете зробити, — я відповім, або просто зателефонуйте.',
   file="energospilnoty.html", role_default="2",
   title="Енергетичні спільноти — Дмитро Паламарчук",
   seo_title="Енергетична спільнота: з чого почати — консультації для ініціативних груп і громад",
@@ -642,7 +692,7 @@ HOME_EN = dict(
 # ----------------------------------------------------------------- components
 
 def c_header(c, cur, nav, other=None):
-    links = "".join(f'<a href="{h}"{" aria-current=\"page\"" if h == cur else ""}>{esc(l)}</a>' for h, l in nav)
+    links = "".join(f'<a href="{h}"{" class=\"home\"" if i == 0 and len(nav) > 3 else ""}{" aria-current=\"page\"" if h == cur else ""}>{esc(l)}</a>' for i, (h, l) in enumerate(nav))
     lang = f'<a class="lang" href="{other[0]}" hreflang="{other[2]}" lang="{other[2]}">{other[1]}</a>' if other else ''
     return f"""<a class="skip" href="#main">{esc(c['skip'])}</a>
 <header class="hdr"><div class="wrap">
@@ -663,7 +713,7 @@ def c_footer(c):
 </div></footer>"""
 
 
-def c_contact(c, band=True):
+def c_contact(c, band=True, head=True):
     roles = "".join(f'<label><input type="radio" name="role" value="{esc(r)}" id="role-{k}"> {esc(r)}</label>' for k, r in enumerate(c["roles"]))
     needs = "".join(f'<label><input type="checkbox" name="need" value="{esc(r)}" id="need-{k}"> {esc(r)}</label>' for k, r in enumerate(c["needs"]))
     cts = ""
@@ -671,10 +721,10 @@ def c_contact(c, band=True):
         ext = ' rel="noopener"' if href.startswith("http") else ''
         btn = f'<button class="copy" type="button" data-v="{esc(v)}">{esc(c["copy_short"])}</button>' if cp else ''
         cts += f'<div class="ct"><span class="k">{esc(k)}</span><a class="v" href="{esc(href)}"{ext}>{esc(v)}</a>{btn}</div>'
-    return f"""<section id="contact" class="{'band' if band else ''}" aria-labelledby="c-h"><div class="wrap">
-  <div class="sh"><h2 id="c-h">{esc(c['c_h'])}</h2><p>{esc(c['c_sub'])}</p></div>
+    return f"""<section id="contact" class="{'band' if band else ('' if head else 'plain')}" aria-labelledby="c-h"><div class="wrap">
+  {f'<div class="sh"><h2 id="c-h">{esc(c["c_h"])}</h2><p>{esc(c["c_sub"])}</p></div>' if head else f'<h2 id="c-h" class="vh">{esc(c["form_h"])}</h2>'}
   <div class="req"><form class="form" id="reqform" novalidate>
-<h3>{esc(c['form_h'])}</h3><p class="hint">{esc(c['form_hint'])}</p>
+{f'<h3>{esc(c["form_h"])}</h3>' if head else ''}<p class="hint">{esc(c['form_hint'])}</p>
 <fieldset><legend>{esc(c['f_role'])}</legend><div class="opts">{roles}</div></fieldset>
 <fieldset><legend>{esc(c['f_need'])}</legend><div class="opts">{needs}</div></fieldset>
 <div class="row2"><div><label class="l" for="f-place">{esc(c['f_place'])}</label><input type="text" id="f-place" autocomplete="address-level2" placeholder="{esc(c['f_place_ph'])}"></div>
@@ -692,11 +742,24 @@ def c_contact(c, band=True):
 </div></section>"""
 
 
+def c_gates(p):
+    rows = "".join(f'<li><a href="{h}"><span><b>{esc(t)}</b><span class="r">{esc(r)}</span></span><span class="arr" aria-hidden="true">→</span></a></li>'
+                   for h, t, r in p["gates"])
+    return f'<nav class="gates" aria-labelledby="gates-l"><p class="lbl" id="gates-l">{esc(p["gates_h"])}</p><ul>{rows}</ul></nav>'
+
+
+def c_cta(c, h, sub, role):
+    return f"""<section id="contact" class="band cta-s" aria-labelledby="cta-h"><div class="wrap">
+  <div><h2 id="cta-h">{esc(h)}</h2><p>{esc(sub)}</p><a class="mail" href="mailto:{MAIL}">{MAIL}</a></div>
+  <div class="acts"><a class="btn btn-p" href="zvernennia.html?role={role}">{esc(c['cta_btn'])}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+</div></section>"""
+
+
 def c_plan(p, sid="plan"):
     items = ""
     for i, (h, first, d, you) in enumerate(p["plan"]):
         fl = f'<span class="first">{"почніть із цього"}</span>' if first else ''
-        items += (f'<li><span class="n">{i+1}</span><div><h3>{esc(h)}{fl}</h3><p>{esc(d)}</p></div>'
+        items += (f'<li><span class="n">{i+1:02d}</span><div><h3>{esc(h)}{fl}</h3><p>{esc(d)}</p></div>'
                   f'<p class="you"><b>{esc(p["you_lbl"])}</b>{esc(you)}</p></li>')
     note = f'<p class="plan-note">{esc(p["plan_note"])}</p>' if p.get("plan_note") else ''
     return f"""<section id="{sid}" aria-labelledby="{sid}-h"><div class="wrap">
@@ -751,7 +814,7 @@ def doc(c, p, body, seo, alt=True, extra_ld=None):
             f'<meta name="description" content="{esc(p["description"])}"><link rel="canonical" href="{url}">{alts}'
             f'<meta property="og:type" content="website"><meta property="og:title" content="{esc(ttl)}"><meta property="og:description" content="{esc(p["description"])}"><meta property="og:url" content="{url}">'
             f'<meta property="og:image" content="{BASE}og.png"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta name="twitter:card" content="summary_large_image">'
-            f'<link rel="icon" href="{FAVICON}">{FONTS}<style>{CSS}{CSS_PAGES}</style>'
+            f'<link rel="icon" href="{FAVICON}">{FONTS}<style>{FONT_FACES}{CSS}{CSS_PAGES}</style>'
             f'<script type="application/ld+json">{json.dumps(ld, ensure_ascii=False)}</script>')
     js = (JS.replace("__LAB__", json.dumps(c["f_lab"], ensure_ascii=False)).replace("__HDR__", json.dumps(c["f_hdr"], ensure_ascii=False))
             .replace("__COPY__", json.dumps(c["copy"], ensure_ascii=False)).replace("__COPIED__", json.dumps(c["copied"], ensure_ascii=False))) + JS_PAGES
@@ -761,7 +824,7 @@ def doc(c, p, body, seo, alt=True, extra_ld=None):
             t = t.replace(w, f'<span class="nw">{w}</span>')
         return '>' + t + '<'
     body = re.sub(r'>([^<]+)<', _nw, body)  # text nodes only, never attributes
-    full_body = f'{body}<script>{js}</script>'
+    full_body = f'{body}<script>{js}</script>' if 'id="reqform"' in body else body
     return (f'<!doctype html><html lang="{c["lang"]}"><head><meta charset="utf-8">'
             f'<meta name="viewport" content="width=device-width, initial-scale=1">{head}</head>'
             f'<body data-role="{p.get("role_default", "")}">{full_body}</body></html>')
@@ -774,6 +837,8 @@ ENTRY_ICONS = {0: ICONS[0], 1: ICONS[1], 2: ICONS[2]}
 
 def home(c, p, nav, other, lang_ua=True):
     if lang_ua:
+        mid = ""
+    elif False:
         entries = "".join(f'<li><a href="{h}">{ENTRY_ICONS[ic]}<div><h3>{esc(t)}</h3><p>{esc(d)}</p></div><span class="arr">{esc(p["entries_go"])} →</span></a></li>'
                           for h, ic, t, d in p["entries"])
         mid = f"""<section id="services" class="band" aria-labelledby="en-h"><div class="wrap">
@@ -791,13 +856,13 @@ def home(c, p, nav, other, lang_ua=True):
     <h1>{esc(c['name'])}</h1>
     <p class="role">{esc(p['role'])}</p>
     <p class="lead">{esc(p['lead'])}</p>
-    <div class="acts"><a class="btn btn-p" href="#contact">{esc(p['cta1'])}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+    <div class="acts"><a class="btn btn-p" href="{'zvernennia.html' if lang_ua else '#contact'}">{esc(p['cta1'])}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
   </div>
-  {c_facts(p)}
+  {c_gates(p) if lang_ua else c_facts(p)}
 </div>
 {mid}
 {c_experience(p)}
-{c_contact(c)}
+{c_cta(c, p['cta_h'], p['cta_sub'], '') if lang_ua else c_contact(c)}
 </main>
 {c_footer(c)}"""
     return body
@@ -808,32 +873,28 @@ def osbb(c, p, nav):
     prep = "".join(f'<li>{esc(x)}</li>' for x in p["prep"])
     progs = "".join(f'<li><a href="{u}" rel="noopener">{esc(t)}</a></li>' for t, u in p["progs"])
     th = dict(c); th.update(th_cap=c["th_cap"])
-    body = f"""{c_header(c, p['file'], nav)}
+    body = f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
 <main id="main">
 <div class="wrap phero">
-  <p class="kicker">{esc(p['kicker'])}</p>
+  <p class="kicker back"><a href="index.html">{esc(c['back'])}</a> · {esc(p['kicker'])}</p>
   <h1>{esc(p['h1'])}</h1>
   <p class="lead">{esc(p['lead'])}</p>
   <p class="tag-free">{esc(p['free'])}</p>
-  <div class="acts"><a class="btn btn-p" href="#contact">{esc('Записатися на консультацію')}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+  <div class="acts"><a class="btn btn-p" href="zvernennia.html?role=0">{esc('Записатися на консультацію')}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
 </div>
 {c_plan(p)}
 <section id="self" class="band" aria-labelledby="self-h"><div class="wrap split">
-  <div class="sh" style="margin:0"><h2 id="self-h">{esc(p['self_h'])}</h2><p>{esc(p['self_sub'])}</p></div>
-  <ul class="check">{selfc}</ul>
+  <div><h2 id="self-h">{esc(p['self_h'])}</h2><p class="sub2">{esc(p['self_sub'])}</p><ul class="check">{selfc}</ul></div>
+  <div id="prepare"><h2 id="prep-h">{esc(p['prep_h'])}</h2><div class="prep" style="display:block"><ul>{prep}</ul></div></div>
 </div></section>
-<section id="prepare" aria-labelledby="prep-h"><div class="wrap split">
-  <div class="sh" style="margin:0"><h2 id="prep-h">{esc(p['prep_h'])}</h2></div>
-  <div class="prep" style="display:block"><ul>{prep}</ul></div>
-</div></section>
-<section id="thermo" class="band" aria-labelledby="th-h"><div class="wrap">
+<section id="thermo" aria-labelledby="th-h"><div class="wrap">
   <div class="explain" style="margin-top:0"><div><p class="kicker">{esc(p['th_kicker'])}</p><h2 id="th-h" style="font-size:var(--fs-h2)">{esc(p['th_h'])}</h2><p>{esc(p['th_p'])}</p></div>{scheme(th)}</div>
 </div></section>
 <section id="programs" aria-labelledby="pr-h"><div class="wrap">
   <div class="sh"><h2 id="pr-h">{esc(p['progs_h'])}</h2><p>{esc(p['progs_sub'])}</p></div>
   <ul class="links-out">{progs}</ul>
 </div></section>
-{c_contact(c)}
+{c_cta(c, p['cta_h'], p['cta_sub'], p['role_default'])}
 </main>
 {c_footer(c)}"""
     return body
@@ -851,21 +912,44 @@ def generic(c, p, nav):
   <div class="sh" style="margin:0"><h2 id="prep-h">{esc(p['prep_h'])}</h2></div>
   <div class="prep" style="display:block"><ul>{prep}</ul></div>
 </div></section>""" if prep else ''
-    body = f"""{c_header(c, p['file'], nav)}
+    body = f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
 <main id="main">
 <div class="wrap phero">
-  <p class="kicker">{esc(p['kicker'])}</p>
+  <p class="kicker back"><a href="index.html">{esc(c['back'])}</a> · {esc(p['kicker'])}</p>
   <h1>{esc(p['h1'])}</h1>
   <p class="lead">{esc(p['lead'])}</p>
-  <div class="acts"><a class="btn btn-p" href="#contact">{esc('Обговорити ваше питання')}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
+  <div class="acts"><a class="btn btn-p" href="zvernennia.html?role={p['role_default']}">{esc('Обговорити ваше питання')}</a><a class="btn btn-s" href="{TEL}" aria-label="{esc(c['call'])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>
 </div>
 {c_plan(p)}
 {ex}
 {prep_s}
-{c_contact(c)}
+{c_cta(c, p['cta_h'], p['cta_sub'], p['role_default'])}
 </main>
 {c_footer(c)}"""
     return body
+
+
+ZV_UA = dict(
+  file="zvernennia.html", role_default="",
+  title="Звернення — Дмитро Паламарчук",
+  seo_title="Звернення — Дмитро Паламарчук: ОСББ, МЕП, енергоспільноти",
+  description="Опишіть питання щодо енергомодернізації ОСББ, муніципального енергетичного плану чи енергетичної спільноти — Дмитро Паламарчук відповість.",
+  kicker="Звернення", h1="Опишіть ваше питання",
+  lead="Кількох слів про ситуацію достатньо — я відповім телефоном або листом. Якщо зручніше поговорити, просто зателефонуйте.",
+)
+
+
+def contact_page(c, p, nav):
+    return f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
+<main id="main">
+<div class="wrap phero">
+  <p class="kicker back"><a href="index.html">{esc(c['back'])}</a> · {esc(p['kicker'])}</p>
+  <h1>{esc(p['h1'])}</h1>
+  <p class="lead">{esc(p['lead'])}</p>
+</div>
+{c_contact(c, band=False, head=False)}
+</main>
+{c_footer(c)}"""
 
 
 def build_all():
@@ -877,6 +961,7 @@ def build_all():
         "osbb.html": doc(cu, OSBB_UA, osbb(cu, OSBB_UA, NAV_UA), True, alt=False),
         "mep.html": doc(cu, MEP_UA, generic(cu, MEP_UA, NAV_UA), True, alt=False),
         "energospilnoty.html": doc(cu, EC_UA, generic(cu, EC_UA, NAV_UA), True, alt=False),
+        "zvernennia.html": doc(cu, ZV_UA, contact_page(cu, ZV_UA, NAV_UA), True, alt=False),
     }
     return pages
 
@@ -888,9 +973,12 @@ if __name__ == "__main__":
     for fn, html in pages.items():
         open(os.path.join(HERE, "dist", fn), "w").write(html)
         open(os.path.join(HERE, "preview", fn), "w").write(html)
+    import shutil
+    for d in ("preview", "dist"):
+        shutil.copytree(os.path.join(HERE, "fonts"), os.path.join(HERE, d, "fonts"), dirs_exist_ok=True)
     make_og(os.path.join(HERE, "dist", "og.png"))
     open(os.path.join(HERE, "dist", "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
-    urls = ["", "osbb.html", "mep.html", "energospilnoty.html", "en.html"]
+    urls = ["", "osbb.html", "mep.html", "energospilnoty.html", "zvernennia.html", "en.html"]
     open(os.path.join(HERE, "dist", "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f'<url><loc>{BASE}{u}</loc><lastmod>2026-10-31</lastmod></url>\n' for u in urls) + '</urlset>\n')
