@@ -312,11 +312,53 @@ footer .cr{margin:0;font-size:13px;color:var(--on-footer-2)}
   .mentions li{grid-template-columns:minmax(0,1fr);gap:var(--s-1)}
   .phero{padding-block:var(--s-6) var(--s-7)}
 }
-</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Дмитро Паламарчук", "alternateName": ["Дмитро Паламарчук", "Dmytro Palamarchuk", "Паламарчук Дмитро Миколайович"], "jobTitle": "Консультант з енергоефективності та муніципального енергетичного планування", "email": "mailto:dmytropalamarchuk@gmail.com", "telephone": "+380 97 889 13 85", "url": "https://dmytropalamarchuk-svg.github.io/", "address": {"@type": "PostalAddress", "addressLocality": "Cherkasy", "addressCountry": "UA"}, "worksFor": {"@type": "Organization", "name": "NGO E-TEAM", "url": "https://www.eteamngo.org/"}, "knowsAbout": ["Energy efficiency", "Municipal energy planning", "Energy communities", "Homeowner associations"], "sameAs": ["https://orcid.org/0000-0002-6023-9780", "https://scholar.google.com/citations?user=g-yRUywAAAAJ"]}</script></head><body data-role=""><a class="skip" href="#main">Перейти до змісту</a>
+
+.card-home{padding-block:64px var(--s-8)}
+.card-home h1{font-size:clamp(36px,5vw,48px)}
+.card-home .lead{max-width:40em;margin-bottom:var(--s-6)}
+.bigbtns{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--s-4)}
+.bigbtns a{display:flex;flex-direction:column;gap:var(--s-3);height:100%;box-sizing:border-box;padding:var(--s-5);border:1.5px solid var(--rule);border-top:3px solid var(--primary);border-radius:var(--r-2);background:var(--surface);color:var(--ink);text-decoration:none}
+.bigbtns a:hover{border-color:var(--primary)}
+.bigbtns a:hover b{color:var(--primary)}
+.bigbtns b{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.25}
+.bigbtns .cap{font-size:13.5px;line-height:1.5;color:var(--ink-2)}
+.bigbtns .go{margin-top:auto;padding-top:var(--s-2);font-weight:600;color:var(--primary)}
+.homelinks{list-style:none;margin:var(--s-6) 0 0;padding:0;border-top:1px solid var(--rule)}
+.homelinks li{border-bottom:1px solid var(--rule);padding-block:var(--s-3)}
+.homelinks a.go2{font-weight:600;text-decoration:none}
+.homelinks a.go2:hover{text-decoration:underline}
+.homelinks .ctl{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5)}
+.homelinks .media{color:var(--ink-2);font-size:var(--fs-small)}
+.mailline{margin:var(--s-3) 0 0;font-size:var(--fs-small)}
+.prose{max-width:var(--measure);margin:0 0 var(--s-4)}
+.chlinks{max-width:var(--measure);font-size:var(--fs-small);color:var(--ink-2);margin-top:var(--s-6)}
+.also{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-4);max-width:860px}
+.also li{position:relative;padding-left:22px}
+.also li::before{content:"";position:absolute;left:2px;top:.68em;width:7px;height:7px;border-radius:50%;background:var(--ink-2)}
+.qwrap{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,7fr);gap:var(--s-7);align-items:start}
+.qintro h2{margin-bottom:var(--s-3)}
+.qintro p{color:var(--ink-2)}
+.qct{margin-top:var(--s-4);display:grid;gap:var(--s-1);font-size:var(--fs-small)}
+.qct a{font-weight:600}
+.qct .tel{font-size:18px}
+.consent{color:var(--ink-2);margin:calc(-1 * var(--s-2)) 0 0}
+.qout{grid-column:2;border:1.5px solid var(--primary);border-radius:var(--r-2);padding:var(--s-5);background:var(--tint);display:flex;flex-direction:column;gap:var(--s-3);min-width:0}
+.qout p{margin:0;font-weight:600}
+.qout pre{margin:0;white-space:pre-wrap;word-break:break-word;font-family:var(--sans);font-size:15px;line-height:1.55}
+.pcards{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:var(--s-4)}
+.pcards li{border:1px solid var(--rule);border-radius:var(--r-2);padding:var(--s-5);display:flex;flex-direction:column;gap:var(--s-2);background:var(--surface)}
+.pcards .yrs{align-self:flex-start;font-size:13px;font-weight:600;color:var(--primary);border:1px solid var(--primary);border-radius:var(--r-1);padding:1px 8px}
+.pcards h3{font-size:18px;line-height:1.35;margin:var(--s-1) 0 0}
+.pcards .fund{font-size:13.5px;color:var(--ink-2);margin:0}
+.pcards .prole{margin:auto 0 0;padding-top:var(--s-3);border-top:1px solid var(--rule);font-size:var(--fs-small)}
+.datal{list-style:none;margin:0;padding:0;display:grid;gap:var(--s-2);max-width:var(--measure);font-size:var(--fs-small)}
+@media (max-width:900px){.bigbtns,.qwrap,.pcards{grid-template-columns:minmax(0,1fr)}.qwrap{gap:var(--s-5)}.qout{grid-column:1}}
+@media (max-width:560px){.card-home{padding-block:var(--s-6) var(--s-7)}}
+</style><script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "name": "Дмитро Паламарчук", "alternateName": ["Дмитро Паламарчук", "Dmytro Palamarchuk", "Паламарчук Дмитро Миколайович"], "jobTitle": "Консультант з енергоефективності та муніципального енергетичного планування", "email": "mailto:dmytro.palamarchuk@eteamngo.org", "telephone": "+380 97 889 13 85", "url": "https://dmytropalamarchuk-svg.github.io/", "address": {"@type": "PostalAddress", "addressLocality": "Cherkasy", "addressCountry": "UA"}, "memberOf": {"@type": "Organization", "name": "NGO E-TEAM", "url": "https://www.eteamngo.org/"}, "knowsAbout": ["Energy efficiency", "Municipal energy planning", "Energy communities", "Homeowner associations"], "sameAs": ["https://orcid.org/0000-0002-6023-9780", "https://scholar.google.com/citations?user=g-yRUywAAAAJ"]}</script></head><body data-role=""><a class="skip" href="#main">Перейти до змісту</a>
 <header class="hdr"><div class="wrap">
   <a class="brand" href="index.html"><b>Дмитро Паламарчук</b><span>Енергоефективність · МЕП · енергоспільноти</span></a>
   <nav class="nav" aria-label="Основна навігація">
-    <div class="links"><a href="index.html" class="home">Головна</a><a href="osbb.html">ОСББ</a><a href="mep.html">МЕП громадам</a><a href="energospilnoty.html">Енергоспільноти</a></div>
+    <div class="links"><a href="index.html" class="home">Головна</a><a href="osbb.html">ОСББ</a><a href="energospilnoty.html">Енергоспільноти</a><a href="mep.html">МЕП громадам</a><a href="pro-mene.html">Про мене</a></div>
     <div class="tools"><a class="tel" href="tel:+380978891385">+380 97 889 13 85</a><a class="lang" href="en.html" hreflang="en" lang="en">EN</a></div>
   </nav>
 </div></header>
@@ -326,65 +368,55 @@ footer .cr{margin:0;font-size:13px;color:var(--on-footer-2)}
   <h1>Опишіть ваше питання</h1>
   <p class="lead">Кількох слів про ситуацію достатньо — я відповім телефоном або листом. Якщо зручніше поговорити, просто зателефонуйте.</p>
 </div>
-<section id="contact" class="plain" aria-labelledby="c-h"><div class="wrap">
-  <h2 id="c-h" class="vh">Опишіть ваше питання</h2>
-  <div class="req"><form class="form" id="reqform" novalidate>
-<p class="hint">Форма складе текст листа. Ви надішлете його поштою або скопіюєте в месенджер — дані нікуди не передаються автоматично і не зберігаються.</p>
-<fieldset><legend>Хто звертається</legend><div class="opts"><label><input type="radio" name="role" value="ОСББ або управитель" id="role-0"> ОСББ або управитель</label><label><input type="radio" name="role" value="Громада (ОМС)" id="role-1"> Громада (ОМС)</label><label><input type="radio" name="role" value="Ініціативна група / енергоспільнота" id="role-2"> Ініціативна група / енергоспільнота</label><label><input type="radio" name="role" value="Міжнародна організація / донор" id="role-3"> Міжнародна організація / донор</label><label><input type="radio" name="role" value="Інше" id="role-4"> Інше</label></div></fieldset>
-<fieldset><legend>Що потрібно</legend><div class="opts"><label><input type="checkbox" name="need" value="Консультація" id="need-0"> Консультація</label><label><input type="checkbox" name="need" value="Участь у загальних зборах ОСББ" id="need-1"> Участь у загальних зборах ОСББ</label><label><input type="checkbox" name="need" value="Огляд будинку і розрахунок" id="need-2"> Огляд будинку і розрахунок</label><label><input type="checkbox" name="need" value="Муніципальний енергетичний план" id="need-3"> Муніципальний енергетичний план</label><label><input type="checkbox" name="need" value="Енергетична спільнота: з чого почати" id="need-4"> Енергетична спільнота: з чого почати</label><label><input type="checkbox" name="need" value="Експертна участь у проєкті" id="need-5"> Експертна участь у проєкті</label></div></fieldset>
-<div class="row2"><div><label class="l" for="f-place">Населений пункт</label><input type="text" id="f-place" autocomplete="address-level2" placeholder="напр., Сміла"></div>
-<div><label class="l" for="f-name">Ваше ім’я</label><input type="text" id="f-name" autocomplete="name"></div></div>
-<div><label class="l" for="f-contact">Телефон або email</label><input type="text" id="f-contact" autocomplete="email"></div>
-<div><label class="l" for="f-msg">Коротко про питання</label><textarea id="f-msg" placeholder="що є зараз і що хочете змінити"></textarea></div>
-<p class="err" id="f-err" tabindex="-1" hidden>Оберіть, хто звертається, і вкажіть ім’я та контакт, щоб я міг відповісти.</p>
-<div><button class="btn btn-p" type="submit">Скласти лист</button></div>
-</form>
-<div class="out" id="f-out" hidden aria-live="polite"><h3>Лист готовий. Перевірте текст і надішліть.</h3><pre id="f-text"></pre>
-<div class="acts"><a class="btn btn-p" id="f-mail" href="mailto:dmytropalamarchuk@gmail.com">Надіслати поштою</a><a class="btn btn-s" href="tel:+380978891385">Зателефонувати</a></div>
-<button class="copy" type="button" id="copy-msg" data-v="">Копіювати текст</button></div>
-</div>
-  <div class="contact"><div class="ct"><span class="k">Email</span><a class="v" href="mailto:dmytropalamarchuk@gmail.com">dmytropalamarchuk@gmail.com</a><button class="copy" type="button" data-v="dmytropalamarchuk@gmail.com">Копіювати</button></div><div class="ct"><span class="k">Корпоративна пошта, ГО <span class="nw">«Е-ТЕАМ»</span></span><a class="v" href="mailto:dmytro.palamarchuk@eteamngo.org">dmytro.palamarchuk@eteamngo.org</a><button class="copy" type="button" data-v="dmytro.palamarchuk@eteamngo.org">Копіювати</button></div><div class="ct"><span class="k">Телефон</span><a class="v" href="tel:+380978891385">+380 97 889 13 85</a><button class="copy" type="button" data-v="+380 97 889 13 85">Копіювати</button></div><div class="ct"><span class="k">Сайт ГО <span class="nw">«Е-ТЕАМ»</span></span><a class="v" href="https://www.eteamngo.org/" rel="noopener">eteamngo.org</a></div><div class="ct"><span class="k">Google Scholar</span><a class="v" href="https://scholar.google.com/citations?user=g-yRUywAAAAJ" rel="noopener">Профіль і цитування</a></div><div class="ct"><span class="k">ORCID</span><a class="v" href="https://orcid.org/0000-0002-6023-9780" rel="noopener">0000-0002-6023-9780</a></div></div>
+<section id="contact" class="plain" aria-labelledby="q-h"><div class="wrap qwrap">
+  <h2 id="q-h" class="vh">Опишіть ваше питання</h2><div></div>
+  <form class="form qf" id="qform" novalidate data-role="">
+    <fieldset><legend>Хто звертається</legend><div class="opts"><label><input type="radio" name="role" value="ОСББ або управитель" id="role-0"> ОСББ або управитель</label><label><input type="radio" name="role" value="Громада (ОМС)" id="role-1"> Громада (ОМС)</label><label><input type="radio" name="role" value="Ініціативна група / енергоспільнота" id="role-2"> Ініціативна група / енергоспільнота</label><label><input type="radio" name="role" value="Міжнародна організація / донор" id="role-3"> Міжнародна організація / донор</label><label><input type="radio" name="role" value="Інше" id="role-4"> Інше</label></div></fieldset>
+    <div class="row2"><div><label class="l" for="q-name">Ваше ім’я</label><input type="text" id="q-name" autocomplete="name"></div>
+    <div><label class="l" for="q-contact">Телефон або email</label><input type="text" id="q-contact" autocomplete="email"></div></div>
+    <div><label class="l" for="q-msg">Ваше питання</label><textarea id="q-msg" placeholder="кілька слів про ситуацію"></textarea></div>
+    <p class="err" id="q-err" tabindex="-1" hidden></p>
+    <div><button class="btn btn-p" type="submit">Надіслати</button></div>
+    <p class="consent small">Натискаючи «Надіслати», ви даєте згоду Дмитру Паламарчуку на обробку і зберігання ваших персональних даних для відповіді на ваше звернення відповідно до Закону України «Про захист персональних даних».</p>
+  </form>
+  <div class="qout" id="q-out" hidden aria-live="polite"><p id="q-msgout"></p><pre id="q-text"></pre><button class="copy" type="button" id="q-copy" data-v="">Копіювати текст</button></div>
 </div></section>
+<section id="data" class="band" aria-labelledby="d-h"><div class="wrap">
+  <div class="sh"><h2 id="d-h">Як обробляються дані</h2></div>
+  <ul class="datal"><li><b>Що надсилається:</b> ім'я, телефон або email, хто звертається і текст питання.</li><li><b>Навіщо:</b> лише для відповіді на ваше звернення. Розсилок не буде.</li><li><b>Хто отримує:</b> лист надходить на dmytro.palamarchuk@eteamngo.org.</li><li><b>Передача до хабу LIFE-ECOss:</b> якщо ви звертаєтесь щодо енергоспільноти, ваші контакти передаються хабу у Луцьку (ГО <span class="nw">«Е-ТЕАМ»</span>). Іншим третім особам дані не передаються.</li><li><b>Ваші права:</b> ви можете дізнатися, які дані про вас зберігаються, виправити чи видалити їх або відкликати згоду — напишіть на ту саму адресу.</li><li>Сайт не використовує cookie та аналітику.</li></ul>
+</div></section>
+<section id="contacts" aria-label="Контакти"><div class="wrap"><div class="contact"><div class="ct"><span class="k">Email, ГО <span class="nw">«Е-ТЕАМ»</span></span><a class="v" href="mailto:dmytro.palamarchuk@eteamngo.org">dmytro.palamarchuk@eteamngo.org</a><button class="copy" type="button" data-v="dmytro.palamarchuk@eteamngo.org">Копіювати</button></div><div class="ct"><span class="k">Телефон</span><a class="v" href="tel:+380978891385">+380 97 889 13 85</a><button class="copy" type="button" data-v="+380 97 889 13 85">Копіювати</button></div><div class="ct"><span class="k">Сайт ГО <span class="nw">«Е-ТЕАМ»</span></span><a class="v" href="https://www.eteamngo.org/" rel="noopener">eteamngo.org</a></div><div class="ct"><span class="k">Google Scholar</span><a class="v" href="https://scholar.google.com/citations?user=g-yRUywAAAAJ" rel="noopener">Профіль і цитування</a></div><div class="ct"><span class="k">ORCID</span><a class="v" href="https://orcid.org/0000-0002-6023-9780" rel="noopener">0000-0002-6023-9780</a></div></div></div></section>
 </main>
 <footer><div class="wrap">
-  <div><b>Дмитро Паламарчук</b>Незалежний експерт · Черкаси<br>Член правління ГО <span class="nw">«Е-ТЕАМ»</span></div>
-  <div><b><a href="tel:+380978891385">+380 97 889 13 85</a></b><a href="mailto:dmytropalamarchuk@gmail.com">dmytropalamarchuk@gmail.com</a><br><a href="mailto:dmytro.palamarchuk@eteamngo.org">dmytro.palamarchuk@eteamngo.org</a></div>
-  <div><a href="https://orcid.org/0000-0002-6023-9780" rel="noopener">ORCID</a> · <a href="https://scholar.google.com/citations?user=g-yRUywAAAAJ" rel="noopener">Google Scholar</a> · <a href="https://www.eteamngo.org/" rel="noopener">ГО <span class="nw">«Е-ТЕАМ»</span></a></div>
-  <div class="base"><p class="legal" aria-label="Юридична особа, що надає послуги"><span class="lg-k">Фізична особа — підприємець</span><span class="lg-n">Паламарчук Дмитро Миколайович</span></p><p class="cr">© 2026 Дмитро Паламарчук · Оновлено: жовтень 2026</p></div>
+  <div><b>Дмитро Паламарчук</b>Експерт · Черкаси<br>Член правління ГО <span class="nw">«Е-ТЕАМ»</span></div>
+  <div><b><a href="tel:+380978891385">+380 97 889 13 85</a></b><a href="mailto:dmytro.palamarchuk@eteamngo.org">dmytro.palamarchuk@eteamngo.org</a></div>
+  <div><a href="https://orcid.org/0000-0002-6023-9780" rel="noopener">ORCID</a> · <a href="https://scholar.google.com/citations?user=g-yRUywAAAAJ" rel="noopener">Google Scholar</a> · <a href="https://www.eteamngo.org/" rel="noopener">ГО <span class="nw">«Е-ТЕАМ»</span></a> · <a href="pro-mene.html">Про мене</a></div>
+  <div class="base"><p class="legal" aria-label="Юридична особа, що надає послуги"><span class="lg-k">Фізична особа — підприємець</span><span class="lg-n">Паламарчук Дмитро Миколайович</span></p><p class="cr">© 2026 Дмитро Паламарчук · Оновлено: листопад 2026</p></div>
 </div></footer><script>
-var lab=["Хто", "Населений пункт", "Що потрібно", "Питання", "Контакт"], hdr="Звернення з сайту", COPY="Копіювати текст", COPIED="Скопійовано";
-document.getElementById('reqform').addEventListener('submit',function(e){e.preventDefault();
-  var g=function(id){return document.getElementById(id).value.trim();};
-  var name=g('f-name'), contact=g('f-contact'), err=document.getElementById('f-err');
-  var role=(document.querySelector('input[name=role]:checked')||{}).value||'';
-  if(!name||!contact||!role){err.hidden=false;err.focus();return;} err.hidden=true;
-  var needs=[].slice.call(document.querySelectorAll('input[name=need]:checked')).map(function(x){return x.value;}).join(', ');
-  var lines=[hdr, lab[0]+': '+role];
-  if(g('f-place')) lines.push(lab[1]+': '+g('f-place'));
-  if(needs) lines.push(lab[2]+': '+needs);
-  if(g('f-msg')) lines.push(lab[3]+': '+g('f-msg'));
-  lines.push(lab[4]+': '+name+', '+contact);
-  var txt=lines.join('\n');
-  document.getElementById('f-text').textContent=txt;
-  document.getElementById('copy-msg').setAttribute('data-v',txt);
-  var m=document.getElementById('f-mail'); m.href=m.href.split('?')[0]+'?subject='+encodeURIComponent(hdr)+'&body='+encodeURIComponent(txt);
-  var o=document.getElementById('f-out'); o.hidden=false; o.scrollIntoView({behavior:'smooth',block:'nearest'});
+(function(){var f=document.getElementById('qform'); if(!f) return; var T={"name": "Ваше ім’я", "contact": "Телефон або email", "msg": "Ваше питання", "msg_ph": "кілька слів про ситуацію", "role": "Хто звертається", "btn": "Надіслати", "err": "Вкажіть ім’я та телефон або email, щоб я міг відповісти.", "err_role": "Оберіть, хто звертається.", "ok": "Дякую, звернення надіслано.", "mail": "Відкрилася ваша поштова програма з готовим листом — залишилося натиснути «Надіслати» в ній. Якщо вона не відкрилася, скопіюйте текст і надішліть його на dmytro.palamarchuk@eteamngo.org або зателефонуйте.", "fail": "Не вдалося надіслати. Скопіюйте текст і надішліть його на dmytro.palamarchuk@eteamngo.org або зателефонуйте.", "copy": "Копіювати текст", "copied": "Скопійовано", "hdr": "Звернення з сайту", "more": "Як обробляються дані — на сторінці «Звернення»."}, KEY="", TO="dmytro.palamarchuk@eteamngo.org";
+var out=document.getElementById('q-out'), msg=document.getElementById('q-msgout'), pre=document.getElementById('q-text'), cp=document.getElementById('q-copy');
+f.addEventListener('submit',function(e){e.preventDefault();
+  var g=function(id){var x=document.getElementById(id);return x?x.value.trim():'';};
+  var err=document.getElementById('q-err'), rr=f.querySelector('input[name=role]:checked');
+  var role=f.querySelector('input[name=role]')?(rr?rr.value:''):f.getAttribute('data-role');
+  var name=g('q-name'), contact=g('q-contact');
+  if(!name||!contact||!role){err.textContent=!role?T.err_role:T.err;err.hidden=false;err.focus();return;} err.hidden=true;
+  var txt=[T.hdr+' ('+location.pathname.split('/').pop()+')', T.role+': '+role, T.name+': '+name, T.contact+': '+contact].concat(g('q-msg')?[T.msg+': '+g('q-msg')]:[]).join('\n');
+  pre.textContent=txt; cp.setAttribute('data-v',txt);
+  var show=function(m,ok){msg.textContent=m; out.hidden=false; pre.hidden=ok; cp.hidden=ok; out.scrollIntoView({behavior:'smooth',block:'nearest'});};
+  if(KEY){
+    fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
+      body:JSON.stringify({access_key:KEY,subject:T.hdr+': '+role,from_name:name,contact:contact,role:role,message:g('q-msg'),botcheck:''})})
+    .then(function(r){return r.json();}).then(function(j){if(j&&j.success){show(T.ok,true);f.reset();}else show(T.fail,false);})
+    .catch(function(){show(T.fail,false);});
+  } else {
+    location.href='mailto:'+TO+'?subject='+encodeURIComponent(T.hdr+': '+role)+'&body='+encodeURIComponent(txt);
+    show(T.mail,false);
+  }
 });
-var NEED_MAP=[[0,1,2],[0,3],[0,4],[0,5],[0,1,2,3,4,5]];
-document.querySelectorAll('input[name=role]').forEach(function(r,ri){r.addEventListener('change',function(){
-  var ok=NEED_MAP[ri]||NEED_MAP[4];
-  document.querySelectorAll('input[name=need]').forEach(function(c,ci){var show=ok.indexOf(ci)>-1;c.parentNode.hidden=!show;if(!show)c.checked=false;});
-});});
-document.querySelectorAll('.pick').forEach(function(a){a.addEventListener('click',function(){
-  var r=document.getElementById('role-'+a.getAttribute('data-role')); if(r){r.checked=true;r.dispatchEvent(new Event('change'));}
-  var n=document.getElementById('need-'+a.getAttribute('data-need')); if(n) n.checked=true;
-});});
-function sel(b){var s=b.parentNode.querySelector('.v');if(!s)return;var r=document.createRange();r.selectNodeContents(s);var w=window.getSelection();w.removeAllRanges();w.addRange(r);}
-document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
-  var v=b.getAttribute('data-v'), label=b.textContent;
-  var done=function(){b.textContent=COPIED;setTimeout(function(){b.textContent=label;},1600);};
-  try{navigator.clipboard.writeText(v).then(done,function(){sel(b);});}catch(e){sel(b);}
-});});
+cp.addEventListener('click',function(){var v=cp.getAttribute('data-v'),l=cp.textContent;try{navigator.clipboard.writeText(v).then(function(){cp.textContent=T.copied;setTimeout(function(){cp.textContent=l;},1600);});}catch(e){}});
+document.querySelectorAll('.ct .copy').forEach(function(b){b.addEventListener('click',function(){var v=b.getAttribute('data-v'),l=b.textContent;try{navigator.clipboard.writeText(v).then(function(){b.textContent=T.copied;setTimeout(function(){b.textContent=l;},1600);});}catch(e){}});});
+})();
 
 (function(){var q=new URLSearchParams(location.search).get('role'); var dr=(q!==null&&/^[0-4]$/.test(q))?q:document.body.getAttribute('data-role'); if(dr===null||dr==='') return;
   var r=document.getElementById('role-'+dr); if(r){r.checked=true;r.dispatchEvent(new Event('change'));}})();
