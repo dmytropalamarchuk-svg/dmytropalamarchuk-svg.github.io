@@ -700,11 +700,11 @@ ZV_UA = dict(
   data_h="Як обробляються дані",
   data=[("Що надсилається:", "ім'я, телефон або email, хто звертається і текст питання."),
         ("Навіщо:", "лише для відповіді на ваше звернення. Розсилок не буде."),
-        ("Хто отримує:", f"лист надходить мені особисто: звернення громад щодо муніципальних енергетичних планів — на {MAIL}, усі інші — на {MAIL_W}."),
+        ("Хто отримує:", f"лист надходить мені особисто на {MAIL_W}."),
         ("Передача до хабу LIFE-ECOss:", "якщо ви звертаєтесь щодо енергоспільноти, ваші контакти передаються хабу у Луцьку (ГО «Е-ТЕАМ»). Іншим третім особам дані не передаються."),
         ("Ваші права:", "ви можете дізнатися, які дані про вас зберігаються, виправити чи видалити їх або відкликати згоду — напишіть на ту саму адресу."),
         ("", "Сайт не використовує cookie та аналітику.")],
-  contacts=[("Зв'язок", [("Email, ГО «Е-ТЕАМ» — ОСББ, енергоспільноти", MAIL_W, "mailto:" + MAIL_W, True), ("Email — МЕП для громад", MAIL, "mailto:" + MAIL, True), ("Телефон", TEL_H, TEL, True)]),
+  contacts=[("Зв'язок", [("Email, ГО «Е-ТЕАМ»", MAIL_W, "mailto:" + MAIL_W, True), ("Телефон", TEL_H, TEL, True)]),
             ("Профілі", [("Сайт ГО «Е-ТЕАМ»", "eteamngo.org", ETEAM, False), ("Google Scholar", "Профіль і цитування", SCHOLAR, False),
                          ("ORCID", "0000-0002-6023-9780", ORCID, False)])],
   consent_q=CONSENT, roles=True,
@@ -943,8 +943,8 @@ Q_UA = dict(name="Ваше ім’я", contact="Телефон або email", ms
             role="Хто звертається", btn="Надіслати повідомлення",
             err="Вкажіть ім’я та телефон або email, щоб я міг відповісти.", err_role="Оберіть, хто звертається.",
             ok="Дякую, звернення надіслано.",
-            mail="Відкрилася ваша поштова програма з готовим листом — залишилося натиснути «Надіслати» в ній. Якщо вона не відкрилася, скопіюйте текст і надішліть його на {to} або зателефонуйте.",
-            fail="Не вдалося надіслати. Скопіюйте текст і надішліть його на {to} або зателефонуйте.",
+            mail="Відкрилася ваша поштова програма з готовим листом — залишилося натиснути «Надіслати» в ній. Якщо вона не відкрилася, скопіюйте текст і надішліть його на " + MAIL_W + " або зателефонуйте.",
+            fail="Не вдалося надіслати. Скопіюйте текст і надішліть його на " + MAIL_W + " або зателефонуйте.",
             copy="Копіювати текст", copied="Скопійовано", hdr="Звернення з сайту",
             more="Як обробляються дані — на сторінці «Звернення».")
 
@@ -955,18 +955,18 @@ f.addEventListener('submit',function(e){e.preventDefault();
   var g=function(id){var x=document.getElementById(id);return x?x.value.trim():'';};
   var err=document.getElementById('q-err'), rr=f.querySelector('input[name=role]:checked');
   var role=f.querySelector('input[name=role]')?(rr?rr.value:''):f.getAttribute('data-role');
-  var name=g('q-name'), contact=g('q-contact'); var to=f.getAttribute('data-to')||TO; if(f.getAttribute('data-to-gov')&&role===f.getAttribute('data-gov-role')) to=f.getAttribute('data-to-gov');
+  var name=g('q-name'), contact=g('q-contact');
   if(!name||!contact||!role){err.textContent=!role?T.err_role:T.err;err.hidden=false;err.focus();return;} err.hidden=true;
   var txt=[T.hdr+' ('+location.pathname.split('/').pop()+')', T.role+': '+role, T.name+': '+name, T.contact+': '+contact].concat(g('q-msg')?[T.msg+': '+g('q-msg')]:[]).join('\n');
   pre.textContent=txt; cp.setAttribute('data-v',txt);
-  var show=function(m,ok){msg.textContent=m.replace('{to}',to); out.hidden=false; pre.hidden=ok; cp.hidden=ok; out.scrollIntoView({behavior:'smooth',block:'nearest'});};
+  var show=function(m,ok){msg.textContent=m; out.hidden=false; pre.hidden=ok; cp.hidden=ok; out.scrollIntoView({behavior:'smooth',block:'nearest'});};
   if(KEY){
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
       body:JSON.stringify({access_key:KEY,subject:T.hdr+': '+role,from_name:name,contact:contact,role:role,message:g('q-msg'),botcheck:''})})
     .then(function(r){return r.json();}).then(function(j){if(j&&j.success){show(T.ok,true);f.reset();}else show(T.fail,false);})
     .catch(function(){show(T.fail,false);});
   } else {
-    location.href='mailto:'+to+'?subject='+encodeURIComponent(T.hdr+': '+role)+'&body='+encodeURIComponent(txt);
+    location.href='mailto:'+TO+'?subject='+encodeURIComponent(T.hdr+': '+role)+'&body='+encodeURIComponent(txt);
     show(T.mail,false);
   }
 });
@@ -1034,9 +1034,7 @@ def c_qform(c, p, role_idx=None, with_roles=False, sid="contact", band=True):
                  "".join(f'<label><input type="radio" name="role" value="{esc(r)}" id="role-{k}"> {esc(r)}</label>' for k, r in enumerate(c["roles"])) +
                  '</div></fieldset>')
     drole = esc(c["roles"][int(role_idx)]) if role_idx not in (None, "") else ""
-    mails = (f'<a href="mailto:{MAIL}">{MAIL}</a><a href="mailto:{MAIL_W}">{MAIL_W}</a>' if p.get("gmail") else f'<a href="mailto:{MAIL_W}">{MAIL_W}</a>')
-    to = MAIL if p.get("gmail") else MAIL_W
-    route = f' data-to-gov="{MAIL}" data-gov-role="{esc(c["roles"][1])}"' if with_roles else ''
+    mails = f'<a href="mailto:{MAIL_W}">{MAIL_W}</a>' + (f'<a href="mailto:{MAIL}">{MAIL}</a>' if p.get("gmail") else '')
     consent = p.get("consent_q", p.get("consent", ""))
     more = "" if p["file"] == "zvernennia.html" else f' <a href="zvernennia.html#data">{esc(q["more"])}</a>'
     if p["file"] == "zvernennia.html":
@@ -1045,7 +1043,7 @@ def c_qform(c, p, role_idx=None, with_roles=False, sid="contact", band=True):
             f'<p class="qct"><a class="tel" href="{TEL}">{TEL_H}</a>{mails}</p></div>') if p.get("q_h") else '<h2 id="q-h" class="vh">' + esc(p["h1"]) + '</h2><div></div>'
     return f"""<section id="{sid}" class="{'band' if band else 'plain'}" aria-labelledby="q-h"><div class="wrap qwrap">
   {head}
-  <form class="form qf" id="qform" novalidate data-role="{drole}" data-to="{to}"{route}>
+  <form class="form qf" id="qform" novalidate data-role="{drole}">
     {roles}
     <div class="row2"><div><label class="l" for="q-name">{esc(q['name'])}</label><input type="text" id="q-name" autocomplete="name"></div>
     <div><label class="l" for="q-contact">{esc(q['contact'])}</label><input type="text" id="q-contact" autocomplete="email"></div></div>
@@ -1063,7 +1061,7 @@ def c_hero(c, p, btns=True):
     if btns:
         acts = (f'<div class="acts"><a class="btn btn-p" href="#contact">{esc(p["btn"])}</a>'
                 f'<a class="btn btn-s" href="{TEL}" aria-label="{esc(c["call"])}: {TEL_H}">{PHONE_ICON}<span>{TEL_H}</span></a></div>'
-                f'<p class="mailline"><a href="mailto:{MAIL if p.get("gmail") else MAIL_W}">{MAIL if p.get("gmail") else MAIL_W}</a></p>')
+                f'<p class="mailline"><a href="mailto:{MAIL_W}">{MAIL_W}</a></p>')
     free = f'<p class="tag-free">{esc(p["free"])}</p>' if p.get("free") else ''
     fund = f'<p class="fundnote">{esc(p["fund"])}</p>' if p.get("fund") else ''
     return f"""<div class="wrap phero">
@@ -1102,7 +1100,7 @@ def c_list(items):
 def osbb(c, p, nav):
     progs = "".join(f'<li><a href="{u}" rel="noopener">{esc(t)}</a></li>' for t, u in p["progs"])
     also = "".join(f'<li><b>{esc(a)}</b> {esc(b)}</li>' for a, b in p["also"])
-    return f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
+    return f"""{c_header(c, p['file'], nav)}
 <main id="main">
 {c_hero(c, p)}
 {c_plan(p)}
@@ -1125,7 +1123,7 @@ def osbb(c, p, nav):
 
 def ec_page(c, p, nav):
     links = " · ".join(f'<a href="{u}" rel="noopener">{esc(t)}</a>' for t, u in p["links"])
-    return f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
+    return f"""{c_header(c, p['file'], nav)}
 <main id="main">
 <div class="wrap phero">
   <p class="kicker back"><a href="index.html">{esc(c['back'])}</a> · {esc(p['kicker'])}</p>
@@ -1142,7 +1140,7 @@ def ec_page(c, p, nav):
 
 
 def mep_page(c, p, nav):
-    return f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
+    return f"""{c_header(c, p['file'], nav)}
 <main id="main">
 {c_hero(c, p)}
 {c_plan(p)}
@@ -1166,7 +1164,7 @@ def about_page(c, p, nav):
         return out
     edu = "".join(f'<li><span class="y">{y}</span><span>{esc(x)}</span></li>' for y, x in p["edu"])
     ment = "".join(f'<li><span class="y">{y}</span><a href="{u}" rel="noopener">{esc(t)}</a></li>' for y, t, u in p["mentions"])
-    return f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
+    return f"""{c_header(c, p['file'], nav)}
 <main id="main">
 <div class="wrap phero">
   <p class="kicker back"><a href="index.html">{esc(c['back'])}</a> · {esc(p['kicker'])}</p>
@@ -1203,7 +1201,7 @@ def contact_page(c, p, nav):
             cts += f'<div class="ct"><span class="k">{esc(k)}</span><a class="v" href="{esc(href)}"{ext}>{esc(v)}</a>{btn}</div>'
         cts += '</div>'
     data = "".join(f'<li>{f"<b>{esc(a)}</b> " if a else ""}{esc(b)}</li>' for a, b in p["data"])
-    return f"""{c_header(c, p['file'], nav, ('en.html', 'EN', 'en'))}
+    return f"""{c_header(c, p['file'], nav)}
 <main id="main">
 <div class="wrap phero">
   <p class="kicker back"><a href="index.html">{esc(c['back'])}</a> · {esc(p['kicker'])}</p>
@@ -1224,8 +1222,7 @@ def build_all():
     cu, ce = COMMON["ua"], COMMON["en"]
     nav_en = [("en.html", "Home"), ("#experience", "Experience"), ("#contact", "Contact")]
     pages = {
-        "index.html": doc(cu, HOME_UA, home(cu, HOME_UA, NAV_UA, ("en.html", "EN", "en")), True),
-        "en.html": doc(ce, HOME_EN, home_en(ce, HOME_EN, nav_en, ("index.html", "UA", "uk")), True),
+        "index.html": doc(cu, HOME_UA, home(cu, HOME_UA, NAV_UA, None), True, alt=False),
         "osbb.html": doc(cu, OSBB_UA, osbb(cu, OSBB_UA, NAV_UA), True, alt=False),
         "energospilnoty.html": doc(cu, EC_UA, ec_page(cu, EC_UA, NAV_UA), True, alt=False),
         "mep.html": doc(cu, MEP_UA, mep_page(cu, MEP_UA, NAV_UA), True, alt=False),
@@ -1247,7 +1244,7 @@ if __name__ == "__main__":
         shutil.copytree(os.path.join(HERE, "fonts"), os.path.join(HERE, d, "fonts"), dirs_exist_ok=True)
     make_og(os.path.join(HERE, "dist", "og.png"))
     open(os.path.join(HERE, "dist", "robots.txt"), "w").write(f"User-agent: *\nAllow: /\nSitemap: {BASE}sitemap.xml\n")
-    urls = ["", "osbb.html", "energospilnoty.html", "mep.html", "pro-mene.html", "zvernennia.html", "en.html"]
+    urls = ["", "osbb.html", "energospilnoty.html", "mep.html", "pro-mene.html", "zvernennia.html"]
     open(os.path.join(HERE, "dist", "sitemap.xml"), "w").write(
         '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         + "".join(f'<url><loc>{BASE}{u}</loc><lastmod>2026-11-03</lastmod></url>\n' for u in urls) + '</urlset>\n')
