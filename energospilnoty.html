@@ -424,7 +424,7 @@ f.addEventListener('submit',function(e){e.preventDefault();
   if(KEY){
     var sb=f.querySelector('button[type=submit]'); if(sb) sb.disabled=true;
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({access_key:KEY,subject:T.hdr+': '+role,page:(location.pathname.split('/').pop()||'index.html'),from_name:name,contact:contact,role:role,message:g('q-msg'),botcheck:''})})
+      body:JSON.stringify((function(){var d={access_key:KEY,subject:T.hdr+': '+role,from_name:name,botcheck:''};d['Сторінка']=(location.pathname.split('/').pop()||'index.html');d['Ім\'я']=name;d['Контакт']=contact;d['Хто звертається']=role;if(g('q-msg'))d['Питання']=g('q-msg');if(/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(contact))d.email=contact;return d;})())})
     .then(function(r){return r.json();}).then(function(j){if(j&&j.success){show(T.ok,true);f.reset();}else show(T.fail,false);})
     .catch(function(){show(T.fail,false);}).then(function(){if(sb) sb.disabled=false;});
   } else {
