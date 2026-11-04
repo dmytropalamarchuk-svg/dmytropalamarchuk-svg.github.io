@@ -410,7 +410,7 @@ footer .fm{color:var(--on-footer-2)}
   <div><p class="fl">Профілі</p><a href="https://orcid.org/0000-0002-6023-9780" rel="noopener">ORCID</a> · <a href="https://scholar.google.com/citations?user=g-yRUywAAAAJ" rel="noopener">Google Scholar</a></div>
   <div class="base"><p class="legal" aria-label="Юридична особа, що надає послуги"><span class="lg-k">Фізична особа — підприємець</span><span class="lg-n">Паламарчук Дмитро Миколайович</span></p><p class="cr">© 2026 Дмитро Паламарчук · Оновлено: листопад 2026</p></div>
 </div></footer><script>
-(function(){var f=document.getElementById('qform'); if(!f) return; var T={"name": "Ваше ім’я", "contact": "Телефон або email", "msg": "Ваше питання", "msg_ph": "кілька слів про ситуацію", "role": "Хто звертається", "btn": "Надіслати повідомлення", "err": "Вкажіть ім’я та телефон або email, щоб я міг відповісти.", "err_role": "Оберіть, хто звертається.", "ok": "Дякую, звернення надіслано.", "mail": "Відкрилася ваша поштова програма з готовим листом — залишилося натиснути «Надіслати» в ній. Якщо вона не відкрилася, скопіюйте текст і надішліть його на dmytro.palamarchuk@eteamngo.org або зателефонуйте.", "fail": "Не вдалося надіслати. Скопіюйте текст і надішліть його на dmytro.palamarchuk@eteamngo.org або зателефонуйте.", "copy": "Копіювати текст", "copied": "Скопійовано", "hdr": "Звернення з сайту", "more": "Як обробляються дані — на сторінці «Звернення»."}, KEY="", TO="dmytro.palamarchuk@eteamngo.org";
+(function(){var f=document.getElementById('qform'); if(!f) return; var T={"name": "Ваше ім’я", "contact": "Телефон або email", "msg": "Ваше питання", "msg_ph": "кілька слів про ситуацію", "role": "Хто звертається", "btn": "Надіслати повідомлення", "err": "Вкажіть ім’я та телефон або email, щоб я міг відповісти.", "err_role": "Оберіть, хто звертається.", "ok": "Дякую, звернення надіслано.", "mail": "Відкрилася ваша поштова програма з готовим листом — залишилося натиснути «Надіслати» в ній. Якщо вона не відкрилася, скопіюйте текст і надішліть його на dmytro.palamarchuk@eteamngo.org або зателефонуйте.", "fail": "Не вдалося надіслати. Скопіюйте текст і надішліть його на dmytro.palamarchuk@eteamngo.org або зателефонуйте.", "copy": "Копіювати текст", "copied": "Скопійовано", "hdr": "Звернення з сайту", "more": "Як обробляються дані — на сторінці «Звернення»."}, KEY="1bcee78c-7c3d-4d5a-a902-892a0d6c9cea", TO="dmytro.palamarchuk@eteamngo.org";
 var out=document.getElementById('q-out'), msg=document.getElementById('q-msgout'), pre=document.getElementById('q-text'), cp=document.getElementById('q-copy');
 f.addEventListener('submit',function(e){e.preventDefault();
   var g=function(id){var x=document.getElementById(id);return x?x.value.trim():'';};
@@ -422,10 +422,11 @@ f.addEventListener('submit',function(e){e.preventDefault();
   pre.textContent=txt; cp.setAttribute('data-v',txt);
   var show=function(m,ok){msg.textContent=m; out.hidden=false; pre.hidden=ok; cp.hidden=ok; out.scrollIntoView({behavior:'smooth',block:'nearest'});};
   if(KEY){
+    var sb=f.querySelector('button[type=submit]'); if(sb) sb.disabled=true;
     fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json','Accept':'application/json'},
-      body:JSON.stringify({access_key:KEY,subject:T.hdr+': '+role,from_name:name,contact:contact,role:role,message:g('q-msg'),botcheck:''})})
+      body:JSON.stringify({access_key:KEY,subject:T.hdr+': '+role,page:(location.pathname.split('/').pop()||'index.html'),from_name:name,contact:contact,role:role,message:g('q-msg'),botcheck:''})})
     .then(function(r){return r.json();}).then(function(j){if(j&&j.success){show(T.ok,true);f.reset();}else show(T.fail,false);})
-    .catch(function(){show(T.fail,false);});
+    .catch(function(){show(T.fail,false);}).then(function(){if(sb) sb.disabled=false;});
   } else {
     location.href='mailto:'+TO+'?subject='+encodeURIComponent(T.hdr+': '+role)+'&body='+encodeURIComponent(txt);
     show(T.mail,false);
