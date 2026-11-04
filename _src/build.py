@@ -493,7 +493,7 @@ COMMON = {
             jobTitle="Energy efficiency and municipal energy planning consultant"),
 }
 
-NAV_UA = [("index.html", "Головна"), ("osbb.html", "ОСББ"), ("energospilnoty.html", "Енергоспільноти"), ("mep.html", "МЕП громадам"), ("pro-mene.html", "Про мене")]
+NAV_UA = [("index.html", "Головна"), ("osbb.html", "ОСББ"), ("energospilnoty.html", "Енергоспільноти"), ("mep.html", "Громадам"), ("pro-mene.html", "Про мене")]
 
 MENTIONS_UA = [
     ("2026", "«Золотоноша.City»: «Як зробити свій будинок сучасним і комфортним: навчання для голів золотоніських об’єднань» — семінар для голів ОСББ",
@@ -526,7 +526,7 @@ HOME_UA = dict(
   title="Дмитро Паламарчук", seo_title="Дмитро Паламарчук — енергоефективність житла та енергетичне планування",
   description="Дмитро Паламарчук — експерт з енергоефективності та енергетичного планування: консультації ОСББ щодо енергомодернізації будинків, муніципальні енергетичні плани для громад, енергетичні спільноти. Черкаси.",
   role="Експерт з енергоефективності та енергетичного планування",
-  lead="Консультую ОСББ щодо енергомодернізації будинків, розробляю муніципальні енергетичні плани для громад і допомагаю ініціативним групам підготуватися до створення енергетичних спільнот.",
+  lead="Працюю з ОСББ і громадами з 2019 року. Кандидат економічних наук.",
   big=[("osbb.html", "Енергомодернізація та резервне живлення багатоквартирних будинків",
         f"Оглядаю будинок, пояснюю умови програм {FEE} і допомагаю правлінню підготуватися до кожного кроку.",
         "Регіональний радник з енергоефективності мережі ГО «Е-ТЕАМ» у проєкті «Зелена відбудова України разом із Фондом енергоефективності». Для ОСББ консультації безкоштовні.",
@@ -757,12 +757,14 @@ HOME_EN = dict(
 
 # ----------------------------------------------------------------- components
 
-def c_header(c, cur, nav, other=None):
+def c_header(c, cur, nav, other=None, brand=True):
     links = "".join(f'<a href="{h}"{" class=\"home\"" if i == 0 and len(nav) > 3 else ""}{" aria-current=\"page\"" if h == cur else ""}>{esc(l)}</a>' for i, (h, l) in enumerate(nav))
     lang = f'<a class="lang" href="{other[0]}" hreflang="{other[2]}" lang="{other[2]}">{other[1]}</a>' if other else ''
+    sub = esc(c['brand_sub']).replace(' · ', '&nbsp;· ').replace('енергетичне планування', 'енергетичне&nbsp;планування')
+    brand_html = f'<a class="brand" href="{nav[0][0]}"><b>{esc(c["name"])}</b><span>{sub}</span></a>' if brand else ''
     return f"""<a class="skip" href="#main">{esc(c['skip'])}</a>
-<header class="hdr"><div class="wrap">
-  <a class="brand" href="{nav[0][0]}"><b>{esc(c['name'])}</b><span>{esc(c['brand_sub']).replace(' · ', '&nbsp;· ').replace('енергетичне планування', 'енергетичне&nbsp;планування')}</span></a>
+<header class="hdr{'' if brand else ' nobrand'}"><div class="wrap">
+  {brand_html}
   <nav class="nav" aria-label="{esc(c['nav_label'])}">
     <div class="links">{links}</div>
     <div class="tools"><a class="tel" href="{TEL}">{TEL_H}</a>{lang}</div>
@@ -772,9 +774,9 @@ def c_header(c, cur, nav, other=None):
 
 def c_footer(c):
     return f"""<footer><div class="wrap">
-  <div><b>{esc(c['name'])}</b>{esc(c['ft_role'])}<br>{esc(c['ft_board'])}</div>
-  <div><b><a href="{TEL}">{TEL_H}</a></b><a href="mailto:{MAIL_W}">{MAIL_W}</a></div>
-  <div><a href="{ORCID}" rel="noopener">ORCID</a> · <a href="{SCHOLAR}" rel="noopener">Google Scholar</a> · <a href="{ETEAM}" rel="noopener">{esc(c['ft_org'])}</a>{' · <a href="pro-mene.html">Про мене</a>' if c['lang']=='uk' else ''}</div>
+  <div><b>{esc(c['name'])} · Черкаси</b>Член правління <a href="{ETEAM}" rel="noopener">ГО <span class="nw">«Е-ТЕАМ»</span></a> на громадських засадах</div>
+  <div><p class="fl">Контакти</p><b><a href="{TEL}">{TEL_H}</a></b><a href="mailto:{MAIL_W}">{MAIL_W}</a><br><a href="zvernennia.html">Описати своє питання →</a><br><span class="fm">Для медіа — коментарі за цими контактами</span></div>
+  <div><p class="fl">Профілі</p><a href="{ORCID}" rel="noopener">ORCID</a> · <a href="{SCHOLAR}" rel="noopener">Google Scholar</a></div>
   <div class="base"><p class="legal" aria-label="{esc(c['lg_aria'])}"><span class="lg-k">{esc(c['lg_k'])}</span><span class="lg-n">{esc(c['lg_n'])}</span></p><p class="cr">{esc(c['ft_base'])}</p></div>
 </div></footer>"""
 
@@ -998,6 +1000,12 @@ CSS_NEW = r"""
 .homelinks a.go2:hover{text-decoration:underline}
 .homelinks .ctl{display:flex;flex-wrap:wrap;gap:var(--s-2) var(--s-5)}
 .homelinks .media{color:var(--ink-2);font-size:var(--fs-small)}
+.card-home h1{margin-bottom:var(--s-2)}
+.card-home .role{margin-bottom:var(--s-3)}
+.hdr.nobrand .wrap{justify-content:flex-end}
+.hdr.nobrand .links{border-top:0;padding-top:0}
+footer .fl{margin:0 0 var(--s-2);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--on-footer-2)}
+footer .fm{color:var(--on-footer-2)}
 .mailline{margin:var(--s-3) 0 0;font-size:var(--fs-small)}
 .prose{max-width:var(--measure);margin:0 0 var(--s-4)}
 .chlinks{max-width:var(--measure);font-size:var(--fs-small);color:var(--ink-2);margin-top:var(--s-6)}
@@ -1075,7 +1083,7 @@ def c_hero(c, p, btns=True):
 def home(c, p, nav, other):
     big = "".join(f'<li><a href="{h}"><b>{esc(t)}</b><span class="txt">{esc(txt)}</span><span class="cap">{esc(cap)}</span><span class="go">{esc(go)} →</span></a></li>'
                   for h, t, txt, cap, go in p["big"])
-    return f"""{c_header(c, p['file'], nav, other)}
+    return f"""{c_header(c, p['file'], nav, other, brand=False)}
 <main id="main">
 <div class="wrap card-home">
   <h1>{esc(c['name'])}</h1>
@@ -1085,8 +1093,6 @@ def home(c, p, nav, other):
   <ul class="homelinks">
     <li><a class="go2" href="pro-mene.html">{esc(p['about'])} →</a></li>
     <li><a class="go2" href="zvernennia.html">{esc(p['ask'])} →</a></li>
-    <li><span class="ctl"><a href="{TEL}"><b>{TEL_H}</b></a><a href="mailto:{MAIL_W}">{MAIL_W}</a></span></li>
-    <li class="media">{esc(p['media'])} — <a href="{TEL}">{TEL_H}</a> · <a href="mailto:{MAIL_W}">{MAIL_W}</a></li>
   </ul>
 </div>
 </main>
